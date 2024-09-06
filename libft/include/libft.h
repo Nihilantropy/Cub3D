@@ -59,6 +59,7 @@ void	ft_putnbr_fd(int n, int fd);
 /* PLUS */
 int		ft_putchar(char c);
 void	ft_exit_error(char *error);
+int		ft_isspace(char c);
 
 /* get_next_line */
 

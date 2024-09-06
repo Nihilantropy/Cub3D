@@ -1,21 +1,21 @@
 #include "../include/cub3D.h"
 
-static int	check_extention(char *str);
+static bool	check_extention(char *str);
 
 /*	valid check:
 **	return 1 if argument passed or
 **	map extention are not valid
 */
-int	valid_check(int argc, char **argv)
+bool	check_valid_arg(int argc, char **argv)
 {
 	if (argc != 2)
-		return (1);
-	else if (check_extention(argv[1]) == 1)
-		return (1);
-	return (0);
+		return (false);
+	else if (check_extention(argv[1]) == false)
+		return (false);
+	return (true);
 }
 
-static int	check_extention(char *str)
+static bool	check_extention(char *str)
 {
 	int	i;
 
@@ -24,7 +24,7 @@ static int	check_extention(char *str)
 		return (1);
 	if (str[i] == 'b' && str[i - 1] == 'u' && str[i - 2] == 'c'
 		&& str[i - 3] == '.')
-		return (0);
+		return (true);
 	else
-		return (1);
+		return (false);
 }

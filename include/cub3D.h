@@ -3,7 +3,12 @@
 
 # include <unistd.h>
 # include <stdio.h>
+# include <stdlib.h>
 # include <math.h>
+# include <fcntl.h>
+# include <limits.h>
+# include <time.h>
+# include <stdbool.h>
 # include "../libft/include/libft.h"
 # include "../minilibx-linux/mlx.h"
 # include "messages.h"
@@ -34,11 +39,21 @@ typedef struct s_game
 }	t_game;
 
 /*** check ***/
-int	valid_check(int argc, char **argv);
+bool	check_valid_arg(int argc, char **argv);
+bool	check_valid_map(const char **matrix);
 
 /*** main ***/
-inline t_game	init_game(void);
-void			get_map(t_game game, char *map);
+t_game	init_game(void);
+
+/*** utils ***/
+void	print_matrix(char **matrix);
+void	free_matrix(char **matrix);
+
+/*** parser ***/
+bool	get_map(t_game *game, const char *map);
+
+/*** main utils ***/
+int		get_map_info_len(char **matrix);
 
 
 #endif
