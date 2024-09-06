@@ -3,8 +3,8 @@
 static int	check_extention(char *str);
 
 /*	valid check:
-		return 1 if argument passed or
-		map extention are not valid
+**	return 1 if argument passed or
+**	map extention are not valid
 */
 int	valid_check(int argc, char **argv)
 {

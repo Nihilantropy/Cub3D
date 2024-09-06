@@ -30,21 +30,23 @@ LINK 		= -lX11 -lXext -lm
 INC 		= -I$(CUB3D_HEAD) -I$(LIBFT_DIR) -I$(PRINTF_DIR) -I$(MLX_DIR)
 
 # Compilation rule for the program
-$(NAME): $(LIBFT) $(PRINTF_LIB) $(MLX_LIB) $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -L$(LIBFT_DIR) -lft -L$(MLX_DIR) -lmlx_Linux $(LINK) -o $(NAME)
+$(NAME):	$(OBJS)
+			$(LIBFT)
+			$(MLX_LIB)
+			$(CC) $(CFLAGS) $(OBJS) -L$(LIBFT_DIR) -lft -L$(MLX_DIR) -lmlx_Linux $(LINK) -o $(NAME)
 
 
 # Rule to compile object files
-$(CUB3D_DIR)/%.o: $(CUB3D_DIR)/%.c
-	$(CC) $(CFLAGS) $(INC) -c $< -o $@
+%.o:		%.c
+			$(CC) $(CFLAGS) $(INC) -c $< -o $@
 
 # Rule to make libft
 $(LIBFT):
-	$(MAKE) -C $(LIBFT_DIR)
+			$(MAKE) -C $(LIBFT_DIR)
 
 # Rule to make libmlx_Linux
 $(MLX_LIB):
-	$(MAKE) -C $(MLX_DIR)
+			$(MAKE) -C $(MLX_DIR)
 
 all:		$(NAME)
 

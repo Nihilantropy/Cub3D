@@ -1,8 +1,8 @@
 #include "../include/cub3D.h"
 
 /*	init game:
-		initializing all variable in
-		game structure
+**	initializing all variable in
+**	game structure
 */
 inline t_game	init_game(void)
 {
