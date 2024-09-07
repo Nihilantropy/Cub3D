@@ -10,10 +10,12 @@ UTILS_DIR	= ./utils
 
 SRCS		=	$(MAIN_DIR)/main.c \
 				$(MAIN_DIR)/init_game.c \
+				$(MAIN_DIR)/init_game_utils.c \
 				$(UTILS_DIR)/print.c \
 				$(UTILS_DIR)/free.c \
 				$(CHECK_DIR)/check_arg.c \
 				$(CHECK_DIR)/check_map.c \
+				$(CHECK_DIR)/check_info.c \
 				$(PARSER_DIR)/parser_get_map.c \
 				$(PARSER_DIR)/parser_get_map_utils.c \
 

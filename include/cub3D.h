@@ -25,11 +25,25 @@ typedef enum e_tiles
 	WEST = 'W',
 }	e_tiles;
 
+/* keep track of the necessary map infos */
+typedef struct s_info
+{
+	char			identifier;
+	bool			found;
+	struct s_info	*next;
+}	t_info;
+
+/* checks for map validation */
 typedef struct s_check
 {
 	bool	map_started;
+	bool	map_order;
+	bool	map_infos;
+	bool	map_matrix;
+	t_info	*info;
 }	t_check;
 
+/* map */
 typedef struct s_map
 {
 	t_check	check;
@@ -45,17 +59,30 @@ typedef struct s_game
 }	t_game;
 
 /*** check ***/
+/* check arg */
 bool	check_valid_arg(int argc, char **argv);
+/* check map */
 bool	check_valid_map(t_game *game, const char **matrix);
+bool	is_info_line(const char *line);
+/* check infos */
+void	check_map_infos(t_game *game, const char **matrix);
 
 /*** main ***/
-t_game	init_game(void);
+/* init game */
+void	init_game(t_game *game);
+/* init game utils */
+void	init_info_list(t_game *game);
 
 /*** utils ***/
+/* print */
 void	print_matrix(char **matrix);
+void	print_info_list(t_info *info);
+/* free */
 void	free_matrix(char **matrix);
+void	free_info_list(t_info **info);
 
 /*** parser ***/
+/* parser get map */
 bool	get_map(t_game *game, const char *map);
 
 /*** main utils ***/

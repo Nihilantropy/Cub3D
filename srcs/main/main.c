@@ -10,7 +10,7 @@ int	main(int argc, char **argv)
 		ft_putstr_fd(P_USAGE, 2);
 		return (1);
 	}
-	game = init_game();
+	init_game(&game);
 	if (get_map(&game, argv[1]) == false)
 		return (1);
 	return (0);
