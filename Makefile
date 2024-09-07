@@ -15,7 +15,8 @@ SRCS		=	$(MAIN_DIR)/main.c \
 				$(UTILS_DIR)/free.c \
 				$(CHECK_DIR)/check_arg.c \
 				$(CHECK_DIR)/check_map.c \
-				$(CHECK_DIR)/check_info.c \
+				$(CHECK_DIR)/check_map_info.c \
+				$(CHECK_DIR)/check_map_matrix.c \
 				$(PARSER_DIR)/parser_get_map.c \
 				$(PARSER_DIR)/parser_get_map_utils.c \
 

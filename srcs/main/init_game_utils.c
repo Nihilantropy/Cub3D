@@ -19,6 +19,7 @@ void	init_info_list(t_game *game)
 			ft_exit_error(ERR_ALLOC_INFO);
 		new_node->identifier = set_info_identifier(i);
 		new_node->found = false;
+		new_node->index = -1;
 		append_info_node(info, new_node);
 		i++;
 	}

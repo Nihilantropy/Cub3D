@@ -16,6 +16,7 @@ bool	check_valid_map(t_game *game, const char **matrix)
 	check_map_infos(game, matrix);
 	if (game->map.check.map_infos == false)
 		return (ft_bool_putstr_fd(ERR_NO_INFOS, 2));
+	check_map_matrix(game, matrix);
 	return (true);
 }
 

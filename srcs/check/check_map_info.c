@@ -11,6 +11,7 @@ void	check_map_infos(t_game *game, const char **matrix)
 	y = 0;
 	while (matrix[y])
 	{
+		x = 0;
 		while (matrix[y][x] && ft_isspace(matrix[y][x]))
 			x++;
 		if (matrix[y][x] == '\0')
@@ -44,6 +45,7 @@ static void	info_identifier_found(t_game *game, const char *line)
 		info->next->next->next->next->found = true;
 	else if (ft_strncmp(line, "C ", 2) == 0)
 		info->next->next->next->next->next->found = true;
+	
 }
 
 static bool	check_all_info_identifiers(t_info *info)

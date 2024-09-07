@@ -30,6 +30,7 @@ typedef struct s_info
 {
 	char			identifier;
 	bool			found;
+	int				index;
 	struct s_info	*next;
 }	t_info;
 
@@ -64,8 +65,10 @@ bool	check_valid_arg(int argc, char **argv);
 /* check map */
 bool	check_valid_map(t_game *game, const char **matrix);
 bool	is_info_line(const char *line);
-/* check infos */
+/* check map infos */
 void	check_map_infos(t_game *game, const char **matrix);
+/* check map matrix */
+void	check_map_matrix(t_game *game, const char **matrix);
 
 /*** main ***/
 /* init game */
