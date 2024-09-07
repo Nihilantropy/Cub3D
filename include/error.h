@@ -7,6 +7,6 @@
 # define ERR_ALLOC_MATRIX "Error\nMatrix alloc failed\n"
 # define ERR_MAP_ORDER "Error\nMap should start with the infos\n"
 # define ERR_NO_MAP "Error\nNo map matrix found in map file\n"
-# define ERR_INV_MAP "Error\nMap matrix is absent\n"
+# define ERR_INV_MAP "Error\nMap provided is not valid\n"
 
 #endif

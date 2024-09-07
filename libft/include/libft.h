@@ -6,7 +6,7 @@
 /*   By: crea <crea@student.42roma.it>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 21:56:04 by crea              #+#    #+#             */
-/*   Updated: 2024/03/25 17:30:05 by crea             ###   ########.fr       */
+/*   Updated: 2024/09/07 10:40:13 by crea             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <unistd.h>
 # include <stdint.h>
 # include <stddef.h>
+# include <stdbool.h>
 
 /* LIBFT */
 int		ft_isalpha(int c);
@@ -60,6 +61,7 @@ void	ft_putnbr_fd(int n, int fd);
 int		ft_putchar(char c);
 void	ft_exit_error(char *error);
 int		ft_isspace(char c);
+bool	ft_bool_putstr_fd(char *str, int fd);
 
 /* get_next_line */
 

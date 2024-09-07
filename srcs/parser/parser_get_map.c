@@ -20,7 +20,7 @@ bool	get_map(t_game *game, const char *map)
 		ft_exit_error(ERR_ALLOC_MATRIX);
 	if (build_matrix(matrix, map) == false)
 		return (false);
-	if (check_valid_map((const char **)matrix) == false)
+	if (check_valid_map(game, (const char **)matrix) == false)
 		return (false);
 	print_matrix(matrix);
 	parse_matrix(game, matrix);

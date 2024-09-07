@@ -7,7 +7,8 @@
 t_game	init_game(void)
 {
 	return ((t_game)
-	{
-		.map.matrix = NULL,
-	});
+		{
+			.map.matrix = NULL,
+			.map.check.map_started = false,
+		});
 }

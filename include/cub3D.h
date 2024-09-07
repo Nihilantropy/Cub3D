@@ -25,8 +25,14 @@ typedef enum e_tiles
 	WEST = 'W',
 }	e_tiles;
 
+typedef struct s_check
+{
+	bool	map_started;
+}	t_check;
+
 typedef struct s_map
 {
+	t_check	check;
 	char	**matrix;
 	char	**info;
 }	t_map;
@@ -40,7 +46,7 @@ typedef struct s_game
 
 /*** check ***/
 bool	check_valid_arg(int argc, char **argv);
-bool	check_valid_map(const char **matrix);
+bool	check_valid_map(t_game *game, const char **matrix);
 
 /*** main ***/
 t_game	init_game(void);

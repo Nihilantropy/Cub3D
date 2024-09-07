@@ -2,15 +2,30 @@
 
 static bool	is_info_line(const char *line);
 static bool	is_map_row(const char *line);
+static bool	check_map_order(t_game *game, const char **matrix, int y);
 
-bool	check_valid_map(const char **matrix)
+bool	check_valid_map(t_game *game, const char **matrix)
 {
-	bool	map_strarted;
-	int		y;
+	int	y;
+
+	y = 0;
+	if (!check_map_order(game, matrix, y))
+	{
+		ft_putstr_fd(ERR_INV_MAP, 2);
+		return (false);
+	}
+	if (game->map.check.map_started == false)
+	{
+		ft_putstr_fd(ERR_INV_MAP, 2);
+		return (false);
+	}
+	return (true);
+}
+
+static bool	check_map_order(t_game *game, const char **matrix, int y)
+{
 	int		x;
 
-	map_strarted = false;
-	y = 0;
 	while (matrix[y])
 	{
 		x = 0;
@@ -19,29 +34,18 @@ bool	check_valid_map(const char **matrix)
 		if (matrix[y][x] == '\0')
 		{
 			y++;
-			continue ;
+			continue;
 		}
 		if (is_info_line(matrix[y]))
 		{
-			if (map_strarted)
-			{
-				ft_putstr_fd(ERR_MAP_ORDER, 2);
-				return (false);
-			}
+			if (game->map.check.map_started)
+				return (ft_bool_putstr_fd(ERR_MAP_ORDER, 2));
 		}
 		else if (is_map_row(matrix[y]))
-			map_strarted = true;
+			game->map.check.map_started = true;
 		else
-		{
-			ft_putstr_fd(ERR_NO_MAP, 2);
-			return (false);
-		}
+			return (ft_bool_putstr_fd(ERR_NO_MAP, 2));
 		y++;
-	}
-	if (!map_strarted)
-	{
-		ft_putstr_fd(ERR_INV_MAP, 2);
-		return (false);
 	}
 	return (true);
 }
