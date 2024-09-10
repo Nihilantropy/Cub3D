@@ -16,6 +16,9 @@
 
 /* allocation error msg */
 # define ERR_ALLOC_MATRIX "Error\nMatrix alloc failed\n"
-# define ERR_ALLOC_INFO "Error\nInfo list alloc failed"
+# define ERR_ALLOC_INFO "Error\nInfo list alloc failed\n"
+# define ERR_ALLOC_NEW_MATRIX_ROW "Error\nNew Matrix row alloc failed\n"
+# define ERR_ALLOC_NEW_MATRIX_COL "Error\nNew Matrix column alloc failed\n"
+
 
 #endif

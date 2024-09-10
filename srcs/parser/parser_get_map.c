@@ -23,7 +23,6 @@ bool	get_map(t_game *game, const char *map)
 		return (false);
 	if (check_valid_map(game, (const char **)matrix) == false)
 		return (false);
-	print_matrix(matrix);
 	parse_matrix(game, matrix);
 	free(matrix);
 	return (true);
