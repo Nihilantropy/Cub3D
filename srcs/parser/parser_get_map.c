@@ -2,7 +2,8 @@
 
 static int	get_matrix_len(const char *map);
 static bool	parse_matrix(t_game *game, char **matrix);
-static bool	build_matrix(char **matrix, const char *map);
+static bool	build_matrix(t_game *game, char **matrix, const char *map);
+
 
 bool	get_map(t_game *game, const char *map)
 {
@@ -18,7 +19,7 @@ bool	get_map(t_game *game, const char *map)
 	matrix = (char **)malloc(sizeof(char *) * (len + 1));
 	if (!matrix)
 		ft_exit_error(ERR_ALLOC_MATRIX);
-	if (build_matrix(matrix, map) == false)
+	if (build_matrix(game, matrix, map) == false)
 		return (false);
 	if (check_valid_map(game, (const char **)matrix) == false)
 		return (false);
@@ -40,7 +41,7 @@ static bool	parse_matrix(t_game *game, char **matrix)
 	return (0);
 }
 
-static bool	build_matrix(char **matrix, const char *map)
+static bool	build_matrix(t_game *game, char **matrix, const char *map)
 {
 	char	*line;
 	int		y;
@@ -56,15 +57,14 @@ static bool	build_matrix(char **matrix, const char *map)
 	y = 0;
 	while (line)
 	{
-		//printf("map line[%d] is: %s", y, line); 
 		matrix[y] = ft_strdup(line);
-		//printf("matrix[%d] is: %s\n", y, matrix[y]);
 		free(line);
 		line = get_next_line(fd);
 		y++;
 	}
 	matrix[y] = NULL;
 	close(fd);
+	prepare_matrix_for_checks(game, matrix);
 	return (true);
 }
 

@@ -8,6 +8,11 @@
 # define ERR_NO_MAP "Error\nNo map matrix found in map file\n"
 # define ERR_INV_MAP "Error\nMap provided is not valid\n"
 # define ERR_NO_INFOS "Error\nMap infos are incomplete\n"
+# define ERR_MATRIX_LEN "Error\nMatrix length is too small\n"
+# define ERR_MATRIX_TOP "Error\nMatrix top border isn't closed\n"
+# define ERR_MATRIX_BOT "Error\nMatrix bot border isn't closed\n"
+# define ERR_MATRIX_SIDE "Error\nMatrix side border isn't closed\n"
+
 
 /* allocation error msg */
 # define ERR_ALLOC_MATRIX "Error\nMatrix alloc failed\n"

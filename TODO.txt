@@ -1,3 +1,1 @@
-check_map -> check_valid_map is more then 25 liens
-
 keep going on the map validation

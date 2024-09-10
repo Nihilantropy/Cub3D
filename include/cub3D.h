@@ -40,23 +40,44 @@ typedef struct s_check
 	bool	map_started;
 	bool	map_order;
 	bool	map_infos;
+	bool	matrix_top;
+	bool	matrix_bot;
+	bool	matrix_side;
+	bool	player;
+	bool	map_island;
 	bool	map_matrix;
+	int		map_start_row;
 	t_info	*info;
 }	t_check;
+
+typedef struct s_pos
+{
+	double	x;
+	double	y;
+}	t_pos;
+
+typedef struct s_player
+{
+	char	face;
+	t_pos	pos;
+}	t_player;
 
 /* map */
 typedef struct s_map
 {
 	t_check	check;
+	int		width;
+	int		height;
 	char	**matrix;
 	char	**info;
 }	t_map;
 
 typedef struct s_game
 {
-	t_map	map;
-	void	*mlx_ptr;
-	void	*win_ptr;
+	t_map		map;
+	t_player	player;
+	void		*mlx_ptr;
+	void		*win_ptr;
 }	t_game;
 
 /*** check ***/
@@ -65,6 +86,7 @@ bool	check_valid_arg(int argc, char **argv);
 /* check map */
 bool	check_valid_map(t_game *game, const char **matrix);
 bool	is_info_line(const char *line);
+bool	is_map_row(const char *line);
 /* check map infos */
 void	check_map_infos(t_game *game, const char **matrix);
 /* check map matrix */
@@ -87,6 +109,8 @@ void	free_info_list(t_info **info);
 /*** parser ***/
 /* parser get map */
 bool	get_map(t_game *game, const char *map);
+/* parser matrix */
+void	prepare_matrix_for_checks(t_game *game, char **matrix);
 
 /*** main utils ***/
 int		get_map_info_len(char **matrix);

@@ -23,7 +23,6 @@ void	check_map_infos(t_game *game, const char **matrix)
 			info_identifier_found(game, matrix[y]);
 		y++;
 	}
-	print_info_list(game->map.check.info);
 	if (check_all_info_identifiers(game->map.check.info) == true)
 		game->map.check.map_infos = true;
 }

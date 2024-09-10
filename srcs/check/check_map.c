@@ -1,6 +1,5 @@
 #include "../include/cub3D.h"
 
-static bool	is_map_row(const char *line);
 static void	check_map_order(t_game *game, const char **matrix, int y);
 
 bool	check_valid_map(t_game *game, const char **matrix)
@@ -46,36 +45,4 @@ static void	check_map_order(t_game *game, const char **matrix, int y)
 		y++;
 	}
 	game->map.check.map_order = true;
-}
-
-static bool	is_map_row(const char *line)
-{
-	int	i;
-
-	i = 0;
-	while (line[i])
-	{
-		if (line[i] != FLOOR
-			&& line[i] != WALL
-			&& line[i] != NORTH
-			&& line[i] != SOUTH
-			&& line[i] != EAST
-			&& line[i] != WEST
-			&& !ft_isspace(line[i]))
-			return (false);
-		i++;
-	}
-	return (true);
-}
-
-bool	is_info_line(const char *line)
-{
-	if (ft_strncmp(line, "NO ", 3) == 0
-		|| ft_strncmp(line, "SO ", 3) == 0
-		|| ft_strncmp(line, "WE ", 3) == 0
-		|| ft_strncmp(line, "EA ", 3) == 0
-		|| ft_strncmp(line, "F ", 2) == 0
-		|| ft_strncmp(line, "C ", 2) == 0)
-		return (true);
-	return (false);
 }
