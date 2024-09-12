@@ -1,44 +1,27 @@
 #include "../include/cub3D.h"
 
-static bool	check_map_borders(const char **matrix, int *y, int *x);
-static bool	check_matrix_top(const char **matrix, int *y, int *x);
+static void	check_map_wrong_char(t_game *game, const char **matrix);
+static void	check_map_island(t_game *game, const char **matrix);
 
 void	check_map_matrix(t_game *game, const char **matrix)
 {
-	int		y;
-	int		x;
-
-	y = game->map.check.map_start_row;
-	while (matrix[y])
-	{
-		if (!check_map_borders(matrix, &y, &x))
-			return ;
-		y++;
-	}
-	game->map.check.map_matrix = true;
+	check_map_wrong_char(game, matrix);
+	if (game->map.check.wrong_char == true)
+		return (ft_bool_putstr_fd(ERR_WRONG_CHAR, 2));
+	check_map_island(game, matrix);
+	if (game->map.check.map_island == true)
+		return (ft_putstr_fd(ERR_MAP_ISLAND, 2));
 }
 
-static bool	check_map_borders(const char **matrix, int *y, int *x)
+static void	check_map_wrong_char(t_game *game, const char **matrix)
 {
-	if (matrix[*y + 1] == NULL)
-		return (ft_bool_putstr_fd(ERR_MATRIX_LEN, 2));
-	if (check_matrix_top(matrix, y, x) == false)
-		return (ft_bool_putstr_fd(ERR_MATRIX_TOP, 2));
-	//if (check_matrix_bot(matrix, y, x) == false)
-	//	return (ft_bool_putstr_fd(ERR_MATRIX_BOT, 2));
-	return (true);
+	// TODO read the map matrix. if an invalid char is found
+	// activate the wrong_char flag
 }
 
-static bool	check_matrix_top(const char **matrix, int *y, int *x)
+static void	check_map_island(t_game *game, const char **matrix)
 {
-//	if (matrix[*y][*x] != WALL)
-//		return (false);
-	while (matrix[*y][*x])
-	{
-		printf("%c\n", matrix[*y][*x]);
-		if (matrix[*y][*x] != ' ' || matrix[*y][*x] != WALL)
-			return (false);
-		x++;
-	}
-	return (true);
+	// TODO while we read a line in matrix (matrix[y]) if
+	// we enconuter a sequence of space or tabs, we expect a '\0'.
+	// if we encouter a wall activate the map_island flag 
 }

@@ -1,43 +1,29 @@
 #include "../include/cub3D.h"
 
-static void	set_map_start(t_game *game, const char **matrix);
-static int	get_map_width(t_game *game, const char **matrix);
-static int	get_map_height(t_game *game, const char **matrix);
-static void	copy_matrix(t_game *game, char **matrix_dest, char **matrix_src, int len);
+static bool	set_map_start(t_game *game, const char **matrix);
+static int	get_map_width(const char **matrix);
+static int	get_map_height(const char **matrix);
+static void	copy_matrix(char **matrix_dest, char **matrix_src,
+							int height, int width);
 
-void	prepare_matrix_for_checks(t_game *game, char **matrix)
+bool	parse_matrix(t_game *game, char **matrix)
 {
 	char	**new_matrix;
-	int		y;
-	int		x;
 
 	new_matrix = NULL;
-	y = 0;
-	set_map_start(game, (const char **)matrix);
-	game->map.width = get_map_width(game, (const char **)matrix);
-	game->map.height = get_map_height(game, (const char **)matrix);
-	printf("matrix max width is: %d\n", game->map.width);
-	printf("matrix max heigth is: %d\n", game->map.height);
-
-	new_matrix = malloc(sizeof(char *) * game->map.height + 1);
-	if (!new_matrix)
-		ft_exit_error(ERR_ALLOC_NEW_MATRIX_ROW);
-	while (y < game->map.height)
-	{
-		x = 0;
-		new_matrix[y] = malloc(game->map.width + 1);
-		if (!new_matrix[y])
-			ft_exit_error(ERR_ALLOC_NEW_MATRIX_COL);
-		while (x < game->map.width)
-			new_matrix[y][x++] = 'H';
-		y++;
-	}
-	new_matrix[y] = NULL;
-	copy_matrix(game, new_matrix, matrix, game->map.height);
+	if (set_map_start(game, (const char **)matrix) == false)
+		return (ft_bool_putstr_fd(ERR_NO_MAP, 2));
+	game->map.width = get_map_width((const char **)matrix + game->map.check.map_start_row);
+	game->map.height = get_map_height((const char **)matrix + game->map.check.map_start_row);
+	new_matrix = build_new_matrix(game->map.height, game->map.width);
+	copy_matrix(new_matrix, matrix + game->map.check.map_start_row,
+				game->map.height, game->map.width);
 	print_matrix(new_matrix);
+	game->map.matrix = new_matrix;
+	return (true);
 }
 
-static void	set_map_start(t_game *game, const char **matrix)
+static bool	set_map_start(t_game *game, const char **matrix)
 {
 	int		y;
 	int		x;
@@ -56,19 +42,21 @@ static void	set_map_start(t_game *game, const char **matrix)
 		if (is_map_row(matrix[y]))
 		{
 			game->map.check.map_start_row = y;
-			return ;
+			return (true);
 		}
 		y++;
 	}
+	return (false);
 }
 
-static int	get_map_width(t_game *game, const char **matrix)
+static int	get_map_width(const char **matrix)
 {
 	int	y;
 	int	x;
 	int	width;
 
-	y = game->map.check.map_start_row;
+	y = 0;
+	width = 0;
 	while (matrix[y])
 	{
 		x = 0;
@@ -81,14 +69,14 @@ static int	get_map_width(t_game *game, const char **matrix)
 	return (width);
 }
 
-static int	get_map_height(t_game *game, const char **matrix)
+static int	get_map_height(const char **matrix)
 {
 	int	y;
 	int	len;
 
-	y = game->map.check.map_start_row;
-	len = 1;
-	while (matrix[y])
+	y = 0;
+	len = 0;
+	while (matrix[y] != NULL)
 	{
 		y++;
 		len++;
@@ -96,17 +84,22 @@ static int	get_map_height(t_game *game, const char **matrix)
 	return (len);
 }
 
-static void	copy_matrix(t_game *game, char **matrix_dest, char **matrix_src, int len)
+static void	copy_matrix(char **matrix_dest, char **matrix_src,
+							int height, int width)
 {
 	int	y;
-	int	j;
+	int	x;
 
-	y = game->map.check.map_start_row;
-	j = 0;
-	while (y < (y + len))
+	y = 0;
+	(void)width;
+	while (y < height)
 	{
-		ft_strlcpy(matrix_dest[j], matrix_src[y], ft_strlen(matrix_src[y]));
+		x = 0;
+		while (matrix_src[y][x])
+		{
+			matrix_dest[y][x] = matrix_src[y][x];
+			x++;
+		}
 		y++;
-		j++;
 	}
 }

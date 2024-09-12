@@ -31,3 +31,28 @@ bool	is_info_line(const char *line)
 		return (true);
 	return (false);
 }
+
+char	**build_new_matrix(int height, int width)
+{
+	char	**new_matrix;
+	int		y;
+	int		x;
+
+	new_matrix = malloc(sizeof(char *) * (height + 1));
+	if (!new_matrix)
+		ft_exit_error(ERR_ALLOC_NEW_MATRIX_ROW);
+	y = 0;
+	while (y < height)
+	{
+		new_matrix[y] = malloc(width + 1);
+		if (!new_matrix[y])
+			ft_exit_error(ERR_ALLOC_NEW_MATRIX_COL);
+		x = 0;
+		while (x < width)
+			new_matrix[y][x++] = 'H';
+		new_matrix[y][x] = '\0';
+		y++;
+	}
+	new_matrix[y] = NULL;
+	return (new_matrix);
+}

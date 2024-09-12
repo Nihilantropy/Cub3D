@@ -12,10 +12,12 @@ bool	check_valid_map(t_game *game, const char **matrix)
 		return (ft_bool_putstr_fd(ERR_MAP_ORDER, 2));
 	if (game->map.check.map_started == false)
 		return (ft_bool_putstr_fd(ERR_NO_MAP, 2));
+	check_map_matrix(game, matrix);
+	if (game->map.check.map_matrix == false)
+		return (ft_bool_putstr_fd(ERR_MAP_MATRIX, 2));
 	check_map_infos(game, matrix);
 	if (game->map.check.map_infos == false)
 		return (ft_bool_putstr_fd(ERR_NO_INFOS, 2));
-	check_map_matrix(game, matrix);
 	return (true);
 }
 

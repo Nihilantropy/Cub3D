@@ -1,1 +1,5 @@
 keep going on the map validation
+
+do the matrix checks
+
+do the info list check

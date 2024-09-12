@@ -6,7 +6,7 @@ void	print_matrix(char **matrix)
 
 	y = 0;
 	while (matrix[y])
-		printf("%s", matrix[y++]);
+		printf("%s\n", matrix[y++]);
 }
 
 void	print_info_list(t_info *info)

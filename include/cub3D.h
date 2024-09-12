@@ -37,14 +37,13 @@ typedef struct s_info
 /* checks for map validation */
 typedef struct s_check
 {
+	bool	wrong_char;
 	bool	map_started;
 	bool	map_order;
 	bool	map_infos;
-	bool	matrix_top;
-	bool	matrix_bot;
-	bool	matrix_side;
-	bool	player;
 	bool	map_island;
+	bool	map_closed;
+	bool	player;
 	bool	map_matrix;
 	int		map_start_row;
 	t_info	*info;
@@ -65,11 +64,11 @@ typedef struct s_player
 /* map */
 typedef struct s_map
 {
-	t_check	check;
-	int		width;
-	int		height;
-	char	**matrix;
-	char	**info;
+	t_check		check;
+	int			width;
+	int			height;
+	const char	**matrix;
+	const char	**info;
 }	t_map;
 
 typedef struct s_game
@@ -85,8 +84,6 @@ typedef struct s_game
 bool	check_valid_arg(int argc, char **argv);
 /* check map */
 bool	check_valid_map(t_game *game, const char **matrix);
-bool	is_info_line(const char *line);
-bool	is_map_row(const char *line);
 /* check map infos */
 void	check_map_infos(t_game *game, const char **matrix);
 /* check map matrix */
@@ -110,7 +107,11 @@ void	free_info_list(t_info **info);
 /* parser get map */
 bool	get_map(t_game *game, const char *map);
 /* parser matrix */
-void	prepare_matrix_for_checks(t_game *game, char **matrix);
+bool	parse_matrix(t_game *game, char **matrix);
+/* parser matrix utils */
+bool	is_info_line(const char *line);
+bool	is_map_row(const char *line);
+char	**build_new_matrix(int height, int width);
 
 /*** main utils ***/
 int		get_map_info_len(char **matrix);
