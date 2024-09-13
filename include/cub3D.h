@@ -23,6 +23,9 @@ typedef enum e_tiles
 	SOUTH = 'S',
 	EAST = 'E',
 	WEST = 'W',
+	MAP_FILLER = 'H',
+	SPACE = ' ',
+	TAB = '\t'
 }	e_tiles;
 
 /* keep track of the necessary map infos */
@@ -100,6 +103,7 @@ void	init_info_list(t_game *game);
 void	print_matrix(char **matrix);
 void	print_info_list(t_info *info);
 /* free */
+void	free_all(t_game *game);
 void	free_matrix(char **matrix);
 void	free_info_list(t_info **info);
 

@@ -49,7 +49,7 @@ char	**build_new_matrix(int height, int width)
 			ft_exit_error(ERR_ALLOC_NEW_MATRIX_COL);
 		x = 0;
 		while (x < width)
-			new_matrix[y][x++] = 'H';
+			new_matrix[y][x++] = MAP_FILLER;
 		new_matrix[y][x] = '\0';
 		y++;
 	}

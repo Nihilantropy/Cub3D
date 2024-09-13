@@ -2,6 +2,12 @@
 
 static void	check_map_order(t_game *game, const char **matrix, int y);
 
+/*	check valid map:
+**	1) check the correct order of the map
+**		infos and the map matrix
+**	2) check if the map matrix is valid
+**	3) check if all the infos are correct
+*/
 bool	check_valid_map(t_game *game, const char **matrix)
 {
 	int	y;
@@ -12,7 +18,7 @@ bool	check_valid_map(t_game *game, const char **matrix)
 		return (ft_bool_putstr_fd(ERR_MAP_ORDER, 2));
 	if (game->map.check.map_started == false)
 		return (ft_bool_putstr_fd(ERR_NO_MAP, 2));
-	check_map_matrix(game, matrix);
+	check_map_matrix(game, game->map.matrix);
 	if (game->map.check.map_matrix == false)
 		return (ft_bool_putstr_fd(ERR_MAP_MATRIX, 2));
 	check_map_infos(game, matrix);

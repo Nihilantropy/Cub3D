@@ -1,5 +1,11 @@
 #include "../include/cub3D.h"
 
+/*	main:
+**	1) check for incorrect arguments
+**	2) initialize the game structure
+**	3) get the map to parse and validate
+**		the map infos and the map matrix
+*/
 int	main(int argc, char **argv)
 {
 	t_game	game;
@@ -12,6 +18,10 @@ int	main(int argc, char **argv)
 	}
 	init_game(&game);
 	if (get_map(&game, argv[1]) == false)
+	{
+		free_all(&game);
 		return (1);
+	}
+	free_all(&game);
 	return (0);
 }

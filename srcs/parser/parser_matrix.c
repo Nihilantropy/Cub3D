@@ -6,6 +6,17 @@ static int	get_map_height(const char **matrix);
 static void	copy_matrix(char **matrix_dest, char **matrix_src,
 							int height, int width);
 
+/*	parse matrix:
+**	1) set the map matrix starting row
+**	2) get the map width
+**	3) get the map height
+**	4) build a new matrix to make a perfect rectangle
+**		based on the max width and max height of the
+**		provided map matrix, then fill it with fille char
+**		'H' for better controls managment
+**	5) copy the provided map matrix into the new matrix and
+**		save it in the game structure
+*/
 bool	parse_matrix(t_game *game, char **matrix)
 {
 	char	**new_matrix;
@@ -19,7 +30,7 @@ bool	parse_matrix(t_game *game, char **matrix)
 	copy_matrix(new_matrix, matrix + game->map.check.map_start_row,
 				game->map.height, game->map.width);
 	print_matrix(new_matrix);
-	game->map.matrix = new_matrix;
+	game->map.matrix = (const char **)new_matrix;
 	return (true);
 }
 

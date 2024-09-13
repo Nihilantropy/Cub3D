@@ -4,6 +4,12 @@ static void		append_info_node(t_info **info, t_info *new_node);
 static t_info	*find_last_info_node(t_info *info);
 static char		set_info_identifier(int	i);
 
+/*	init info list:
+**	initialize a list with all
+**	the necessary information
+**	that the user should provide
+**	in the map file
+*/
 void	init_info_list(t_game *game)
 {
 	t_info	**info;

@@ -3,6 +3,10 @@
 static void	info_identifier_found(t_game *game, const char *line);
 static bool	check_all_info_identifiers(t_info *info);
 
+/*	check map infos:
+**	check if all the map infos are present
+**	in the map file
+*/
 void	check_map_infos(t_game *game, const char **matrix)
 {
 	int		y;
