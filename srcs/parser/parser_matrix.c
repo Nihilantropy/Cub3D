@@ -3,8 +3,7 @@
 static bool	set_map_start(t_game *game, const char **matrix);
 static int	get_map_width(const char **matrix);
 static int	get_map_height(const char **matrix);
-static void	copy_matrix(char **matrix_dest, char **matrix_src,
-							int height, int width);
+static void	copy_matrix(char **matrix_dest, const char **matrix_src);
 
 /*	parse matrix:
 **	1) set the map matrix starting row
@@ -17,19 +16,17 @@ static void	copy_matrix(char **matrix_dest, char **matrix_src,
 **	5) copy the provided map matrix into the new matrix and
 **		save it in the game structure
 */
-bool	parse_matrix(t_game *game, char **matrix)
+bool	parse_matrix(t_game *game, const char **matrix)
 {
 	char	**new_matrix;
 
 	new_matrix = NULL;
-	if (set_map_start(game, (const char **)matrix) == false)
+	if (set_map_start(game, matrix) == false)
 		return (ft_bool_putstr_fd(ERR_NO_MAP, 2));
-	game->map.width = get_map_width((const char **)matrix + game->map.check.map_start_row);
-	game->map.height = get_map_height((const char **)matrix + game->map.check.map_start_row);
+	game->map.width = get_map_width(matrix + game->map.check.map_start_row);
+	game->map.height = get_map_height(matrix + game->map.check.map_start_row);
 	new_matrix = build_new_matrix(game->map.height, game->map.width);
-	copy_matrix(new_matrix, matrix + game->map.check.map_start_row,
-				game->map.height, game->map.width);
-	print_matrix(new_matrix);
+	copy_matrix(new_matrix, matrix + game->map.check.map_start_row);
 	game->map.matrix = (const char **)new_matrix;
 	return (true);
 }
@@ -95,15 +92,13 @@ static int	get_map_height(const char **matrix)
 	return (len);
 }
 
-static void	copy_matrix(char **matrix_dest, char **matrix_src,
-							int height, int width)
+static void	copy_matrix(char **matrix_dest, const char **matrix_src)
 {
-	int	y;
-	int	x;
+	int		y;
+	int		x;
 
 	y = 0;
-	(void)width;
-	while (y < height)
+	while (matrix_src[y])
 	{
 		x = 0;
 		while (matrix_src[y][x])

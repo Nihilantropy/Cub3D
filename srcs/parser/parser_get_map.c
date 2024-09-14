@@ -15,9 +15,11 @@ static bool	build_matrixes(t_game *game, char **matrix, const char *map);
 */
 bool	get_map(t_game *game, const char *map)
 {
+	bool	flag;
 	int		len;
 	char	**matrix;
 
+	matrix = NULL;
 	len = get_matrix_len(map);
 	if (!len)
 	{
@@ -28,11 +30,13 @@ bool	get_map(t_game *game, const char *map)
 	if (!matrix)
 		ft_exit_error(ERR_ALLOC_MATRIX);
 	if (build_matrixes(game, matrix, map) == false)
-		return (false);
-	if (check_valid_map(game, (const char **)matrix) == false)
-		return (false);
+		flag = false;
+	else if (check_valid_map(game, (const char **)matrix) == false)
+		flag = false;
+	else
+		flag = true;
 	free_matrix(matrix);
-	return (true);
+	return (flag);
 }
 
 static bool	build_matrixes(t_game *game, char **matrix, const char *map)
@@ -58,7 +62,7 @@ static bool	build_matrixes(t_game *game, char **matrix, const char *map)
 	}
 	matrix[y] = NULL;
 	close(fd);
-	if (parse_matrix(game, matrix) == false)
+	if (parse_matrix(game, (const char **)matrix) == false)
 		return (false);
 	return (true);
 }

@@ -1,14 +1,5 @@
 #include "../include/cub3D.h"
 
-void	print_matrix(char **matrix)
-{
-	int	y;
-
-	y = 0;
-	while (matrix[y])
-		printf("%s\n", matrix[y++]);
-}
-
 void	print_info_list(t_info *info)
 {
 	t_info	*current_node;
@@ -23,4 +14,21 @@ void	print_info_list(t_info *info)
 			printf("identifier found = false\n");
 		current_node = current_node->next;
 	}
+}
+
+void	free_info_list(t_info **info)
+{
+	t_info	*current;
+	t_info	*next;
+
+	if (!*info)
+		return;
+	current = *info;
+	while (current)
+	{
+		next = current->next;
+		free(current);
+		current = next;
+	}
+	*info = NULL;
 }

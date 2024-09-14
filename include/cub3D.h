@@ -82,6 +82,12 @@ typedef struct s_game
 	void		*win_ptr;
 }	t_game;
 
+/*** main ***/
+/* init game */
+void	init_game(t_game *game);
+/* init game utils */
+void	init_info_list(t_game *game);
+
 /*** check ***/
 /* check arg */
 bool	check_valid_arg(int argc, char **argv);
@@ -92,33 +98,25 @@ void	check_map_infos(t_game *game, const char **matrix);
 /* check map matrix */
 void	check_map_matrix(t_game *game, const char **matrix);
 
-/*** main ***/
-/* init game */
-void	init_game(t_game *game);
-/* init game utils */
-void	init_info_list(t_game *game);
-
-/*** utils ***/
-/* print */
-void	print_matrix(char **matrix);
-void	print_info_list(t_info *info);
-/* free */
-void	free_all(t_game *game);
-void	free_matrix(char **matrix);
-void	free_info_list(t_info **info);
-
 /*** parser ***/
 /* parser get map */
 bool	get_map(t_game *game, const char *map);
 /* parser matrix */
-bool	parse_matrix(t_game *game, char **matrix);
+bool	parse_matrix(t_game *game, const char **matrix);
 /* parser matrix utils */
 bool	is_info_line(const char *line);
 bool	is_map_row(const char *line);
 char	**build_new_matrix(int height, int width);
 
-/*** main utils ***/
-int		get_map_info_len(char **matrix);
-
+/*** utils ***/
+/* main */
+void	free_all(t_game *game);
+/* matrix */
+void	print_matrix(const char **matrix);
+void	free_matrix(char **matrix);
+char	**dup_matrix(const char **matrix);
+/* info */
+void	print_info_list(t_info *info);
+void	free_info_list(t_info **info);
 
 #endif

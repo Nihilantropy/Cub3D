@@ -13,12 +13,11 @@
 # define ERR_MAP_MATRIX "Error\nMAP MATRIX format is incorrect\n"
 # define ERR_MAP_ISLAND "Error\nMAP MATRIX contain an island\n"
 
-
 /* allocation error msg */
 # define ERR_ALLOC_MATRIX "Error\nMatrix alloc failed\n"
+# define ERR_ALLOC_MATRIX_COPY "Error\nMatrix copy alloc failed\n"
 # define ERR_ALLOC_INFO "Error\nInfo list alloc failed\n"
 # define ERR_ALLOC_NEW_MATRIX_ROW "Error\nNew Matrix row alloc failed\n"
 # define ERR_ALLOC_NEW_MATRIX_COL "Error\nNew Matrix column alloc failed\n"
-
 
 #endif

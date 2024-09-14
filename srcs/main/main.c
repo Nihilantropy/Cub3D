@@ -22,6 +22,7 @@ int	main(int argc, char **argv)
 		free_all(&game);
 		return (1);
 	}
+	print_matrix(game.map.matrix);
 	free_all(&game);
 	return (0);
 }

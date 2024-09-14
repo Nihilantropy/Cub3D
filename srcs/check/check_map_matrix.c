@@ -18,6 +18,7 @@ void	check_map_matrix(t_game *game, const char **matrix)
 	check_map_island(game, matrix);
 	if (game->map.check.map_island == true)
 		return (ft_putstr_fd(ERR_MAP_ISLAND, 2));
+	game->map.check.map_matrix = true;
 }
 
 static void	check_map_wrong_char(t_game *game, const char **matrix)
@@ -45,11 +46,14 @@ static void	check_map_wrong_char(t_game *game, const char **matrix)
 
 static void	check_map_island(t_game *game, const char **matrix)
 {
-	(void)game;
-	(void)matrix;
-	// TODO while we read a line in matrix (matrix[y]) if
-	// we enconuter a sequence of space or tabs, we expect a '\0'.
-	// if we encouter a wall activate the map_island flag 
+	int	y;
+	int	x;
+
+	y = 0;
+	while (matrix[y])
+	{
+		if ()
+	}
 }
 
 static bool	is_tile(char c)

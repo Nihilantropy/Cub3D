@@ -23,8 +23,8 @@ void	check_map_infos(t_game *game, const char **matrix)
 			y++;
 			continue ;
 		}
-		if (is_info_line(matrix[y]))
-			info_identifier_found(game, matrix[y]);
+		if (is_info_line(&matrix[y][x]))
+			info_identifier_found(game, &matrix[y][x]);
 		y++;
 	}
 	if (check_all_info_identifiers(game->map.check.info) == true)
