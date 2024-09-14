@@ -3,5 +3,6 @@
 void	free_all(t_game *game)
 {
 	free_matrix((char **)game->map.matrix);
+	free_bool_matrix(game->map.check.visited);
 	free_info_list(&game->map.check.info);
 }

@@ -18,6 +18,8 @@ SRCS		=	$(MAIN_DIR)/main.c \
 				$(CHECK_DIR)/check_map.c \
 				$(CHECK_DIR)/check_map_info.c \
 				$(CHECK_DIR)/check_map_matrix.c \
+				$(CHECK_DIR)/check_map_matrix_dfs.c \
+				$(CHECK_DIR)/check_map_matrix_borders.c \
 				$(PARSER_DIR)/parser_get_map.c \
 				$(PARSER_DIR)/parser_matrix.c \
 				$(PARSER_DIR)/parser_matrix_utils.c \

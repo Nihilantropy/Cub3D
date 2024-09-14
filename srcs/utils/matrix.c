@@ -13,9 +13,22 @@ void	free_matrix(char **matrix)
 {
 	int	y;
 
-	y = 0;
-	if (!matrix || !matrix[y])
+	if (!matrix || !*matrix)
 		return ;
+	y = 0;
+	while (matrix[y])
+		free(matrix[y++]);
+	free(matrix);
+	matrix = NULL;
+}
+
+void	free_bool_matrix(bool **matrix)
+{
+	int y;
+	
+	if (!matrix)
+		return ;
+	y = 0;
 	while (matrix[y])
 		free(matrix[y++]);
 	free(matrix);

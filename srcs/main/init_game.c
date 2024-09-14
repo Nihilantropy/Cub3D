@@ -36,8 +36,11 @@ static void	init_map_checks(t_game *game)
 	game->map.check.map_started = false;
 	game->map.check.map_order = false;
 	game->map.check.map_infos = false;
-	game->map.check.player = false;
+	game->map.check.player = 0;
+	game->map.check.visited = NULL;
 	game->map.check.map_island = false;
+	game->map.check.found_region = false;
+	game->map.check.map_open = false;
 	game->map.check.map_matrix = false;
 	game->map.check.map_start_row = 0;
 	game->map.check.info = NULL;

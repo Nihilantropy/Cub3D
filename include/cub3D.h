@@ -25,7 +25,7 @@ typedef enum e_tiles
 	WEST = 'W',
 	MAP_FILLER = 'H',
 	SPACE = ' ',
-	TAB = '\t'
+	TAB = '\t',
 }	e_tiles;
 
 /* keep track of the necessary map infos */
@@ -44,9 +44,11 @@ typedef struct s_check
 	bool	map_started;
 	bool	map_order;
 	bool	map_infos;
+	bool	**visited;
 	bool	map_island;
-	bool	map_closed;
-	bool	player;
+	bool	found_region;
+	bool	map_open;
+	int		player;
 	bool	map_matrix;
 	int		map_start_row;
 	t_info	*info;
@@ -97,6 +99,10 @@ bool	check_valid_map(t_game *game, const char **matrix);
 void	check_map_infos(t_game *game, const char **matrix);
 /* check map matrix */
 void	check_map_matrix(t_game *game, const char **matrix);
+/* check map matrix dfs */
+void	check_map_matrix_island(t_game *game, const char **matrix);
+/* check map matrix borders */
+void	check_map_matrix_borders(t_game *game, const char **matrix);
 
 /*** parser ***/
 /* parser get map */
@@ -114,6 +120,7 @@ void	free_all(t_game *game);
 /* matrix */
 void	print_matrix(const char **matrix);
 void	free_matrix(char **matrix);
+void	free_bool_matrix(bool **matrix);
 char	**dup_matrix(const char **matrix);
 /* info */
 void	print_info_list(t_info *info);
