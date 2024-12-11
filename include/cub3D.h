@@ -14,6 +14,8 @@
 # include "messages.h"
 # include "error.h"
 
+#define DISPLAY_NAME "Cub3D"
+
 /* enum for map tiles symbols */
 typedef enum e_tiles
 {
@@ -113,6 +115,9 @@ bool	parse_matrix(t_game *game, const char **matrix);
 bool	is_info_line(const char *line);
 bool	is_map_row(const char *line);
 char	**build_new_matrix(int height, int width);
+
+/*** display */
+void	handle_display(t_game *game);
 
 /*** utils ***/
 /* main */
