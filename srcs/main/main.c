@@ -26,7 +26,7 @@ int	main(int argc, char **argv)
 	game.mlx_ptr = mlx_init();
 	handle_display(&game);
 	handle_key_event(&game);
-	mlx_loop_hook(game.mlx_ptr, game_update, &game);
+	// mlx_loop_hook(game.mlx_ptr, game_update, &game);
 	mlx_loop(game.mlx_ptr);
 	free_all(&game);
 	return (0);

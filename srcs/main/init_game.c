@@ -1,6 +1,7 @@
 #include "../include/cub3D.h"
 
 static void	init_map(t_game *game);
+static void	init_display(t_game *game);
 static void	init_map_checks(t_game *game);
 static void	init_player(t_game *game);
 
@@ -10,7 +11,10 @@ static void	init_player(t_game *game);
 */
 void	init_game(t_game *game)
 {
+	game->mlx_ptr = NULL;
+	game->win_ptr = NULL;
 	init_map(game);
+	init_display(game);
 	init_player(game);
 }
 
@@ -21,6 +25,13 @@ static void	init_map(t_game *game)
 	game->map.width = 0;
 	game->map.height = 0;
 	init_map_checks(game);
+}
+
+static void	init_display(t_game *game)
+{
+	game->display.width = WIN_WIDTH;
+	game->display.height = WIN_HEIGHT;
+	game->display.open = false;
 }
 
 static void	init_player(t_game *game)

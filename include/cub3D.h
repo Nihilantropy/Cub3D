@@ -11,10 +11,14 @@
 # include <stdbool.h>
 # include "../libft/include/libft.h"
 # include "../minilibx-linux/mlx.h"
+# include "keys.h"
 # include "messages.h"
 # include "error.h"
 
 #define DISPLAY_NAME "Cub3D"
+
+#define WIN_WIDTH 1920
+#define WIN_HEIGHT 1080
 
 /* enum for map tiles symbols */
 typedef enum e_tiles
@@ -56,6 +60,13 @@ typedef struct s_check
 	t_info	*info;
 }	t_check;
 
+typedef struct s_display
+{
+	int		width;
+	int		height;
+	bool	open;
+}	t_display;
+
 typedef struct s_pos
 {
 	double	x;
@@ -81,6 +92,7 @@ typedef struct s_map
 typedef struct s_game
 {
 	t_map		map;
+	t_display	display;
 	t_player	player;
 	void		*mlx_ptr;
 	void		*win_ptr;
@@ -118,6 +130,9 @@ char	**build_new_matrix(int height, int width);
 
 /*** display */
 void	handle_display(t_game *game);
+
+/*** events ***/
+void	handle_key_event(t_game *game);
 
 /*** utils ***/
 /* main */

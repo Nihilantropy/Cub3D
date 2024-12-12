@@ -1,6 +1,7 @@
 #ifndef ERROR_H
 # define ERROR_H
 
+/* checks err msg */
 # define ERR_ARG "Error\nInvalid argument\n"
 # define P_USAGE "[Usage]\n./cub3D map/map*.cub"
 # define ERR_EMPY_FILE "Error\nMap file is empty\n"
@@ -15,7 +16,10 @@
 # define ERR_MAP_BORDERS "Error\nMap matrix borders are open\n"
 # define ERR_NBR_PLAYER "Error\nWrong number of player\n"
 
-/* allocation error msg */
+/* generic err msg*/
+#define ERR_DISPLAY_OPEN "Error\nCould not open display. Exiting..."
+
+/* allocation err msg */
 # define ERR_ALLOC_MATRIX "Error\nMatrix alloc failed\n"
 # define ERR_ALLOC_MATRIX_COPY "Error\nMatrix copy alloc failed\n"
 # define ERR_ALLOC_INFO "Error\nInfo list alloc failed\n"
