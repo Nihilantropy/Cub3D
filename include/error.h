@@ -3,7 +3,7 @@
 
 /* checks err msg */
 # define ERR_ARG "Error\nInvalid argument\n"
-# define P_USAGE "[Usage]\n./cub3D map/map*.cub"
+# define P_USAGE "[Usage]\n./cub3D map/map*.cub\n"
 # define ERR_EMPY_FILE "Error\nMap file is empty\n"
 # define ERR_WRONG_CHAR "Error\nWrong CHAR in map matrix\n"
 # define ERR_MAP_ORDER "Error\nMap should start with the infos\n"

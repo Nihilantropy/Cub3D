@@ -14,11 +14,12 @@
 # include "keys.h"
 # include "messages.h"
 # include "error.h"
+# include "player.h"
 
-#define DISPLAY_NAME "Cub3D"
+# define DISPLAY_NAME "Cub3D"
 
-#define WIN_WIDTH 1920
-#define WIN_HEIGHT 1080
+# define WIN_WIDTH 1920
+# define WIN_HEIGHT 1080
 
 /* enum for map tiles symbols */
 typedef enum e_tiles
@@ -67,18 +68,6 @@ typedef struct s_display
 	bool	open;
 }	t_display;
 
-typedef struct s_pos
-{
-	double	x;
-	double	y;
-}	t_pos;
-
-typedef struct s_player
-{
-	char	face;
-	t_pos	pos;
-}	t_player;
-
 /* map */
 typedef struct s_map
 {
@@ -103,6 +92,8 @@ typedef struct s_game
 void	init_game(t_game *game);
 /* init game utils */
 void	init_info_list(t_game *game);
+/* handle_closure */
+int	close_game(void *param);
 
 /*** check ***/
 /* check arg */
@@ -132,7 +123,7 @@ char	**build_new_matrix(int height, int width);
 void	handle_display(t_game *game);
 
 /*** events ***/
-void	handle_key_event(t_game *game);
+void	handle_events(t_game *game);
 
 /*** utils ***/
 /* main */

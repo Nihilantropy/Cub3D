@@ -1,7 +1,6 @@
 #include "../include/cub3D.h"
 
 static void	open_display(t_game *game);
-static void	get_win_size(t_game *game);
 
 void	handle_display(t_game *game)
 {

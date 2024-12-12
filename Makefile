@@ -6,11 +6,14 @@ CUB3D_HEAD	= ./include
 MAIN_DIR	= ./main
 CHECK_DIR	= ./check
 PARSER_DIR	= ./parser
+DISPLAY_DIR = ./display
+EVENTS_DIR	= ./events
 UTILS_DIR	= ./utils
 
 SRCS		=	$(MAIN_DIR)/main.c \
 				$(MAIN_DIR)/init_game.c \
 				$(MAIN_DIR)/init_game_utils.c \
+				$(MAIN_DIR)/handle_closure.c \
 				$(UTILS_DIR)/main.c \
 				$(UTILS_DIR)/matrix.c \
 				$(UTILS_DIR)/info.c \
@@ -23,6 +26,8 @@ SRCS		=	$(MAIN_DIR)/main.c \
 				$(PARSER_DIR)/parser_get_map.c \
 				$(PARSER_DIR)/parser_matrix.c \
 				$(PARSER_DIR)/parser_matrix_utils.c \
+				$(DISPLAY_DIR)/handle_display.c \
+				$(EVENTS_DIR)/key_events.c
 
 
 						
