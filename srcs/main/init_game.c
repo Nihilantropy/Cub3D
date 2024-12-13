@@ -39,6 +39,8 @@ static void	init_player(t_game *game)
 	game->player.face = 0;
 	game->player.pos.x = 0;
 	game->player.pos.y = 0;
+	game->player.rot.current_angle = 0;
+	game->player.rot.next_rotation = false;
 }
 
 static void	init_map_checks(t_game *game)

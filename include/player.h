@@ -24,7 +24,7 @@ typedef struct s_pos
 typedef struct s_rot
 {
 	double	current_angle;
-	bool	next_angle;
+	bool	next_rotation;
 }	t_rot;
 
 /**
