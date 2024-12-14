@@ -118,12 +118,19 @@ bool	parse_matrix(t_game *game, const char **matrix);
 bool	is_info_line(const char *line);
 bool	is_map_row(const char *line);
 char	**build_new_matrix(int height, int width);
+/* parser get player */
+void	get_player_infos(t_game *game);
 
 /*** display */
 void	handle_display(t_game *game);
 
 /*** events ***/
-void	handle_events(t_game *game);
+void	handle_key_events(t_game *game);
+
+/*** player ***/
+/* player movement */
+void	set_player_movement(t_game *game, int moving);
+void	set_player_rot_angle(t_game *game, int rotating);
 
 /*** utils ***/
 /* main */

@@ -25,7 +25,7 @@ int	main(int argc, char **argv)
 	print_matrix(game.map.matrix); // REMOVE
 	game.mlx_ptr = mlx_init();
 	handle_display(&game);
-	handle_events(&game);
+	handle_key_events(&game);
 	// handle_update(&game);
 	mlx_loop(game.mlx_ptr);
 	free_all(&game);

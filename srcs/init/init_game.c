@@ -37,10 +37,16 @@ static void	init_display(t_game *game)
 static void	init_player(t_game *game)
 {
 	game->player.face = 0;
-	game->player.pos.x = 0;
 	game->player.pos.y = 0;
-	game->player.rot.current_angle = 0;
-	game->player.rot.next_rotation = false;
+	game->player.pos.x = 0;
+	game->player.speed = 0.0;
+	game->player.rot_speed = 0.0;
+	game->player.moving.forward = false;
+	game->player.moving.backward = false;
+	game->player.rot.current_angle = -1;
+	game->player.rot.left = false;
+	game->player.rot.right = false;
+
 }
 
 static void	init_map_checks(t_game *game)
