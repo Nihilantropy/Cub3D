@@ -6,57 +6,39 @@ static bool is_valid_pos(const char **matrix, double new_y, double new_x);
 
 /**
  * @brief based on the moving input, set the correct
- * moving boolean var and update player position.
+ *	moving boolean var and update player position.
  * 
  * @param moving incoming moving input
  */
 void	set_player_movement(t_game *game, int moving)
 {
-	if (moving == M_FORWARD)
-	{
-		game->player.moving.forward = true;
-		game->player.moving.backward = false;
-	}
-	else if (moving == M_BACKWARD)
-	{
-		game->player.moving.backward = true;
-		game->player.moving.forward = false;
-	}
-	else
-	{
-		game->player.moving.backward = false;
-		game->player.moving.forward = false;		
-	}
 	if (moving == M_STILL)
-		return ;
+	{
+		game->player.moving.forward = false;
+		game->player.moving.backward = false;
+		return;
+	}
+	game->player.moving.forward = (moving == M_FORWARD);
+	game->player.moving.backward = (moving == M_BACKWARD);
 	update_player_pos(game);
 }
 
 /**
  * @brief based on the rotating input, set the correct
- * boolean var and update player rotation angle.
+ *	boolean var and update player rotation angle.
  * 
  * @param rotating incoming rotation input
  */
 void	set_player_rot_angle(t_game *game, int rotating)
 {
-	if (rotating == R_LEFT)
-	{
-		game->player.rot.left = true;
-		game->player.rot.right = false;
-	}
-	else if (rotating == R_RIGHT)
-	{
-		game->player.rot.right = true;
-		game->player.rot.left = false;
-	}
-	else
-	{
-		game->player.rot.right = false;
-		game->player.rot.left = false;		
-	}
 	if (rotating == R_STILL)
-		return ;
+	{
+		game->player.rot.left = false;
+		game->player.rot.right = false;
+		return;
+	}
+	game->player.rot.left = (rotating == R_LEFT);
+	game->player.rot.right = (rotating == R_RIGHT);
 	update_player_angle(game);
 }
 
@@ -85,10 +67,11 @@ static void	update_player_pos(t_game *game)
 		new_x -= game->player.speed * cos(angle);
 		new_y -= game->player.speed * sin(angle);
 	}
-	if (!is_valid_pos(game->map.matrix, new_y, new_x))
+	if (is_valid_pos(game->map.matrix, new_y, new_x))
 	{
 		game->player.pos.x = new_x;
 		game->player.pos.y = new_y;
+		draw_player_2d(game);
 	}
 	printf("Checking position (%.2f, %.2f): Grid (%d, %d) - Valid: %s\n",
        new_x, new_y, (int)new_x, (int)new_y,
@@ -118,6 +101,7 @@ static void	update_player_angle(t_game *game)
 
 /**
  * @brief check if the next position is valid
+ * returns corrisponding boolean based on condition matching
  */
 static bool is_valid_pos(const char **matrix, double new_y, double new_x)
 {
@@ -127,10 +111,9 @@ static bool is_valid_pos(const char **matrix, double new_y, double new_x)
 	grid_x = (int)new_x;
 	grid_y = (int)new_y;
 
-    if (grid_y >= 0 && matrix[grid_y] != NULL &&
-		grid_x >= 0 && matrix[grid_y][grid_x] != '\0')
-    {
-        return (matrix[grid_y][grid_x] == FLOOR);
-    }
-    return false;
+	return (
+		grid_y >= 0 && matrix[grid_y] != NULL &&
+		grid_x >= 0 && matrix[grid_y][grid_x] != '\0' &&
+		matrix[grid_y][grid_x] == FLOOR
+	);
 }

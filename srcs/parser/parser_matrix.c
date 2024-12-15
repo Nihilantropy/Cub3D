@@ -5,17 +5,18 @@ static int	get_map_width(const char **matrix);
 static int	get_map_height(const char **matrix);
 static void	copy_matrix(char **matrix_dest, const char **matrix_src);
 
-/*	parse matrix:
-**	1) set the map matrix starting row
-**	2) get the map width
-**	3) get the map height
-**	4) build a new matrix to make a perfect rectangle
-**		based on the max width and max height of the
-**		provided map matrix, then fill it with fille char
-**		'H' for better controls managment
-**	5) copy the provided map matrix into the new matrix and
-**		save it in the game structure
-*/
+/**	
+ * @brief parse matrix:
+ * - set the map matrix starting row
+ * - get the map width
+ * - get the map height
+ * - build a new matrix to make a perfect rectangle
+ *  based on the max width and max height of the
+ *  provided map matrix, then fill it with fille char
+ *  'H' for better controls managment
+ * - copy the provided map matrix into the new matrix and
+ *  save it in the game structure
+ */
 bool	parse_matrix(t_game *game, const char **matrix)
 {
 	char	**new_matrix;
@@ -32,6 +33,11 @@ bool	parse_matrix(t_game *game, const char **matrix)
 	return (true);
 }
 
+/**
+ * @brief set the starting point of the map in the file
+ * passed by the user to make sure no infos are present after the
+ * starting point.
+ */
 static bool	set_map_start(t_game *game, const char **matrix)
 {
 	int		y;

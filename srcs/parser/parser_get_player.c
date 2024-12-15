@@ -1,17 +1,16 @@
 #include "../include/cub3D.h"
 
-static bool	is_player_char(char player);
 static void	set_player_var(t_game *game, int y, int x);
 static void	set_player_rot(t_game *game, char face);
 static void	set_player_pos(t_game *game, int y, int x);
 
 /**
  * @brief parse matrix to get and set palyer infos;
- *  - player facing
- *  - player velocity
- * 	- camera field of view
- *  - player position
- *  - player rotation
+ * - player facing
+ * - player velocity
+ * - camera field of view
+ * - player position
+ * - player rotation
  */
 void	get_player_infos(t_game *game)
 {
@@ -35,7 +34,7 @@ void	get_player_infos(t_game *game)
 	}
 }
 
-static bool	is_player_char(char player)
+bool	is_player_char(char player)
 {
 	return (player == NORTH || player == EAST
 		|| player == SOUTH || player == WEST);

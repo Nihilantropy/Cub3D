@@ -11,12 +11,15 @@ DISPLAY_DIR = ./display
 EVENTS_DIR	= ./events
 PLAYER_DIR	= ./player
 UTILS_DIR	= ./utils
+RENDER_DIR	= ./rendering
 
 SRCS		=	$(MAIN_DIR)/main.c \
 				$(MAIN_DIR)/handle_closure.c \
 				$(INIT_DIR)/init_game.c \
-				$(INIT_DIR)/init_game_utils.c \
+				$(INIT_DIR)/init_game_utils_1.c \
+				$(INIT_DIR)/init_game_utils_2.c \
 				$(UTILS_DIR)/main.c \
+				$(UTILS_DIR)/minimap.c \
 				$(UTILS_DIR)/matrix.c \
 				$(UTILS_DIR)/info.c \
 				$(CHECK_DIR)/check_arg.c \
@@ -31,7 +34,10 @@ SRCS		=	$(MAIN_DIR)/main.c \
 				$(PARSER_DIR)/parser_get_player.c \
 				$(DISPLAY_DIR)/handle_display.c \
 				$(EVENTS_DIR)/key_events.c \
-				$(PLAYER_DIR)/player_movement.c
+				$(PLAYER_DIR)/player_movement.c \
+				$(RENDER_DIR)/draw_map_2d.c \
+				$(RENDER_DIR)/draw_player_2d.c \
+				$(RENDER_DIR)/render_frame.c
 
 
 						

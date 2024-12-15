@@ -15,11 +15,14 @@
 # include "messages.h"
 # include "error.h"
 # include "player.h"
+# include "minimap.h"
 
 # define DISPLAY_NAME "Cub3D"
 
 # define WIN_WIDTH 1920
 # define WIN_HEIGHT 1080
+
+# define FRAME_TIME_MS 16
 
 /* enum for map tiles symbols */
 typedef enum e_tiles
@@ -81,19 +84,23 @@ typedef struct s_map
 typedef struct s_game
 {
 	t_map		map;
+	t_minimap	minimap;
 	t_display	display;
 	t_player	player;
+	bool		running;
 	void		*mlx_ptr;
 	void		*win_ptr;
 }	t_game;
 
 /*** main ***/
+/* main */
+void	game_loop(t_game *game);
+/* handle closure */
+int		close_game(void *param);
+
+/*** init ***/
 /* init game */
 void	init_game(t_game *game);
-/* init game utils */
-void	init_info_list(t_game *game);
-/* handle_closure */
-int	close_game(void *param);
 
 /*** check ***/
 /* check arg */
@@ -120,6 +127,7 @@ bool	is_map_row(const char *line);
 char	**build_new_matrix(int height, int width);
 /* parser get player */
 void	get_player_infos(t_game *game);
+bool	is_player_char(char player);
 
 /*** display */
 void	handle_display(t_game *game);
@@ -132,6 +140,14 @@ void	handle_key_events(t_game *game);
 void	set_player_movement(t_game *game, int moving);
 void	set_player_rot_angle(t_game *game, int rotating);
 
+/*** rendering ***/
+/* drwa map 2d */
+void	draw_map_2d(t_game *game);
+/* draw player 2d */
+void	draw_player_2d(t_game *game);
+/* render frame */
+int		render_frame(t_game *game);
+
 /*** utils ***/
 /* main */
 void	free_all(t_game *game);
@@ -143,5 +159,7 @@ char	**dup_matrix(const char **matrix);
 /* info */
 void	print_info_list(t_info *info);
 void	free_info_list(t_info **info);
+/* minimap */
+void	free_minimap_images(t_game *game);
 
 #endif

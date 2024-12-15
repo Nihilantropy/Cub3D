@@ -1,19 +1,24 @@
 #include "../include/cub3D.h"
 
+void		init_minimap(t_game *game);
+void		init_info_list(t_game *game);
 static void	init_map(t_game *game);
 static void	init_display(t_game *game);
 static void	init_map_checks(t_game *game);
 static void	init_player(t_game *game);
 
-/*	init game:
-**	initializing all variable in
-**	game structure
-*/
+/** 
+ *  @brief init game:
+ *	initializing all variable in
+ *	game structure
+ */
 void	init_game(t_game *game)
 {
 	game->mlx_ptr = NULL;
 	game->win_ptr = NULL;
+	game->running = false;
 	init_map(game);
+	init_minimap(game);
 	init_display(game);
 	init_player(game);
 }

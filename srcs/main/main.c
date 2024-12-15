@@ -1,11 +1,12 @@
 #include "../include/cub3D.h"
 
-/*	main:
-**	1) check for incorrect arguments
-**	2) initialize the game structure
-**	3) get the map to parse and validate
-**		the map infos and the map matrix
-*/
+/** 
+ * @brief main:
+ *	1) check for incorrect arguments
+ *	2) initialize the game structure
+ *	3) get the map to parse and validate
+ *		the map infos and the map matrix
+ */
 int	main(int argc, char **argv)
 {
 	t_game	game;
@@ -25,9 +26,19 @@ int	main(int argc, char **argv)
 	print_matrix(game.map.matrix); // REMOVE
 	game.mlx_ptr = mlx_init();
 	handle_display(&game);
-	handle_key_events(&game);
-	// handle_update(&game);
-	mlx_loop(game.mlx_ptr);
+	game.running = true;
+	game_loop(&game);
+	game.running = false;
 	free_all(&game);
 	return (0);
+}
+
+void	game_loop(t_game *game)
+{
+	if (game->running)
+	{
+		handle_key_events(game);
+		mlx_loop_hook(game->mlx_ptr, render_frame, game);
+		mlx_loop(game->mlx_ptr);
+	}
 }

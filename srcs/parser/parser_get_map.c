@@ -3,16 +3,17 @@
 static int	get_matrix_len(const char *map);
 static bool	build_matrixes(t_game *game, char **matrix, const char *map);
 
-/*	get map:
-**	1) build 2 matrixes: first one is a copy
-**		of the file provided by the user;
-**		second one is only the map matrix,
-**		filled with FILLER CHAR ('H'), to
-**		make controls easier
-**	2) do all the necessary checks:
-**		-info validation
-**		-map matrix validation
-*/
+/** 
+ * @brief get map:
+ * 1) build 2 matrixes: first one is a copy
+ * of the file provided by the user;
+ * second one is only the map matrix,
+ * filled with FILLER CHAR ('H'), to
+ * make controls easier
+ * 2) do all the necessary checks:
+ * - info validation
+ * - map matrix validation
+ */
 bool	get_map(t_game *game, const char *map)
 {
 	bool	flag;
