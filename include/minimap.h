@@ -4,6 +4,8 @@
 # define MINI_CELL_SIZE 64
 # define MINI_PLAYER_SIZE 16
 
+# include <stdbool.h>
+
 typedef struct s_images
 {
 	void	*player;
@@ -15,6 +17,7 @@ typedef struct s_images
 typedef struct s_minimap
 {
 	t_images	images;
+	bool		changed;
 }	t_minimap;
 
 #endif

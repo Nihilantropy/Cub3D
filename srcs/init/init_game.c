@@ -42,8 +42,10 @@ static void	init_display(t_game *game)
 static void	init_player(t_game *game)
 {
 	game->player.face = 0;
-	game->player.pos.y = 0;
-	game->player.pos.x = 0;
+	game->player.pos.x = 0.0;
+	game->player.pos.y = 0.0;
+	game->player.pos.x_screen = 0;
+	game->player.pos.y_screen = 0;
 	game->player.speed = 0.0;
 	game->player.rot_speed = 0.0;
 	game->player.moving.forward = false;
@@ -51,7 +53,20 @@ static void	init_player(t_game *game)
 	game->player.rot.current_angle = -1;
 	game->player.rot.left = false;
 	game->player.rot.right = false;
-
+	game->player.camera.fov = 0;
+	game->player.camera.ray_dir_x = 0.0;
+	game->player.camera.ray_dir_y = 0.0;
+	game->player.camera.map_x = 0;
+	game->player.camera.map_y = 0;
+	game->player.camera.step_x = 0;
+	game->player.camera.step_y = 0;
+	game->player.camera.side_dist_x = 0.0;
+	game->player.camera.side_dist_y = 0.0;
+	game->player.camera.delta_dist_x = 0.0;
+	game->player.camera.delta_dist_y = 0.0;
+	game->player.camera.wall_hit_x = 0;
+	game->player.camera.wall_hit_y = 0;
+	game->player.camera.perp_wall_dist = 0.0;
 }
 
 static void	init_map_checks(t_game *game)

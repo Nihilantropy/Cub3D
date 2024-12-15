@@ -13,6 +13,7 @@ void	handle_display(t_game *game)
 	open_display(game);
 	game->display.open = true;
 	draw_map_2d(game);
+	draw_player_2d(game);
 }
 
 static void	open_display(t_game *game)

@@ -17,7 +17,7 @@
 # define ERR_NBR_PLAYER "Error\nWrong number of player\n"
 
 /* generic err msg*/
-#define ERR_DISPLAY_OPEN "Error\nCould not open display. Exiting..."
+# define ERR_DISPLAY_OPEN "Error\nCould not open display. Exiting..."
 
 /* allocation err msg */
 # define ERR_ALLOC_MATRIX "Error\nMatrix alloc failed\n"
@@ -26,5 +26,8 @@
 # define ERR_ALLOC_NEW_MATRIX_ROW "Error\nNew matrix row alloc failed\n"
 # define ERR_ALLOC_NEW_MATRIX_COL "Error\nNew matrix column alloc failed\n"
 # define ERR_ALLOC_BOOL_MATRIX "Error\nBool matrix column alloc failed\n"
+
+/* raycast error msg */
+# define ERR_INVALID_RAY_CAST_ACCESS "Error\nInvalid acces on raycast\nClosing game..."
 
 #endif

@@ -9,6 +9,7 @@
 # include <limits.h>
 # include <time.h>
 # include <stdbool.h>
+# include <sys/time.h>
 # include "../libft/include/libft.h"
 # include "../minilibx-linux/mlx.h"
 # include "keys.h"
@@ -16,13 +17,14 @@
 # include "error.h"
 # include "player.h"
 # include "minimap.h"
+# include "colors.h"
 
 # define DISPLAY_NAME "Cub3D"
 
 # define WIN_WIDTH 1920
 # define WIN_HEIGHT 1080
 
-# define FRAME_TIME_MS 16
+# define FRAME_TIME_MS 1000 / 30
 
 /* enum for map tiles symbols */
 typedef enum e_tiles
@@ -139,14 +141,18 @@ void	handle_key_events(t_game *game);
 /* player movement */
 void	set_player_movement(t_game *game, int moving);
 void	set_player_rot_angle(t_game *game, int rotating);
+/* raycast */
+void	cast_ray(t_game *game, t_player *player);
 
 /*** rendering ***/
+/* render frame */
+int		render_frame(t_game *game);
 /* drwa map 2d */
 void	draw_map_2d(t_game *game);
 /* draw player 2d */
 void	draw_player_2d(t_game *game);
-/* render frame */
-int		render_frame(t_game *game);
+/* draw ray */
+void	draw_ray(t_game * game, t_player *player);
 
 /*** utils ***/
 /* main */

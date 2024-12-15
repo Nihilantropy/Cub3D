@@ -71,7 +71,7 @@ static void	update_player_pos(t_game *game)
 	{
 		game->player.pos.x = new_x;
 		game->player.pos.y = new_y;
-		draw_player_2d(game);
+		game->minimap.changed = true;
 	}
 	printf("Checking position (%.2f, %.2f): Grid (%d, %d) - Valid: %s\n",
        new_x, new_y, (int)new_x, (int)new_y,
@@ -96,6 +96,7 @@ static void	update_player_angle(t_game *game)
 		if (game->player.rot.current_angle >= 2 * M_PI)
 			game->player.rot.current_angle -= 2 * M_PI;
 	}
+	game->minimap.changed = true;
 	printf("Current Angle: %.2f radians\n", game->player.rot.current_angle);
 }
 
@@ -114,6 +115,7 @@ static bool is_valid_pos(const char **matrix, double new_y, double new_x)
 	return (
 		grid_y >= 0 && matrix[grid_y] != NULL &&
 		grid_x >= 0 && matrix[grid_y][grid_x] != '\0' &&
-		matrix[grid_y][grid_x] == FLOOR
+		(matrix[grid_y][grid_x] == FLOOR ||
+		is_player_char(matrix[grid_y][grid_x]))
 	);
 }
