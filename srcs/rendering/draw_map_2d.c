@@ -36,5 +36,6 @@ static void	draw_cell(t_game *game, int x, int y, char cell)
 		img_to_draw = game->minimap.images.floor;
 	else
 		img_to_draw = game->minimap.images.unknown;
-	mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, img_to_draw, x * 64, y * 64);
+	mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, img_to_draw,
+		x * MINI_CELL_SIZE, y * MINI_CELL_SIZE);
 }
