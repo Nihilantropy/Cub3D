@@ -5,7 +5,7 @@ static void	init_minimap_images(t_game *game);
 void	init_minimap(t_game *game)
 {
 	init_minimap_images(game);
-	game->minimap.changed = false;
+	game->minimap.changed = true;
 }
 
 static void	init_minimap_images(t_game *game)

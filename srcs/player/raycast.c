@@ -37,7 +37,7 @@ void	cast_ray(t_game *game, t_player *player)
 		player->camera.side_dist_y = (player->camera.map_y + 1.0 - player->pos.y) * player->camera.delta_dist_y;
 	}
 	perform_dda(game, player);
-	draw_ray(game, player);
+	// draw_ray(game, player);
 }
 
 static void	perform_dda(t_game *game, t_player *player)
@@ -67,12 +67,21 @@ static void	perform_dda(t_game *game, t_player *player)
 		if (game->map.matrix[player->camera.map_y][player->camera.map_x] == WALL)
 		{
 			hit = true;
+
+			printf("Wall hit at map_x=%d, map_y=%d\n",
+                   player->camera.map_x, player->camera.map_y);
 			calc_perp_dist(player);
 			stores_wall_hit_coord(player);
+
+			printf("Wall exact hit coordinates: wall_hit_x=%f, wall_hit_y=%f\n",
+				player->camera.wall_hit_x, player->camera.wall_hit_y);
 		}
 	}
 }
 
+/**
+ * @brief calculate the perpedicular distance from the player
+ */
 static void	calc_perp_dist(t_player *player)
 {
 	if (player->camera.side_dist_x < player->camera.side_dist_y)
@@ -85,14 +94,14 @@ static void	stores_wall_hit_coord(t_player *player)
 {
 	if (player->camera.side_dist_x < player->camera.side_dist_y)
 	{
-		player->camera.wall_hit_x = player->camera.map_x;
+		player->camera.wall_hit_x = (double)player->camera.map_x;
 		player->camera.wall_hit_y = player->pos.y +
 			player->camera.perp_wall_dist * player->camera.ray_dir_y;
 	}
 	else
 	{
+		player->camera.wall_hit_y = (double)player->camera.map_y;
 		player->camera.wall_hit_x = player->pos.x +
 			player->camera.perp_wall_dist * player->camera.ray_dir_x;
-		player->camera.wall_hit_y = player->camera.map_y;
 	}
 }

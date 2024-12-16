@@ -24,7 +24,7 @@
 # define WIN_WIDTH 1920
 # define WIN_HEIGHT 1080
 
-# define FRAME_TIME_MS 1000 / 30
+# define FRAME_TIME_MS 1000 / 60
 
 /* enum for map tiles symbols */
 typedef enum e_tiles
@@ -79,7 +79,7 @@ typedef struct s_map
 	t_check		check;
 	int			width;
 	int			height;
-	const char	**matrix;
+	char		**matrix;
 	const char	**info;
 }	t_map;
 
@@ -153,6 +153,8 @@ void	draw_map_2d(t_game *game);
 void	draw_player_2d(t_game *game);
 /* draw ray */
 void	draw_ray(t_game * game, t_player *player);
+/* draw line */
+void draw_line(t_game *game, int x1, int y1, int x2, int y2, int color);
 
 /*** utils ***/
 /* main */

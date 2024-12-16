@@ -23,7 +23,7 @@ int	main(int argc, char **argv)
 		free_all(&game);
 		return (1);
 	}
-	print_matrix(game.map.matrix); // REMOVE
+	print_matrix((const char **)game.map.matrix); // REMOVE
 	game.mlx_ptr = mlx_init();
 	handle_display(&game);
 	game.running = true;

@@ -28,7 +28,7 @@ bool	parse_matrix(t_game *game, const char **matrix)
 	game->map.height = get_map_height(matrix + game->map.check.map_start_row);
 	new_matrix = build_new_matrix(game->map.height, game->map.width);
 	copy_matrix(new_matrix, matrix + game->map.check.map_start_row);
-	game->map.matrix = (const char **)new_matrix;
+	game->map.matrix = new_matrix;
 	get_player_infos(game);
 	return (true);
 }

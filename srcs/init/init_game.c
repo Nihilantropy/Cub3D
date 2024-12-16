@@ -64,8 +64,8 @@ static void	init_player(t_game *game)
 	game->player.camera.side_dist_y = 0.0;
 	game->player.camera.delta_dist_x = 0.0;
 	game->player.camera.delta_dist_y = 0.0;
-	game->player.camera.wall_hit_x = 0;
-	game->player.camera.wall_hit_y = 0;
+	game->player.camera.wall_hit_x = 0.0;
+	game->player.camera.wall_hit_y = 0.0;
 	game->player.camera.perp_wall_dist = 0.0;
 }
 

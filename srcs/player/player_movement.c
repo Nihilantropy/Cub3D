@@ -67,15 +67,15 @@ static void	update_player_pos(t_game *game)
 		new_x -= game->player.speed * cos(angle);
 		new_y -= game->player.speed * sin(angle);
 	}
-	if (is_valid_pos(game->map.matrix, new_y, new_x))
+	if (is_valid_pos((const char **)game->map.matrix, new_y, new_x))
 	{
 		game->player.pos.x = new_x;
 		game->player.pos.y = new_y;
 		game->minimap.changed = true;
 	}
-	printf("Checking position (%.2f, %.2f): Grid (%d, %d) - Valid: %s\n",
-       new_x, new_y, (int)new_x, (int)new_y,
-       is_valid_pos(game->map.matrix, new_y, new_x) ? "YES" : "NO");
+	// printf("Checking position (%.2f, %.2f): Grid (%d, %d) - Valid: %s\n",
+    //    new_x, new_y, (int)new_x, (int)new_y,
+    //    is_valid_pos((const char **)game->map.matrix, new_y, new_x) ? "YES" : "NO");
 }
 
 /**

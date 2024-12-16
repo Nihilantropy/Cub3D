@@ -27,9 +27,9 @@ int	render_frame(t_game *game)
 	{
 		mlx_clear_window(game->mlx_ptr, game->win_ptr);
 		draw_map_2d(game);
+		draw_player_2d(game);
+		cast_ray(game, &game->player);
 	}
-	draw_player_2d(game);
-	cast_ray(game, &game->player);
 	game->minimap.changed = false;
 	return (0);
 }

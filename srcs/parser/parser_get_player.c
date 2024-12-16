@@ -6,11 +6,13 @@ static void	set_player_pos(t_game *game, int y, int x);
 
 /**
  * @brief parse matrix to get and set palyer infos;
+ * - player number
  * - player facing
  * - player velocity
  * - camera field of view
  * - player position
  * - player rotation
+ * Remove the player char from the map matrix
  */
 void	get_player_infos(t_game *game)
 {
@@ -25,7 +27,9 @@ void	get_player_infos(t_game *game)
 		{
 			if (is_player_char(game->map.matrix[y][x]))
 			{
+				game->map.check.player++;
 				set_player_var(game, y, x);
+				game->map.matrix[y][x] = FLOOR;
 				return ;
 			}
 			x++;
@@ -60,14 +64,14 @@ static void	set_player_rot(t_game *game, char face)
 {
 	double	rot;
 
-	rot = -1;
+	rot = 0.0;
 	if (face == NORTH)
-		rot = 0.0;
+		rot = -M_PI / 2;
 	else if (face == EAST)
-		rot = 90.0;
+		rot = 0.0;
 	else if (face == SOUTH)
-		rot = 180.0;
+		rot = M_PI / 2;
 	else if (face == WEST)
-		rot = 270.0;
+		rot = M_PI;
 	game->player.rot.current_angle = rot;
 }

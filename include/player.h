@@ -13,8 +13,10 @@
 # define R_SPEED 0.1
 # define P_FOV 135.0
 
+# define MINI_PLAYER_TEXTURE "texture/debug/minimap_player.xpm"
+
 #ifndef M_PI
-# define M_PI 3.14159265359
+# define M_PI 3.14
 #endif
 
 /**
@@ -44,8 +46,8 @@ typedef struct s_camera
 	double	side_dist_y;
 	double	delta_dist_x;
 	double	delta_dist_y;
-	int		wall_hit_x;
-	int		wall_hit_y;
+	double	wall_hit_x;
+	double	wall_hit_y;
 	double	perp_wall_dist;
 }	t_camera;
 

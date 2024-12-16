@@ -44,6 +44,8 @@ static void	check_map_matrix_wrong_char(t_game *game,
 				game->map.check.wrong_char = true;
 				return ;
 			}
+			if (is_player_char(matrix[y][x]))
+				game->map.check.player++;
 			x++;
 		}
 		y++;
