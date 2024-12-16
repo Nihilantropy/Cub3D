@@ -19,6 +19,10 @@
 # define M_PI 3.14
 #endif
 
+#ifndef M_PI_2
+# define M_PI_2 1.57
+#endif
+
 /**
  * @brief Stores raycasting information.
  * 

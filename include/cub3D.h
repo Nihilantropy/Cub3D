@@ -24,6 +24,8 @@
 # define WIN_WIDTH 1920
 # define WIN_HEIGHT 1080
 
+# define TILE_SIZE 64
+
 # define FRAME_TIME_MS 1000 / 60
 
 /* enum for map tiles symbols */
