@@ -1,0 +1,1 @@
+Start the mlx open windows and basic events interactions (key handling)
