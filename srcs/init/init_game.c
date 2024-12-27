@@ -67,6 +67,8 @@ static void	init_player(t_game *game)
 	game->player.camera.wall_hit_x = 0.0;
 	game->player.camera.wall_hit_y = 0.0;
 	game->player.camera.perp_wall_dist = 0.0;
+	game->player.camera.start_x = 0.0;
+	game->player.camera.start_y = 0.0;
 }
 
 static void	init_map_checks(t_game *game)

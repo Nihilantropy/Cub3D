@@ -56,8 +56,8 @@ static void	set_player_var(t_game *game, int y, int x)
 
 static void	set_player_pos(t_game *game, int y, int x)
 {
-	game->player.pos.y = y;
-	game->player.pos.x = x;
+	game->player.pos.y = y + 0.5;
+	game->player.pos.x = x + 0.5;
 }
 
 static void	set_player_rot(t_game *game, char face)

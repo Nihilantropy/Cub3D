@@ -18,6 +18,7 @@
 # include "player.h"
 # include "minimap.h"
 # include "colors.h"
+# include "test.h"
 
 # define DISPLAY_NAME "Cub3D"
 
@@ -145,6 +146,9 @@ void	set_player_movement(t_game *game, int moving);
 void	set_player_rot_angle(t_game *game, int rotating);
 /* raycast */
 void	cast_ray(t_game *game, t_player *player);
+void	init_ray(t_camera *ray_info, t_player *player, double ray_angle);
+void	calculate_step_dist(t_camera *ray_info, t_player *player);
+int		perform_dda(t_game *game, t_camera *ray_info);
 
 /*** rendering ***/
 /* render frame */
@@ -156,7 +160,10 @@ void	draw_player_2d(t_game *game);
 /* draw ray */
 void	draw_ray(t_game * game, t_player *player);
 /* draw line */
-void draw_line(t_game *game, int x1, int y1, int x2, int y2, int color);
+void	draw_line(t_game *game, int x1, int y1, int x2, int y2, int color);
+/* draw wall */
+void	calculate_wall_dist(t_camera *ray_info, int side);
+void	draw_wall_stripe(t_game *game, int x, int wall_height);
 
 /*** utils ***/
 /* main */
@@ -171,5 +178,9 @@ void	print_info_list(t_info *info);
 void	free_info_list(t_info **info);
 /* minimap */
 void	free_minimap_images(t_game *game);
+
+/*** test ***/
+/* test */
+bool	test_raycasting(t_game *game);
 
 #endif

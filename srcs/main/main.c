@@ -26,6 +26,12 @@ int	main(int argc, char **argv)
 	print_matrix((const char **)game.map.matrix); // REMOVE
 	game.mlx_ptr = mlx_init();
 	handle_display(&game);
+	if (!test_raycasting(&game))
+	{
+		ft_putstr_fd("Raycasting tests failed\n", 2);
+		free_all(&game);
+		return (1);
+	}
 	game.running = true;
 	game_loop(&game);
 	game.running = false;

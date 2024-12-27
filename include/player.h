@@ -25,7 +25,7 @@
 
 /**
  * @brief Stores raycasting information.
- * 
+ *
  * @var fov The field of view in degrees (e.g., 135°).
  * @var ray_dir_x X component of the current ray's direction vector.
  * @var ray_dir_y Y component of the current ray's direction vector.
@@ -36,24 +36,28 @@
  * @var delta_dist_x Distance between vertical grid lines the ray intersects.
  * @var delta_dist_y Distance between horizontal grid lines the ray intersects.
  * @var perp_wall_dist Perpendicular distance from the player to the wall.
+ * @var start_x Starting X position for accurate distance calculation
+ * @var start_y Starting Y position for accurate distance calculation
  */
 typedef struct s_camera
 {
-	double	fov;
-	double	ray_dir_x;
-	double	ray_dir_y;
-	int		map_x;
-	int		map_y;
-	int		step_x;
-	int		step_y;
-	double	side_dist_x;
-	double	side_dist_y;
-	double	delta_dist_x;
-	double	delta_dist_y;
-	double	wall_hit_x;
-	double	wall_hit_y;
-	double	perp_wall_dist;
-}	t_camera;
+    double  fov;
+    double  ray_dir_x;
+    double  ray_dir_y;
+    int     map_x;
+    int     map_y;
+    int     step_x;
+    int     step_y;
+    double  side_dist_x;
+    double  side_dist_y;
+    double  delta_dist_x;
+    double  delta_dist_y;
+    double  wall_hit_x;
+    double  wall_hit_y;
+    double  perp_wall_dist;
+    double  start_x;
+    double  start_y;
+}   t_camera;
 
 
 /**
