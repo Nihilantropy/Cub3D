@@ -1,7 +1,7 @@
 #include "../include/cub3D.h"
 
 static void	update_player_pos(t_game *game);
-static void	update_player_angle(t_game *game);
+static void	update_direction(t_camera *cam, double rot_speed);
 static bool is_valid_pos(const char **matrix, double new_y, double new_x);
 
 /**
@@ -31,15 +31,16 @@ void	set_player_movement(t_game *game, int moving)
  */
 void	set_player_rot_angle(t_game *game, int rotating)
 {
+	double	rot_speed;
+
 	if (rotating == R_STILL)
-	{
-		game->player.rot.left = false;
-		game->player.rot.right = false;
 		return;
-	}
-	game->player.rot.left = (rotating == R_LEFT);
-	game->player.rot.right = (rotating == R_RIGHT);
-	update_player_angle(game);
+	if (rotating == R_LEFT)
+		rot_speed = -game->player.rot_speed;
+	else
+		rot_speed = game->player.rot_speed;
+	update_direction(&game->player.camera, rot_speed);
+	game->minimap.changed = true;
 }
 
 /**
@@ -52,52 +53,47 @@ static void	update_player_pos(t_game *game)
 {
 	double	new_x;
 	double	new_y;
-	double	angle;
+	t_player *p;
 
 	new_x = game->player.pos.x;
 	new_y = game->player.pos.y;
-	angle = game->player.rot.current_angle;
-	if (game->player.moving.forward)
+	p = &game->player;
+	if (p->moving.forward)
 	{
-		new_x += game->player.speed * cos(angle);
-		new_y += game->player.speed * sin(angle);
+		new_x += p->camera.dir_x * p->speed;
+		new_y += p->camera.dir_y * p->speed;
 	}
-	else if (game->player.moving.backward)
+	else if (p->moving.backward)
 	{
-		new_x -= game->player.speed * cos(angle);
-		new_y -= game->player.speed * sin(angle);
+		new_x -= p->camera.dir_x * p->speed;
+		new_y -= p->camera.dir_y * p->speed;
 	}
 	if (is_valid_pos((const char **)game->map.matrix, new_y, new_x))
 	{
-		game->player.pos.x = new_x;
-		game->player.pos.y = new_y;
+		p->pos.x = new_x;
+		p->pos.y = new_y;
 		game->minimap.changed = true;
 	}
-	// printf("Checking position (%.2f, %.2f): Grid (%d, %d) - Valid: %s\n",
-    //    new_x, new_y, (int)new_x, (int)new_y,
-    //    is_valid_pos((const char **)game->map.matrix, new_y, new_x) ? "YES" : "NO");
 }
 
 /**
- * @brief update player rot based on the player rotation speed
- * ensuring to stay between 0 and 360 degree
+ * @brief update camera direction and plane vectors based on rotation speed.
+ * Uses rotation matrix to update both the direction vector and camera plane.
+ * 
+ * @param cam camera info containing direction and plane vectors
+ * @param rot_speed rotation speed in radians
  */
-static void	update_player_angle(t_game *game)
+static void	update_direction(t_camera *cam, double rot_speed)
 {
-	if (game->player.rot.left)
-	{
-		game->player.rot.current_angle -= game->player.rot_speed;
-		if (game->player.rot.current_angle < 0)
-			game->player.rot.current_angle += 2 * M_PI;
-	}
-	else if (game->player.rot.right)
-	{
-		game->player.rot.current_angle += game->player.rot_speed;
-		if (game->player.rot.current_angle >= 2 * M_PI)
-			game->player.rot.current_angle -= 2 * M_PI;
-	}
-	game->minimap.changed = true;
-	printf("Current Angle: %.2f radians\n", game->player.rot.current_angle);
+	double	old_dir_x;
+	double	old_plane_x;
+
+	old_dir_x = cam->dir_x;
+	old_plane_x = cam->plane_x;
+	cam->dir_x = cam->dir_x * cos(rot_speed) - cam->dir_y * sin(rot_speed);
+	cam->dir_y = old_dir_x * sin(rot_speed) + cam->dir_y * cos(rot_speed);
+	cam->plane_x = cam->plane_x * cos(rot_speed) - cam->plane_y * sin(rot_speed);
+	cam->plane_y = old_plane_x * sin(rot_speed) + cam->plane_y * cos(rot_speed);
 }
 
 /**

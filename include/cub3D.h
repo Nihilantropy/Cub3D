@@ -145,10 +145,7 @@ void	handle_key_events(t_game *game);
 void	set_player_movement(t_game *game, int moving);
 void	set_player_rot_angle(t_game *game, int rotating);
 /* raycast */
-void	cast_ray(t_game *game, t_player *player);
-void	init_ray(t_camera *ray_info, t_player *player, double ray_angle);
-void	calculate_step_dist(t_camera *ray_info, t_player *player);
-int		perform_dda(t_game *game, t_camera *ray_info);
+
 
 /*** rendering ***/
 /* render frame */
@@ -182,5 +179,18 @@ void	free_minimap_images(t_game *game);
 /*** test ***/
 /* test */
 bool	test_raycasting(t_game *game);
+
+
+void	cast_ray(t_game *game, t_player *player);
+void	init_ray(t_camera *camera, double ray_dir_x, double ray_dir_y);
+void	calculate_step_dist(t_camera *camera, t_pos *pos);
+void	set_y_step_dist(t_camera *camera, t_pos *pos);
+int	step_in_x_direction(t_camera *camera);
+int	step_in_y_direction(t_camera *camera);
+int	check_wall_hit(t_game *game, t_camera *camera);
+int	perform_dda(t_game *game, t_camera *camera);
+void	calculate_wall_dist(t_camera *camera, int side);
+int	calculate_wall_height(t_game *game, double perp_wall_dist);
+void	draw_wall_stripe(t_game *game, int x, int wall_height);
 
 #endif

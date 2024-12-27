@@ -49,7 +49,6 @@ static void	set_player_var(t_game *game, int y, int x)
 	game->player.face = game->map.matrix[y][x];
 	game->player.speed = P_SPEED;
 	game->player.rot_speed = R_SPEED;
-	game->player.camera.fov = P_FOV;
 	set_player_pos(game, y, x);
 	set_player_rot(game, game->player.face);	
 }
@@ -60,18 +59,34 @@ static void	set_player_pos(t_game *game, int y, int x)
 	game->player.pos.x = x + 0.5;
 }
 
-static void	set_player_rot(t_game *game, char face)
+static void set_player_rot(t_game *game, char face)
 {
-	double	rot;
-
-	rot = 0.0;
 	if (face == NORTH)
-		rot = -M_PI / 2;
+	{
+		game->player.camera.dir_x = 0.0;
+		game->player.camera.dir_y = -1.0;
+		game->player.camera.plane_x = 0.66;
+		game->player.camera.plane_y = 0.0;
+	}
 	else if (face == EAST)
-		rot = 0.0;
+	{
+		game->player.camera.dir_x = 1.0;
+		game->player.camera.dir_y = 0.0;
+		game->player.camera.plane_x = 0.0;
+		game->player.camera.plane_y = 0.66;
+	}
 	else if (face == SOUTH)
-		rot = M_PI / 2;
+	{
+		game->player.camera.dir_x = 0.0;
+		game->player.camera.dir_y = 1.0;
+		game->player.camera.plane_x = -0.66;
+		game->player.camera.plane_y = 0.0;
+	}
 	else if (face == WEST)
-		rot = M_PI;
-	game->player.rot.current_angle = rot;
+	{
+		game->player.camera.dir_x = -1.0;
+		game->player.camera.dir_y = 0.0;
+		game->player.camera.plane_x = 0.0;
+		game->player.camera.plane_y = -0.66;
+	}
 }
