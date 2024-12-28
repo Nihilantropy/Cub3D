@@ -1,27 +1,21 @@
 #include "../include/cub3D.h"
 
-void	cast_ray(t_game *game, t_player *player)
+void	cast_ray(t_game *game, t_player *player, int x)
 {
-	int		x;
 	double	camera_x;
 	double	ray_dir_x;
 	double	ray_dir_y;
 	int		side;
 
-	x = 0;
-	while (x < game->display.width)
-	{
-		camera_x = 2 * x / (double)game->display.width - 1;
-		ray_dir_x = player->camera.dir_x + player->camera.plane_x * camera_x;
-		ray_dir_y = player->camera.dir_y + player->camera.plane_y * camera_x;
-		init_ray(&player->camera, ray_dir_x, ray_dir_y, &player->pos);
-		calculate_step_dist(&player->camera, &player->pos);
-		side = perform_dda(game, &player->camera);
-		calculate_wall_dist(&player->camera, side);
-		draw_wall_stripe(game, x, calculate_wall_height(game, 
-			player->camera.perp_wall_dist));
-		x++;
-	}
+	camera_x = 2 * x / (double)game->display.width - 1;
+	ray_dir_x = player->camera.dir_x + player->camera.plane_x * camera_x;
+	ray_dir_y = player->camera.dir_y + player->camera.plane_y * camera_x;
+	init_ray(&player->camera, ray_dir_x, ray_dir_y, &player->pos);
+	calculate_step_dist(&player->camera, &player->pos);
+	side = perform_dda(game, &player->camera);
+	calculate_wall_dist(&player->camera, side);
+	draw_wall_stripe(game, x, calculate_wall_height(game, 
+		player->camera.perp_wall_dist));
 }
 
 void init_ray(t_camera *camera, double ray_dir_x, double ray_dir_y, t_pos *pos)
@@ -118,10 +112,7 @@ int	perform_dda(t_game *game, t_camera *camera)
 		// Check for map boundaries and wall hit
 		if (camera->map_x < 0 || camera->map_x >= game->map.width ||
 			camera->map_y < 0 || camera->map_y >= game->map.height)
-		{
-			break;  // Out of map bounds
-		}
-
+			return (-1);
 		hit = (game->map.matrix[camera->map_y][camera->map_x] == WALL);
 		iter++;
 	}
@@ -131,30 +122,16 @@ int	perform_dda(t_game *game, t_camera *camera)
 
 void calculate_wall_dist(t_camera *camera, int side)
 {
-    if (side == 0)  // X-side hit
+    if (side == 0)
     {
-        // Calculate distance considering the player's fractional position
-        double player_frac_x = camera->dir_x - floor(camera->dir_x);
-        
-        // If moving right, distance to wall is (1 - player_frac_x)
-        // If moving left, distance is player_frac_x
-        camera->perp_wall_dist = (camera->step_x > 0) 
-            ? (1.0 - player_frac_x)
-            : player_frac_x;
+        camera->perp_wall_dist = (camera->map_x - camera->dir_x + 
+            (1 - camera->step_x) / 2) / camera->ray_dir_x;
     }
-    else  // Y-side hit
+    else
     {
-        // Calculate distance considering the player's fractional position
-        double player_frac_y = camera->dir_y - floor(camera->dir_y);
-        
-        // If moving up, distance is player_frac_y
-        // If moving down, distance is (1 - player_frac_y)
-        camera->perp_wall_dist = (camera->step_y < 0) 
-            ? player_frac_y 
-            : (1.0 - player_frac_y);
+        camera->perp_wall_dist = (camera->map_y - camera->dir_y + 
+            (1 - camera->step_y) / 2) / camera->ray_dir_y;
     }
-
-    // Optional: Ensure result is non-negative and matches expected precision
     camera->perp_wall_dist = fabs(camera->perp_wall_dist);
 }
 

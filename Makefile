@@ -42,8 +42,10 @@ SRCS		=	$(MAIN_DIR)/main.c \
 				$(RENDER_DIR)/draw_player_2d.c \
 				$(RENDER_DIR)/draw_ray.c \
 				$(RENDER_DIR)/draw_line.c \
-				$(RENDER_DIR)/draw_wall.c \
+				$(RENDER_DIR)/render_walls.c \
 				$(RENDER_DIR)/render_frame.c \
+				$(RENDER_DIR)/render_floor_ceiling.c \
+				$(RENDER_DIR)/color_utils.c \
 				$(TEST_DIR)/test.c
 
 

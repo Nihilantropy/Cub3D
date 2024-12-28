@@ -18,6 +18,7 @@
 # include "player.h"
 # include "minimap.h"
 # include "colors.h"
+# include "render.h"
 # include "test.h"
 
 # define DISPLAY_NAME "Cub3D"
@@ -181,7 +182,7 @@ void	free_minimap_images(t_game *game);
 bool	test_raycasting(t_game *game);
 
 
-void	cast_ray(t_game *game, t_player *player);
+void	cast_ray(t_game *game, t_player *player, int x);
 void	init_ray(t_camera *camera, double ray_dir_x, double ray_dir_y, t_pos *pos);
 void	calculate_step_dist(t_camera *camera, t_pos *pos);
 void	set_y_step_dist(t_camera *camera, t_pos *pos);
@@ -192,5 +193,10 @@ int	perform_dda(t_game *game, t_camera *camera);
 void	calculate_wall_dist(t_camera *camera, int side);
 int	calculate_wall_height(t_game *game, double perp_wall_dist);
 void	draw_wall_stripe(t_game *game, int x, int wall_height);
+
+void render_floor_ceiling(t_game *game, t_render_state *state);
+void render_walls(t_game *game, t_render_state *state);
+void render_3d_view(t_game *game);
+int determine_wall_color(int side, double distance);
 
 #endif
