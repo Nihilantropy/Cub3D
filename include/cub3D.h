@@ -182,7 +182,7 @@ bool	test_raycasting(t_game *game);
 
 
 void	cast_ray(t_game *game, t_player *player);
-void	init_ray(t_camera *camera, double ray_dir_x, double ray_dir_y);
+void	init_ray(t_camera *camera, double ray_dir_x, double ray_dir_y, t_pos *pos);
 void	calculate_step_dist(t_camera *camera, t_pos *pos);
 void	set_y_step_dist(t_camera *camera, t_pos *pos);
 int	step_in_x_direction(t_camera *camera);

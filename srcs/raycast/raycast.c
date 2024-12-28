@@ -14,7 +14,7 @@ void	cast_ray(t_game *game, t_player *player)
 		camera_x = 2 * x / (double)game->display.width - 1;
 		ray_dir_x = player->camera.dir_x + player->camera.plane_x * camera_x;
 		ray_dir_y = player->camera.dir_y + player->camera.plane_y * camera_x;
-		init_ray(&player->camera, ray_dir_x, ray_dir_y);
+		init_ray(&player->camera, ray_dir_x, ray_dir_y, &player->pos);
 		calculate_step_dist(&player->camera, &player->pos);
 		side = perform_dda(game, &player->camera);
 		calculate_wall_dist(&player->camera, side);
@@ -24,53 +24,50 @@ void	cast_ray(t_game *game, t_player *player)
 	}
 }
 
-void	init_ray(t_camera *camera, double ray_dir_x, double ray_dir_y)
+void init_ray(t_camera *camera, double ray_dir_x, double ray_dir_y, t_pos *pos)
 {
-	camera->ray_dir_x = ray_dir_x;
-	camera->ray_dir_y = ray_dir_y;
-	camera->map_x = (int)camera->dir_x;
-	camera->map_y = (int)camera->dir_y;
-	if (camera->ray_dir_x == 0)
-		camera->delta_dist_x = 1e30;
-	else
-		camera->delta_dist_x = fabs(1 / camera->ray_dir_x);
-	if (camera->ray_dir_y == 0)
-		camera->delta_dist_y = 1e30;
-	else
-		camera->delta_dist_y = fabs(1 / camera->ray_dir_y);
+    // Explicitly set ray direction
+    camera->ray_dir_x = ray_dir_x;
+    camera->ray_dir_y = ray_dir_y;
+    
+    // Set initial map position based on player's position
+    camera->map_x = (int)pos->x;
+    camera->map_y = (int)pos->y;
+
+    // Improved delta distance calculation
+    camera->delta_dist_x = (ray_dir_x == 0) ? 1e30 : fabs(1.0 / ray_dir_x);
+    camera->delta_dist_y = (ray_dir_y == 0) ? 1e30 : fabs(1.0 / ray_dir_y);
+
+    // Reset camera direction to avoid previous incorrect setting
+    camera->dir_x = pos->x;
+    camera->dir_y = pos->y;
 }
 
-void	calculate_step_dist(t_camera *camera, t_pos *pos)
+void calculate_step_dist(t_camera *camera, t_pos *pos)
 {
-	if (camera->ray_dir_x < 0)
-	{
-		camera->step_x = -1;
-		camera->side_dist_x = (pos->x - camera->map_x)
-			* camera->delta_dist_x;
-	}
-	else
-	{
-		camera->step_x = 1;
-		camera->side_dist_x = (camera->map_x + 1.0 - pos->x)
-			* camera->delta_dist_x;
-	}
-	set_y_step_dist(camera, pos);
-}
+    // X-axis step and side distance
+    if (camera->ray_dir_x < 0)
+    {
+        camera->step_x = -1;
+        camera->side_dist_x = (pos->x - floor(pos->x)) * camera->delta_dist_x;
+    }
+    else
+    {
+        camera->step_x = 1;
+        camera->side_dist_x = (ceil(pos->x) - pos->x) * camera->delta_dist_x;
+    }
 
-void	set_y_step_dist(t_camera *camera, t_pos *pos)
-{
-	if (camera->ray_dir_y < 0)
-	{
-		camera->step_y = -1;
-		camera->side_dist_y = (pos->y - camera->map_y)
-			* camera->delta_dist_y;
-	}
-	else
-	{
-		camera->step_y = 1;
-		camera->side_dist_y = (camera->map_y + 1.0 - pos->y)
-			* camera->delta_dist_y;
-	}
+    // Y-axis step and side distance
+    if (camera->ray_dir_y < 0)
+    {
+        camera->step_y = -1;
+        camera->side_dist_y = (pos->y - floor(pos->y)) * camera->delta_dist_y;
+    }
+    else
+    {
+        camera->step_y = 1;
+        camera->side_dist_y = (ceil(pos->y) - pos->y) * camera->delta_dist_y;
+    }
 }
 
 int	step_in_x_direction(t_camera *camera)
@@ -98,29 +95,67 @@ int	check_wall_hit(t_game *game, t_camera *camera)
 
 int	perform_dda(t_game *game, t_camera *camera)
 {
-	int	hit;
-	int	side;
+	int hit = 0;
+	int side = -1;
+	int max_iterations = game->map.width * game->map.height;  // Prevent infinite loops
+	int iter = 0;
 
-	hit = 0;
-	while (hit == 0)
+	while (hit == 0 && iter < max_iterations)
 	{
 		if (camera->side_dist_x < camera->side_dist_y)
-			side = step_in_x_direction(camera);
+		{
+			camera->side_dist_x += camera->delta_dist_x;
+			camera->map_x += camera->step_x;
+			side = 0;  // X-side
+		}
 		else
-			side = step_in_y_direction(camera);
-		hit = check_wall_hit(game, camera);
+		{
+			camera->side_dist_y += camera->delta_dist_y;
+			camera->map_y += camera->step_y;
+			side = 1;  // Y-side
+		}
+
+		// Check for map boundaries and wall hit
+		if (camera->map_x < 0 || camera->map_x >= game->map.width ||
+			camera->map_y < 0 || camera->map_y >= game->map.height)
+		{
+			break;  // Out of map bounds
+		}
+
+		hit = (game->map.matrix[camera->map_y][camera->map_x] == WALL);
+		iter++;
 	}
-	return (side);
+
+	return (hit ? side : -1);  // Return -1 if no wall found
 }
 
-void	calculate_wall_dist(t_camera *camera, int side)
+void calculate_wall_dist(t_camera *camera, int side)
 {
-	if (side == 0)
-		camera->perp_wall_dist = (camera->map_x - camera->dir_x
-			+ (1 - camera->step_x) / 2) / camera->ray_dir_x;
-	else
-		camera->perp_wall_dist = (camera->map_y - camera->dir_y
-			+ (1 - camera->step_y) / 2) / camera->ray_dir_y;
+    if (side == 0)  // X-side hit
+    {
+        // Calculate distance considering the player's fractional position
+        double player_frac_x = camera->dir_x - floor(camera->dir_x);
+        
+        // If moving right, distance to wall is (1 - player_frac_x)
+        // If moving left, distance is player_frac_x
+        camera->perp_wall_dist = (camera->step_x > 0) 
+            ? (1.0 - player_frac_x)
+            : player_frac_x;
+    }
+    else  // Y-side hit
+    {
+        // Calculate distance considering the player's fractional position
+        double player_frac_y = camera->dir_y - floor(camera->dir_y);
+        
+        // If moving up, distance is player_frac_y
+        // If moving down, distance is (1 - player_frac_y)
+        camera->perp_wall_dist = (camera->step_y < 0) 
+            ? player_frac_y 
+            : (1.0 - player_frac_y);
+    }
+
+    // Optional: Ensure result is non-negative and matches expected precision
+    camera->perp_wall_dist = fabs(camera->perp_wall_dist);
 }
 
 int	calculate_wall_height(t_game *game, double perp_wall_dist)
