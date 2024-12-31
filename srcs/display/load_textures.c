@@ -9,17 +9,11 @@ bool	load_textures(t_game *game)
 	if (!load_single_texture(game, &game->textures.north, PATH_TO_NORHT_WALL_TEXTURE) ||
 		!load_single_texture(game, &game->textures.south, PATH_TO_SOUTH_WALL_TEXTURE) ||
 		!load_single_texture(game, &game->textures.east, PATH_TO_EAST_WALL_TEXTURE) ||
-		!load_single_texture(game, &game->textures.west, PATH_TO_WEST_WALL_TEXTURE))
+		!load_single_texture(game, &game->textures.west, PATH_TO_WEST_WALL_TEXTURE) ||
+		!load_single_texture(game, &game->textures.floor, PATH_TO_FLOOR_TEXTURE) ||
+		!load_single_texture(game, &game->textures.ceiling, PATH_TO_CEILING_TEXTURE))
 	{
-		// Cleanup any textures that were loaded
-		if (game->textures.north)
-			mlx_destroy_image(game->mlx_ptr, game->textures.north);
-		if (game->textures.south)
-			mlx_destroy_image(game->mlx_ptr, game->textures.south);
-		if (game->textures.east)
-			mlx_destroy_image(game->mlx_ptr, game->textures.east);
-		if (game->textures.west)
-			mlx_destroy_image(game->mlx_ptr, game->textures.west);
+		free_textures(game);
 		return (false);
 	}
 
@@ -45,8 +39,6 @@ static bool load_single_texture(t_game *game, void **texture, char *path)
 		ft_putstr_fd("\n", 2);
 		return (false);
 	}
-
-	// Verify texture dimensions
 	if (width != TEXTURE_SIZE || height != TEXTURE_SIZE)
 	{
 		ft_putstr_fd("Error: Texture size mismatch: ", 2);
@@ -56,6 +48,5 @@ static bool load_single_texture(t_game *game, void **texture, char *path)
 		*texture = NULL;
 		return (false);
 	}
-
 	return (true);
 }

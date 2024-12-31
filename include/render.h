@@ -13,35 +13,38 @@
 #define PATH_TO_SOUTH_WALL_TEXTURE "texture/walls/south_wall_texture.xpm"
 #define PATH_TO_EAST_WALL_TEXTURE "texture/walls/east_wall_texture.xpm"
 #define PATH_TO_WEST_WALL_TEXTURE "texture/walls/west_wall_texture.xpm"
-
+#define PATH_TO_FLOOR_TEXTURE "texture/floor/floor_texture.xpm"
+#define PATH_TO_CEILING_TEXTURE "texture/ceiling/ceiling_texture.xpm"
 typedef struct s_textures
 {
 	void	*north;
 	void	*south;
 	void	*east;
 	void	*west;
+	void	*floor;
+	void	*ceiling;
     int		size;
 }	t_textures;
 
 typedef struct s_wall_slice
 {
-    int     height;         // Height of wall slice
-    int     start_y;        // Starting Y coordinate to draw
-    int     end_y;         // Ending Y coordinate to draw
-    double  distance;       // Distance to wall
-    double  wall_x;        // Exact position where wall was hit
-    int     tex_x;         // X coordinate in texture
-    int     tex_y;         // Y coordinate in texture
-    int     side;          // Wall side (N,S,E,W)
-    void    *texture;      // Pointer to texture image
-} t_wall_slice;
+	int		height;
+	int		start_y;
+	int		end_y;
+	double	distance;
+	double	wall_x;
+	int		tex_x;
+	int		tex_y;
+	int		side;
+	void	*texture;
+}	t_wall_slice;
 
 typedef struct s_render_state {
-    void    *img_ptr;      // Current frame buffer
-    int     *img_data;     // Direct pixel access array
-    int     bits_per_pixel;
-    int     line_length;
-    int     endian;
-} t_render_state;
+	void	*img_ptr;
+	int		*img_data;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}	t_render_state;
 
 #endif

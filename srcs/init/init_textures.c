@@ -6,5 +6,7 @@ void init_textures(t_game *game)
 	game->textures.north = NULL;
 	game->textures.south = NULL;
 	game->textures.west = NULL;
+	game->textures.floor = NULL;
+	game->textures.ceiling = NULL;
 	game->textures.size = 0;
 }

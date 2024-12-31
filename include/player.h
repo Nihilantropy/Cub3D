@@ -15,7 +15,7 @@
 
 /* Field of view and projection constants */
 # define FOV_ANGLE (60.0 * M_PI / 180.0)
-# define PROJ_FACTOR 1.0
+# define PLAYER_RADIUS 0.2
 
 /* Minimap related */
 # define MINI_PLAYER_SIZE 16

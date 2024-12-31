@@ -15,10 +15,7 @@ void	init_game(t_game *game)
 	game->mlx_ptr = NULL;
 	game->win_ptr = NULL;
 	game->running = false;
-	    printf("DEBUG: Before map init\n");
     init_map(game);
-    printf("DEBUG: After map init, size: width=%d, height=%d\n",
-        game->map.width, game->map.height);
 	init_minimap(game);
 	init_display(game);
 	init_player(game);

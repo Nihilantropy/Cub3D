@@ -46,19 +46,25 @@ static void clear_frame_buffer(t_render_state *state, t_game *game)
     i = 0;
     while (i < total_pixels)
     {
-        state->img_data[i] = BLACK;  // Clear to black
+        state->img_data[i] = BLACK;
         i++;
     }
 }
 
 void render_3d_view(t_game *game)
 {
-    t_render_state state;
+    t_render_state	state;
+	int				x;
 
     init_frame_buffer(game, &state);
     clear_frame_buffer(&state, game);
     render_floor_ceiling(game, &state);
-    render_walls(game, &state);
+	x = 0;
+	while (x < game->display.width)
+	{
+    	render_walls(game, &state, x);
+		x++;
+	}
     mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, 
         state.img_ptr, 0, 0);
 	mlx_destroy_image(game->mlx_ptr, state.img_ptr);

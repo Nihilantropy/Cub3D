@@ -8,4 +8,8 @@
 # define BLACK 0x000000
 # define GRAY 0xAAAAAA
 
+# define FLOOR_COLOR 0x4A3728
+# define CEILING_COLOR 0x4B4B63
+# define NUM_SHADES 4
+
 #endif
