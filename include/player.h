@@ -47,6 +47,7 @@ typedef struct s_camera
 	int		step_x;
 	int		step_y;
 	double	perp_wall_dist;
+	int		side;
 }	t_camera;
 
 /**

@@ -24,10 +24,7 @@ int	render_frame(t_game *game)
 		return (0);
 	last_frame_time = tv;
 	if (game->minimap.changed)
-	{
-		mlx_clear_window(game->mlx_ptr, game->win_ptr);
 		render_3d_view(game);
-	}
 	game->minimap.changed = false;
 	return (0);
 }
@@ -60,10 +57,9 @@ void render_3d_view(t_game *game)
 
     init_frame_buffer(game, &state);
     clear_frame_buffer(&state, game);
-    render_walls(game, &state);
     render_floor_ceiling(game, &state);
-    
+    render_walls(game, &state);
     mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, 
         state.img_ptr, 0, 0);
-    mlx_destroy_image(game->mlx_ptr, state.img_ptr);
+	mlx_destroy_image(game->mlx_ptr, state.img_ptr);
 }

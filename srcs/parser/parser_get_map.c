@@ -37,6 +37,9 @@ bool	get_map(t_game *game, const char *map)
 	else
 		flag = true;
 	free_matrix(matrix);
+
+	printf("DEBUG: Exiting get_map with size: width=%d, height=%d\n",
+        game->map.width, game->map.height);
 	return (flag);
 }
 

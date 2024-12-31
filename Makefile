@@ -20,10 +20,12 @@ SRCS		=	$(MAIN_DIR)/main.c \
 				$(INIT_DIR)/init_game.c \
 				$(INIT_DIR)/init_game_utils_1.c \
 				$(INIT_DIR)/init_game_utils_2.c \
+				$(INIT_DIR)/init_textures.c \
 				$(UTILS_DIR)/main_utils.c \
 				$(UTILS_DIR)/minimap_utils.c \
 				$(UTILS_DIR)/matrix_utils.c \
 				$(UTILS_DIR)/info_utils.c \
+				$(UTILS_DIR)/textures_utils.c \
 				$(CHECK_DIR)/check_arg.c \
 				$(CHECK_DIR)/check_map.c \
 				$(CHECK_DIR)/check_map_info.c \
@@ -35,6 +37,7 @@ SRCS		=	$(MAIN_DIR)/main.c \
 				$(PARSER_DIR)/parser_matrix_utils.c \
 				$(PARSER_DIR)/parser_get_player.c \
 				$(DISPLAY_DIR)/handle_display.c \
+				$(DISPLAY_DIR)/load_textures.c \
 				$(EVENTS_DIR)/key_events.c \
 				$(PLAYER_DIR)/player_movement.c \
 				$(RAYCAST_DIR)/raycast.c \

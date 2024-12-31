@@ -6,4 +6,5 @@ void	free_all(t_game *game)
 	free_minimap_images(game);
 	free_bool_matrix(game->map.check.visited);
 	free_info_list(&game->map.check.info);
+	free_textures(game);
 }

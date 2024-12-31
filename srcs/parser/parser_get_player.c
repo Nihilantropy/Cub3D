@@ -19,6 +19,9 @@ void	get_player_infos(t_game *game)
 	int	y;
 	int	x;
 
+	printf("Searching for player in map of size: %dx%d\n", 
+           game->map.width, game->map.height);
+
 	y = 0;
 	while (game->map.matrix[y])
 	{

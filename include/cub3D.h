@@ -93,6 +93,7 @@ typedef struct s_game
 	t_minimap	minimap;
 	t_display	display;
 	t_player	player;
+	t_textures	textures;
 	bool		running;
 	void		*mlx_ptr;
 	void		*win_ptr;
@@ -107,6 +108,12 @@ int		close_game(void *param);
 /*** init ***/
 /* init game */
 void	init_game(t_game *game);
+/* init game utils 1 */
+void	init_info_list(t_game *game);
+/* init game utils 2 */
+void	init_minimap(t_game *game);
+/* init textures */
+void	init_textures(t_game *game);
 
 /*** check ***/
 /* check arg */
@@ -135,8 +142,11 @@ char	**build_new_matrix(int height, int width);
 void	get_player_infos(t_game *game);
 bool	is_player_char(char player);
 
-/*** display */
+/*** display ***/
+/* handle display */
 void	handle_display(t_game *game);
+/* load textures */
+bool	load_textures(t_game *game);
 
 /*** events ***/
 void	handle_key_events(t_game *game);
@@ -160,29 +170,29 @@ void	draw_ray(t_game * game, t_player *player);
 /* draw line */
 void	draw_line(t_game *game, int x1, int y1, int x2, int y2, int color);
 /* draw wall */
-void	calculate_wall_dist(t_camera *ray_info, int side);
-void	draw_wall_stripe(t_game *game, int x, int wall_height);
 
 /*** utils ***/
-/* main */
+/* main utils */
 void	free_all(t_game *game);
-/* matrix */
+/* matrix utils */
 void	print_matrix(const char **matrix);
 void	free_matrix(char **matrix);
 void	free_bool_matrix(bool **matrix);
 char	**dup_matrix(const char **matrix);
-/* info */
+/* info utils */
 void	print_info_list(t_info *info);
 void	free_info_list(t_info **info);
-/* minimap */
+/* minimap utils */
 void	free_minimap_images(t_game *game);
+/* textures utils */
+void	free_textures(t_game *game);
 
 /*** test ***/
 /* test */
 bool	test_raycasting(t_game *game);
 
 
-void	cast_ray(t_game *game, t_player *player, int x);
+void cast_ray(t_game *game, t_player *player, int x, t_render_state *state);
 void	init_ray(t_camera *camera, double ray_dir_x, double ray_dir_y, t_pos *pos);
 void	calculate_step_dist(t_camera *camera, t_pos *pos);
 void	set_y_step_dist(t_camera *camera, t_pos *pos);
@@ -190,9 +200,9 @@ int	step_in_x_direction(t_camera *camera);
 int	step_in_y_direction(t_camera *camera);
 int	check_wall_hit(t_game *game, t_camera *camera);
 int	perform_dda(t_game *game, t_camera *camera);
-void	calculate_wall_dist(t_camera *camera, int side);
+void calculate_wall_dist(t_camera *camera, t_pos *pos, int side);
 int	calculate_wall_height(t_game *game, double perp_wall_dist);
-void	draw_wall_stripe(t_game *game, int x, int wall_height);
+void draw_wall_stripe(t_game *game, int x, int wall_height, t_render_state *state);
 
 void render_floor_ceiling(t_game *game, t_render_state *state);
 void render_walls(t_game *game, t_render_state *state);

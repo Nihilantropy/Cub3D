@@ -26,6 +26,10 @@ bool	parse_matrix(t_game *game, const char **matrix)
 		return (ft_bool_putstr_fd(ERR_NO_MAP, 2));
 	game->map.width = get_map_width(matrix + game->map.check.map_start_row);
 	game->map.height = get_map_height(matrix + game->map.check.map_start_row);
+
+	printf("DEBUG: Setting map size in parse_matrix to width=%d, height=%d\n", 
+    game->map.width, game->map.height);
+	
 	new_matrix = build_new_matrix(game->map.height, game->map.width);
 	copy_matrix(new_matrix, matrix + game->map.check.map_start_row);
 	game->map.matrix = new_matrix;

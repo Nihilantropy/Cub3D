@@ -215,7 +215,7 @@ static bool test_dda_algorithm(t_game *game)
         int side = perform_dda(game, &camera);
         
         // Calculate wall distance
-        calculate_wall_dist(&camera, side);
+        calculate_wall_dist(&camera, &player_pos, side);
 		printf("Debug Wall Distance Calculation:\n");
 		printf("Player Position: (%.2f, %.2f)\n", player_pos.x, player_pos.y);
 		printf("Fractional X: %.2f, Fractional Y: %.2f\n", 
@@ -287,6 +287,8 @@ static bool test_dda_algorithm(t_game *game)
 // Main test function for raycasting
 bool test_raycasting(t_game *game)
 {
+	int original_width = game->map.width;
+    int original_height = game->map.height;
     printf("\nRunning Raycasting Tests...\n");
     
     // Run tests
@@ -302,6 +304,12 @@ bool test_raycasting(t_game *game)
     else {
         printf("\n🔴 Some Raycasting Tests Failed!\n");
     }
+
+	game->map.width = original_width;
+    game->map.height = original_height;
+    
+    printf("Original map dimensions restored: %dx%d\n", 
+           game->map.width, game->map.height);
     
     return all_tests_passed;
 }

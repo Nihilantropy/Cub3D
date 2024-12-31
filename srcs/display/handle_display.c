@@ -10,6 +10,7 @@ static void	open_display(t_game *game);
 void	handle_display(t_game *game)
 {
 	init_cell_images(game);
+	load_textures(game);
 	open_display(game);
 	game->display.open = true;
 }

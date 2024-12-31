@@ -1,7 +1,5 @@
 #include "../include/cub3D.h"
 
-void		init_minimap(t_game *game);
-void		init_info_list(t_game *game);
 static void	init_map(t_game *game);
 static void	init_display(t_game *game);
 static void	init_map_checks(t_game *game);
@@ -17,10 +15,14 @@ void	init_game(t_game *game)
 	game->mlx_ptr = NULL;
 	game->win_ptr = NULL;
 	game->running = false;
-	init_map(game);
+	    printf("DEBUG: Before map init\n");
+    init_map(game);
+    printf("DEBUG: After map init, size: width=%d, height=%d\n",
+        game->map.width, game->map.height);
 	init_minimap(game);
 	init_display(game);
 	init_player(game);
+	init_textures(game);
 }
 
 static void	init_map(t_game *game)
@@ -65,6 +67,7 @@ static void init_player(t_game *game)
 	game->player.camera.step_x = 0;
 	game->player.camera.step_y = 0;
 	game->player.camera.perp_wall_dist = 0.0;
+	game->player.camera.side = 0;
 }
 
 static void	init_map_checks(t_game *game)
