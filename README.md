@@ -1,3 +1,33 @@
+# 🎮 Cub3D - A Wolfenstein 3D-style Game Engine
+
+## 🎯 Project Overview
+Hey there! Welcome to Cub3D, an exciting project that recreates the magic behind Wolfenstein 3D's rendering engine. We're going to dive into how we use raycasting to transform a simple 2D map into an immersive 3D world. It's like turning a maze drawn on paper into a real 3D environment you can walk through!
+
+## 🛠️ Technical Requirements 
+Before we jump in, here's what you need to know:
+- The project must be written in C
+- You can only use these functions:
+ - Basic ones: open, close, read, write, printf, malloc, free, perror, strerror, exit
+ - Math library functions (-lm)
+ - MinilibX library functions
+- Libft library is allowed (your own C library)
+
+## 🗺️ Map and Scene Description
+Your game reads a scene from a  file that contains:
+- Wall textures for each direction (NO, SO, WE, EA)
+- Floor and ceiling colors in RGB format
+- A map made of these characters:
+ - '0' for empty spaces
+ - '1' for walls
+ - 'N', 'S', 'E' or 'W' for player's starting position and direction
+
+Here's a simple valid map example:
+111111
+100101
+101001
+1100N1
+111111
+
 ## 🎨 How Our Raycasting Works
 
 ### 📐 The Math Behind It
