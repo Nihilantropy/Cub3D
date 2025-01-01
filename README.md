@@ -21,12 +21,6 @@ Your game reads a scene from a  file that contains:
  - '1' for walls
  - 'N', 'S', 'E' or 'W' for player's starting position and direction
 
-Here's a simple valid map example:
-111111
-100101
-101001
-1100N1
-111111
 
 ## 🎨 How Our Raycasting Works
 
