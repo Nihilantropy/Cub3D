@@ -50,6 +50,7 @@ typedef struct s_info
 	char			identifier;
 	bool			found;
 	int				index;
+	char			*content;
 	struct s_info	*next;
 }	t_info;
 
@@ -57,9 +58,12 @@ typedef struct s_info
 typedef struct s_check
 {
 	bool	wrong_char;
+	bool	wrong_info_char;
+	bool	wrong_info_nbr;
 	bool	map_started;
 	bool	map_order;
-	bool	map_infos;
+	bool	map_infos_id;
+	bool	map_infos_cont;
 	bool	**visited;
 	bool	map_island;
 	bool	found_region;
@@ -84,7 +88,6 @@ typedef struct s_map
 	int			width;
 	int			height;
 	char		**matrix;
-	const char	**info;
 }	t_map;
 
 typedef struct s_game
@@ -134,6 +137,8 @@ void	check_map_matrix_borders(t_game *game, const char **matrix);
 bool	get_map(t_game *game, const char *map);
 /* parser matrix */
 bool	parse_matrix(t_game *game, const char **matrix);
+/* parser get infos */
+bool	parse_info(t_game *game, t_info *info, const char *line);
 /* parser matrix utils */
 bool	is_info_line(const char *line);
 bool	is_map_row(const char *line);
@@ -144,9 +149,12 @@ bool	is_player_char(char player);
 
 /*** display ***/
 /* handle display */
-void	handle_display(t_game *game);
+bool	handle_display(t_game *game);
 /* load textures */
 bool	load_textures(t_game *game);
+char	*find_texture_path(t_info *info, char identifier);
+/* load floor and ceiling */
+bool	load_floor_and_ceiling(t_game *game);
 
 /*** events ***/
 void	handle_key_events(t_game *game);
@@ -173,12 +181,13 @@ void	draw_line(t_game *game, int x1, int y1, int x2, int y2, int color);
 
 /*** utils ***/
 /* main utils */
-void	free_all(t_game *game);
+void	free_all_and_exit(t_game *game, int status);
 /* matrix utils */
 void	print_matrix(const char **matrix);
 void	free_matrix(char **matrix);
 void	free_bool_matrix(bool **matrix);
 char	**dup_matrix(const char **matrix);
+size_t	matrix_len(const char **matrix);
 /* info utils */
 void	print_info_list(t_info *info);
 void	free_info_list(t_info **info);

@@ -9,18 +9,14 @@
 # define MAX_WALL_HEIGHT 1080
 # define MIN_WALL_HEIGHT 20
 
-#define PATH_TO_NORHT_WALL_TEXTURE "texture/walls/north_wall_texture.xpm"
-#define PATH_TO_SOUTH_WALL_TEXTURE "texture/walls/south_wall_texture.xpm"
-#define PATH_TO_EAST_WALL_TEXTURE "texture/walls/east_wall_texture.xpm"
-#define PATH_TO_WEST_WALL_TEXTURE "texture/walls/west_wall_texture.xpm"
-#define PATH_TO_FLOOR_TEXTURE "texture/floor/floor_texture.xpm"
-#define PATH_TO_CEILING_TEXTURE "texture/ceiling/ceiling_texture.xpm"
 typedef struct s_textures
 {
 	void	*north;
 	void	*south;
 	void	*east;
 	void	*west;
+	int		floor_color;
+	int		ceiling_color;
 	void	*floor;
 	void	*ceiling;
     int		size;
@@ -39,7 +35,8 @@ typedef struct s_wall_slice
 	void	*texture;
 }	t_wall_slice;
 
-typedef struct s_render_state {
+typedef struct s_render_state
+{
 	void	*img_ptr;
 	int		*img_data;
 	int		bits_per_pixel;

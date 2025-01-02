@@ -15,20 +15,18 @@ int	main(int argc, char **argv)
 	{
 		ft_putstr_fd(ERR_ARG, 2);
 		ft_putstr_fd(P_USAGE, 2);
-		return (1);
+		exit (EXIT_FAILURE);
 	}
 	init_game(&game);
 	if (get_map(&game, argv[1]) == false)
-	{
-		free_all(&game);
-		return (1);
-	}
+		free_all_and_exit(&game, EXIT_FAILURE);
 	game.mlx_ptr = mlx_init();
-	handle_display(&game);
+	if (!handle_display(&game))
+		free_all_and_exit(&game, EXIT_FAILURE);
 	game.running = true;
 	game_loop(&game);
 	game.running = false;
-	free_all(&game);
+	free_all_and_exit(&game, EXIT_SUCCESS);
 	return (0);
 }
 

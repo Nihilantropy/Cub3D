@@ -25,7 +25,6 @@ void	init_game(t_game *game)
 static void	init_map(t_game *game)
 {
 	game->map.matrix = NULL;
-	game->map.info = NULL;
 	game->map.width = 0;
 	game->map.height = 0;
 	init_map_checks(game);
@@ -70,9 +69,12 @@ static void init_player(t_game *game)
 static void	init_map_checks(t_game *game)
 {
 	game->map.check.wrong_char = false;
+	game->map.check.wrong_info_char = false;
+	game->map.check.wrong_info_nbr = false;
 	game->map.check.map_started = false;
 	game->map.check.map_order = false;
-	game->map.check.map_infos = false;
+	game->map.check.map_infos_id = false;
+	game->map.check.map_infos_cont = false;
 	game->map.check.player = 0;
 	game->map.check.visited = NULL;
 	game->map.check.map_island = false;

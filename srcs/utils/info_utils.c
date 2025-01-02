@@ -7,7 +7,9 @@ void	print_info_list(t_info *info)
 	current_node = info;
 	while (current_node)
 	{
-		printf("%c\n", current_node->identifier);
+		printf("identifier: %c\n", current_node->identifier);
+		if (current_node->content)
+			printf("content: %s\n", current_node->content);
 		if (current_node->found)
 			printf("identifier found = true\n");
 		else if (!current_node->found)
@@ -27,6 +29,8 @@ void	free_info_list(t_info **info)
 	while (current)
 	{
 		next = current->next;
+		if (current->content)
+			free(current->content);
 		free(current);
 		current = next;
 	}

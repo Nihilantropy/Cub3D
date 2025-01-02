@@ -1,6 +1,7 @@
 #include "../include/cub3D.h"
 
 static void	check_map_order(t_game *game, const char **matrix, int y);
+static bool	is_valid_char(char c);
 
 /*	check valid map:
 **	1) check the correct order of the map
@@ -14,10 +15,14 @@ bool	check_valid_map(t_game *game, const char **matrix)
 
 	y = 0;
 	check_map_order(game, matrix, y);
+	if (game->map.check.wrong_info_char == true)
+		return (ft_bool_putstr_fd(ERR_WRONG_INFO_CHAR, 2));
 	if (game->map.check.map_order == false)
 		return (ft_bool_putstr_fd(ERR_MAP_ORDER, 2));
 	check_map_infos(game, matrix);
-	if (game->map.check.map_infos == false)
+	if (game->map.check.wrong_info_nbr == true)
+		return (ft_bool_putstr_fd(ERR_WRONG_INFO_NBR, 2));
+	if (!game->map.check.map_infos_id || !game->map.check.map_infos_cont)
 		return (ft_bool_putstr_fd(ERR_NO_INFOS, 2));
 	check_map_matrix(game, (const char **)game->map.matrix);
 	if (game->map.check.map_matrix == false)
@@ -46,7 +51,14 @@ static void	check_map_order(t_game *game, const char **matrix, int y)
 		}
 		else if (is_map_row(matrix[y]) == true)
 			game->map.check.map_started = true;
+		else if (!is_valid_char(matrix[y][x]))
+			game->map.check.wrong_info_char = true;
 		y++;
 	}
 	game->map.check.map_order = true;
+}
+
+static bool	is_valid_char(char c)
+{
+	return (c == WALL);
 }

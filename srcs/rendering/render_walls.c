@@ -16,13 +16,13 @@ static void calculate_wall_slice(t_wall_slice *slice, t_game *game,
 static void select_wall_texture(t_wall_slice *slice, t_game *game, t_camera *cam)
 {
     if (cam->ray_dir_y > 0 && slice->side == 1)
-        slice->texture = game->textures.south;  // Hit south face
+        slice->texture = game->textures.south;
     else if (cam->ray_dir_y <= 0 && slice->side == 1)
-        slice->texture = game->textures.north;  // Hit north face
+        slice->texture = game->textures.north;
     else if (cam->ray_dir_x > 0 && slice->side == 0)
-        slice->texture = game->textures.east;   // Hit east face
+        slice->texture = game->textures.east;
     else
-        slice->texture = game->textures.west;   // Hit west face
+        slice->texture = game->textures.west;
 }
 
 static void draw_textured_wall_slice(t_render_state *state, t_wall_slice *slice, 
@@ -38,7 +38,6 @@ static void draw_textured_wall_slice(t_render_state *state, t_wall_slice *slice,
     int line_length;
     int endian;
 
-    // Get texture data
     if (!slice->texture)
     {
         printf("Error: Null texture for wall slice\n");
@@ -53,25 +52,20 @@ static void draw_textured_wall_slice(t_render_state *state, t_wall_slice *slice,
         return;
     }
 
-    // Calculate texture step for vertical mapping
     step = 1.0 * TEXTURE_SIZE / slice->height;
     tex_pos = (slice->start_y - game->display.height / 2 + slice->height / 2) * step;
 
-    // Draw the textured wall slice
     y = slice->start_y;
     while (y < slice->end_y)
     {
         tex_y = (int)tex_pos & (TEXTURE_SIZE - 1);
         tex_pos += step;
 
-        // Get color from texture
         color = texture_data[TEXTURE_SIZE * tex_y + slice->tex_x];
         
-        // Apply shading for sides
         if (slice->side == 1)
             color = (color >> 1) & 8355711;
 
-        // Draw pixel
         if (y * game->display.width + x >= 0 && 
             y * game->display.width + x < game->display.width * game->display.height)
         {

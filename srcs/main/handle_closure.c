@@ -7,6 +7,6 @@ int	close_game(void *param)
 	game = param;
 	mlx_clear_window(game->mlx_ptr, game->win_ptr);
 	mlx_destroy_window(game->mlx_ptr, game->win_ptr);
-	free_all(game);
-	exit (0);
+	free_all_and_exit(game, EXIT_SUCCESS);
+	return (0);
 }

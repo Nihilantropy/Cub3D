@@ -34,10 +34,12 @@ SRCS		=	$(MAIN_DIR)/main.c \
 				$(CHECK_DIR)/check_map_matrix_borders.c \
 				$(PARSER_DIR)/parser_get_map.c \
 				$(PARSER_DIR)/parser_matrix.c \
+				$(PARSER_DIR)/parser_get_infos.c \
 				$(PARSER_DIR)/parser_matrix_utils.c \
 				$(PARSER_DIR)/parser_get_player.c \
 				$(DISPLAY_DIR)/handle_display.c \
 				$(DISPLAY_DIR)/load_textures.c \
+				$(DISPLAY_DIR)/load_floor_and_ceiling.c \
 				$(EVENTS_DIR)/key_events.c \
 				$(PLAYER_DIR)/player_movement.c \
 				$(RAYCAST_DIR)/raycast.c \
@@ -64,7 +66,7 @@ MLX_DIR		= ./minilibx-linux
 MLX_LIB		= libmlx_Linux.a
 
 CC			= gcc
-CFLAGS		= -Wall -Wextra -Werror
+CFLAGS		= -Wall -Wextra -Werror -g
 RM 			= rm -f
 LINK 		= -lX11 -lXext -lm
 

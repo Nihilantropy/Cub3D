@@ -10,11 +10,10 @@
 # define R_LEFT -1
 # define R_RIGHT 1
 # define R_STILL 0
-# define P_SPEED 0.1
+# define P_SPEED 0.3
 # define R_SPEED 0.1
 
-/* Field of view and projection constants */
-# define FOV_ANGLE (60.0 * M_PI / 180.0)
+/* player hitbox radius for wall collision */
 # define PLAYER_RADIUS 0.2
 
 /* Minimap related */
