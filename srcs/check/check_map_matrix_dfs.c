@@ -64,9 +64,10 @@ static bool	is_valid_cell(const char **matrix, int y, int x)
 			x >= 0 &&
 			matrix[y] != NULL &&
 			matrix[y][x] != '\0' &&
-			matrix[y][x] != SPACE &&
-			matrix[y][x] != TAB &&
-			matrix[y][x] != MAP_FILLER);
+			matrix[y][x] != MAP_FILLER &&
+			(matrix[y][x] == WALL || 
+			matrix[y][x] == FLOOR ||
+			is_player_char(matrix[y][x])));
 }
 
 /*	dfs mark region:

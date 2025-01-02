@@ -10,18 +10,22 @@ PARSER_DIR	= ./parser
 DISPLAY_DIR = ./display
 EVENTS_DIR	= ./events
 PLAYER_DIR	= ./player
+RAYCAST_DIR	= ./raycast
 UTILS_DIR	= ./utils
 RENDER_DIR	= ./rendering
+TEST_DIR	= ./test
 
 SRCS		=	$(MAIN_DIR)/main.c \
 				$(MAIN_DIR)/handle_closure.c \
 				$(INIT_DIR)/init_game.c \
 				$(INIT_DIR)/init_game_utils_1.c \
 				$(INIT_DIR)/init_game_utils_2.c \
-				$(UTILS_DIR)/main.c \
-				$(UTILS_DIR)/minimap.c \
-				$(UTILS_DIR)/matrix.c \
-				$(UTILS_DIR)/info.c \
+				$(INIT_DIR)/init_textures.c \
+				$(UTILS_DIR)/main_utils.c \
+				$(UTILS_DIR)/minimap_utils.c \
+				$(UTILS_DIR)/matrix_utils.c \
+				$(UTILS_DIR)/info_utils.c \
+				$(UTILS_DIR)/textures_utils.c \
 				$(CHECK_DIR)/check_arg.c \
 				$(CHECK_DIR)/check_map.c \
 				$(CHECK_DIR)/check_map_info.c \
@@ -30,17 +34,24 @@ SRCS		=	$(MAIN_DIR)/main.c \
 				$(CHECK_DIR)/check_map_matrix_borders.c \
 				$(PARSER_DIR)/parser_get_map.c \
 				$(PARSER_DIR)/parser_matrix.c \
+				$(PARSER_DIR)/parser_get_infos.c \
 				$(PARSER_DIR)/parser_matrix_utils.c \
 				$(PARSER_DIR)/parser_get_player.c \
 				$(DISPLAY_DIR)/handle_display.c \
+				$(DISPLAY_DIR)/load_textures.c \
+				$(DISPLAY_DIR)/load_floor_and_ceiling.c \
 				$(EVENTS_DIR)/key_events.c \
 				$(PLAYER_DIR)/player_movement.c \
-				$(PLAYER_DIR)/raycast.c \
+				$(RAYCAST_DIR)/raycast.c \
 				$(RENDER_DIR)/draw_map_2d.c \
 				$(RENDER_DIR)/draw_player_2d.c \
 				$(RENDER_DIR)/draw_ray.c \
 				$(RENDER_DIR)/draw_line.c \
-				$(RENDER_DIR)/render_frame.c
+				$(RENDER_DIR)/render_walls.c \
+				$(RENDER_DIR)/render_frame.c \
+				$(RENDER_DIR)/render_floor_ceiling.c \
+				$(RENDER_DIR)/color_utils.c \
+				$(TEST_DIR)/test.c
 
 
 						
@@ -55,7 +66,7 @@ MLX_DIR		= ./minilibx-linux
 MLX_LIB		= libmlx_Linux.a
 
 CC			= gcc
-CFLAGS		= -Wall -Wextra -Werror
+CFLAGS		= -Wall -Wextra -Werror -g
 RM 			= rm -f
 LINK 		= -lX11 -lXext -lm
 
