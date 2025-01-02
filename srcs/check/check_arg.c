@@ -2,10 +2,13 @@
 
 static bool	check_extention(char *str);
 
-/*	valid check:
-**	return 1 if argument passed or
-**	map extention are not valid
-*/
+/**
+ * @brief Validates command line arguments and map file extension
+ *
+ * @param argc Arguments count
+ * @param argv Arguments array
+ * @return bool true if valid, false otherwise
+ */
 bool	check_valid_arg(int argc, char **argv)
 {
 	if (argc != 2)
@@ -15,6 +18,12 @@ bool	check_valid_arg(int argc, char **argv)
 	return (true);
 }
 
+/**
+ * @brief Checks if file has .cub extension
+ *
+ * @param str File path to check
+ * @return bool true if extension is valid, false otherwise
+ */
 static bool	check_extention(char *str)
 {
 	int	i;

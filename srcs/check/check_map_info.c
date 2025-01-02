@@ -4,10 +4,13 @@ static bool	info_identifier_found(t_game *game, const char *line);
 static bool	check_all_info_identifiers(t_info *info);
 static char	get_identifier(const char *line);
 
-/*	check map infos:
-**	check if all the map infos are present
-**	in the map file
-*/
+/**
+ * @brief Validates map information elements (textures paths and colors)
+ * and tracks their presence through game state
+ *
+ * @param game Game structure containing validation state
+ * @param matrix Map file content as 2D array
+ */
 void	check_map_infos(t_game *game, const char **matrix)
 {
 	int		y;
@@ -35,29 +38,37 @@ void	check_map_infos(t_game *game, const char **matrix)
 		game->map.check.map_infos_id = true;
 }
 
+/**
+ * @brief Validates and parses an identifier line (NO, SO, WE, EA, F, C)
+ *
+ * @param game Game structure containing map data
+ * @param line Line to parse
+ * @return bool true if identifier is valid and parsed, false otherwise
+ */
 static bool	info_identifier_found(t_game *game, const char *line)
 {
-    t_info  *info;
-    char    identifier;
+	t_info  *info;
+	char    identifier;
 
-    if (!game || !game->map.check.info || !line)
-        return (false);
-    identifier = get_identifier(line);
-    if (!identifier)
-        return (false);
-    info = game->map.check.info;
-    while (info)
-    {
-        if (info->identifier == identifier)
-        {
-            if (!parse_info(game, info, line))
-                return (false);
-            return (true);
-        }
-        info = info->next;
-    }
-    return (false);
+	if (!game || !game->map.check.info || !line)
+		return (false);
+	identifier = get_identifier(line);
+	if (!identifier)
+		return (false);
+	info = game->map.check.info;
+	while (info)
+	{
+		if (info->identifier == identifier)
+		{
+			if (!parse_info(game, info, line))
+				return (false);
+			return (true);
+		}
+		info = info->next;
+	}
+	return (false);
 }
+
 
 static char	get_identifier(const char *line)
 {

@@ -13,16 +13,13 @@ PLAYER_DIR	= ./player
 RAYCAST_DIR	= ./raycast
 UTILS_DIR	= ./utils
 RENDER_DIR	= ./rendering
-TEST_DIR	= ./test
 
 SRCS		=	$(MAIN_DIR)/main.c \
 				$(MAIN_DIR)/handle_closure.c \
 				$(INIT_DIR)/init_game.c \
-				$(INIT_DIR)/init_game_utils_1.c \
-				$(INIT_DIR)/init_game_utils_2.c \
+				$(INIT_DIR)/init_game_utils.c \
 				$(INIT_DIR)/init_textures.c \
 				$(UTILS_DIR)/main_utils.c \
-				$(UTILS_DIR)/minimap_utils.c \
 				$(UTILS_DIR)/matrix_utils.c \
 				$(UTILS_DIR)/info_utils.c \
 				$(UTILS_DIR)/textures_utils.c \
@@ -37,23 +34,18 @@ SRCS		=	$(MAIN_DIR)/main.c \
 				$(PARSER_DIR)/parser_get_infos.c \
 				$(PARSER_DIR)/parser_matrix_utils.c \
 				$(PARSER_DIR)/parser_get_player.c \
+				$(PARSER_DIR)/parser_get_player_utils.c \
 				$(DISPLAY_DIR)/handle_display.c \
 				$(DISPLAY_DIR)/load_textures.c \
 				$(DISPLAY_DIR)/load_floor_and_ceiling.c \
+				$(DISPLAY_DIR)/load_floor_and_ceiling_utils.c \
 				$(EVENTS_DIR)/key_events.c \
 				$(PLAYER_DIR)/player_movement.c \
 				$(RAYCAST_DIR)/raycast.c \
-				$(RENDER_DIR)/draw_map_2d.c \
-				$(RENDER_DIR)/draw_player_2d.c \
-				$(RENDER_DIR)/draw_ray.c \
-				$(RENDER_DIR)/draw_line.c \
 				$(RENDER_DIR)/render_walls.c \
+				$(RENDER_DIR)/render_walls_utils.c \
 				$(RENDER_DIR)/render_frame.c \
 				$(RENDER_DIR)/render_floor_ceiling.c \
-				$(RENDER_DIR)/color_utils.c \
-				$(TEST_DIR)/test.c
-
-
 						
 OBJS		= $(patsubst %.c, $(CUB3D_DIR)/%.o, $(SRCS))
 

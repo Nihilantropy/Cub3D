@@ -26,11 +26,12 @@
 
 /* allocation err msg */
 # define ERR_ALLOC_MATRIX "Error\nMatrix alloc failed\n"
-# define ERR_ALLOC_MATRIX_COPY "Error\nMatrix copy alloc failed\n"
+# define ERR_ALLOC_MATRIX_DUP "Error\nMatrix duplicate alloc failed\n"
 # define ERR_ALLOC_INFO "Error\nInfo list alloc failed\n"
 # define ERR_ALLOC_NEW_MATRIX_ROW "Error\nNew matrix row alloc failed\n"
 # define ERR_ALLOC_NEW_MATRIX_COL "Error\nNew matrix column alloc failed\n"
 # define ERR_ALLOC_BOOL_MATRIX "Error\nBool matrix column alloc failed\n"
+# define ERR_ALLOC_RENDER_STATE "Error\nRender state alloc failed"
 
 /* raycast error msg */
 # define ERR_INVALID_RAY_CAST_ACCESS "Error\nInvalid acces on raycast\nClosing game..."

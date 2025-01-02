@@ -3,7 +3,10 @@
 static bool	open_display(t_game *game);
 
 /**
- * @brief create all images and open game window
+ * @brief Sets up game display by loading textures and initializing window
+ *
+ * @param game Game structure containing display data
+ * @return bool true if setup successful, false otherwise
  */
 bool	handle_display(t_game *game)
 {

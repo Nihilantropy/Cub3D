@@ -1,11 +1,12 @@
 #include "../include/cub3D.h"
 
-/** 
- * @brief main:
- *	1) check for incorrect arguments
- *	2) initialize the game structure
- *	3) get the map to parse and validate
- *		the map infos and the map matrix
+/**
+ * @brief Main entry point for the Cub3D game. Initializes game structures,
+ * validates input, sets up display, and starts the game loop.
+ *
+ * @param argc Number of command-line arguments
+ * @param argv Array of command-line arguments, where argv[1] is the map file path
+ * @return int Returns 0 on successful execution, exits with failure status on errors
  */
 int	main(int argc, char **argv)
 {
@@ -30,6 +31,12 @@ int	main(int argc, char **argv)
 	return (0);
 }
 
+/**
+ * @brief Manages the main game loop, handling keyboard events and
+ * rendering frames continuously while the game is running
+ *
+ * @param game Pointer to the game structure containing MLX and game state data
+ */
 void	game_loop(t_game *game)
 {
 	if (game->running)

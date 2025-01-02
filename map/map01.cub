@@ -4,7 +4,7 @@ NO ./texture/walls/north_wall_texture.xpm
 EA ./texture/walls/east_wall_texture.xpm
 
 
-F 220,1000,0
+F 220,100,0
 C 225,30,0	             
 
 11111111111111111111111111111

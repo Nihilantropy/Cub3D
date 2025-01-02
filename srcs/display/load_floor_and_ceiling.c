@@ -1,12 +1,16 @@
 #include "../include/cub3D.h"
 
-static bool check_rgb_values(const char **rgb);
-static int create_rgb(const char **rgb);
 static bool process_rgb_values(int *color, char **values);
 static bool create_solid_color_texture(t_game *game, void **texture, int color);
 static bool	load_color_texture(t_game *game, char identifier, 
 							int *color_ptr, void **texture);
 
+/**
+ * @brief Creates floor and ceiling textures from RGB color values
+ * 
+ * @param game Game structure containing texture data
+ * @return bool true if both textures created successfully, false otherwise
+ */
 bool load_floor_and_ceiling(t_game *game)
 {
 	if (!load_color_texture(game, 'F', &game->textures.floor_color,
@@ -18,7 +22,15 @@ bool load_floor_and_ceiling(t_game *game)
 	return (true);
 }
 
-
+/**
+ * @brief Creates texture from RGB color for floor/ceiling
+ *
+ * @param game Game structure
+ * @param identifier 'F' for floor, 'C' for ceiling
+ * @param color_ptr Pointer to store RGB color value
+ * @param texture Pointer to store created texture
+ * @return bool true if texture created successfully, false otherwise
+ */
 static bool load_color_texture(t_game *game, char identifier, 
 							int *color_ptr, void **texture)
 {
@@ -39,27 +51,32 @@ static bool load_color_texture(t_game *game, char identifier,
 	return (create_solid_color_texture(game, texture, *color_ptr));
 }
 
-
+/**
+ * @brief Creates solid color texture of specified dimensions
+ *
+ * @param game Game structure containing MLX data
+ * @param texture Pointer to store created texture
+ * @param color RGB color value to fill texture
+ * @return bool true if texture created, false on failure
+ */
 static bool	create_solid_color_texture(t_game *game, void **texture, int color)
 {
-	int	x;
-	int	y;
-	int	*data;
-	int	bits_pp;
-	int	line_len;
-	int	endian;
+	int				x;
+	int				y;
+	t_render_state	state;
 
 	*texture = mlx_new_image(game->mlx_ptr, TEXTURE_SIZE, TEXTURE_SIZE);
 	if (!(*texture))
 		return (false);
-	data = (int *)mlx_get_data_addr(*texture, &bits_pp, &line_len, &endian);
+	state.img_data = (int *)mlx_get_data_addr(*texture, &state.bits_per_pixel,
+								&state.line_length, &state.endian);
 	y = 0;
 	while (y < TEXTURE_SIZE)
 	{
 		x = 0;
 		while (x < TEXTURE_SIZE)
 		{
-			data[y * (line_len / 4) + x] = color;
+			state.img_data[y * (state.line_length / 4) + x] = color;
 			x++;
 		}
 		y++;
@@ -67,6 +84,13 @@ static bool	create_solid_color_texture(t_game *game, void **texture, int color)
 	return (true);
 }
 
+/**
+ * @brief Validates and converts RGB string values to color integer
+ *
+ * @param color Pointer to store final RGB value
+ * @param values Array of RGB strings to process
+ * @return bool true if valid and converted, false otherwise
+ */
 static bool process_rgb_values(int *color, char **values)
 {
 	if (!check_rgb_values((const char **)values))
@@ -78,34 +102,3 @@ static bool process_rgb_values(int *color, char **values)
 	free_matrix(values);
 	return (true);
 }
-
-static bool check_rgb_values(const char **rgb)
-{
-	int	value;
-	int	i;
-
-	if (!rgb || matrix_len(rgb) != 3)
-		return (false);
-	i = 0;
-	while (rgb[i])
-	{
-		value = ft_atoi(rgb[i]);
-		if (value < 0 || value > 255)
-			return (false);
-		i++;
-	}
-	return (true);
-}
-
-static int create_rgb(const char **rgb)
-{
-	int	r;
-	int	g;
-	int	b;
-
-	r = ft_atoi(rgb[0]);
-	g = ft_atoi(rgb[1]);
-	b = ft_atoi(rgb[2]);
-	return ((r << 16) | (g << 8) | b);
-}
-

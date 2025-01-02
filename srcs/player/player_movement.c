@@ -40,7 +40,7 @@ void	set_player_rot_angle(t_game *game, int rotating)
 	else
 		rot_speed = game->player.rot_speed;
 	update_direction(&game->player.camera, rot_speed);
-	game->minimap.changed = true;
+	game->changed = true;
 }
 
 /**
@@ -114,7 +114,7 @@ static void update_player_pos(t_game *game)
     {
         p->pos.x = new_x;
         p->pos.y = new_y;
-        game->minimap.changed = true;
+        game->changed = true;
     }
 }
 

@@ -4,8 +4,10 @@ static int	key_press(int keycode, t_game *game);
 static int	key_release(int keycode, t_game *game);
 
 /**
- * @brief main function to handle key events
-*/
+ * @brief Sets up keyboard and window event handlers
+ *
+ * @param game Game structure containing MLX window data
+ */
 void	handle_key_events(t_game *game)
 {
 	mlx_hook(game->win_ptr, X_EVENT_KEY_PRESS, 1L << 0, key_press, game);
@@ -14,7 +16,11 @@ void	handle_key_events(t_game *game)
 }
 
 /**
- * @brief set and update player position and rotation on key press
+ * @brief Updates player movement or rotation based on key press.
+ *
+ * @param keycode The key pressed.
+ * @param game The game instance.
+ * @return Always returns 0.
  */
 static int	key_press(int keycode, t_game *game)
 {
@@ -30,7 +36,11 @@ static int	key_press(int keycode, t_game *game)
 }
 
 /**
- * @brief set and stop player position and rotation on key release
+ * @brief Handles key release actions, stopping movement or closing the game.
+ *
+ * @param keycode The key released.
+ * @param game The game instance.
+ * @return Always returns 0.
  */
 static int	key_release(int keycode, t_game *game)
 {

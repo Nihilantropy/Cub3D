@@ -4,12 +4,13 @@ static void	check_map_matrix_wrong_char(t_game *game,
 										const char **matrix);
 static bool	is_tile(char c);
 
-/*	check map matrix:
-**	1) check if there is a wrong char in
-**		the map matrix
-**	2) check if there is one and only one
-**		map island
-*/
+/**
+ * @brief Validates map matrix for wrong characters, isolated regions,
+ * open borders and player count
+ *
+ * @param game Game structure containing map validation data
+ * @param matrix Map content as 2D array
+ */
 void	check_map_matrix(t_game *game, const char **matrix)
 {
 	check_map_matrix_wrong_char(game, matrix);

@@ -5,18 +5,20 @@ static void	init_display(t_game *game);
 static void	init_map_checks(t_game *game);
 static void	init_player(t_game *game);
 
-/** 
- *  @brief init game:
- *	initializing all variable in
- *	game structure
+/**
+ * @brief Initializes all game components to their default values:
+ * map, display settings, player state and textures. changed secure
+ * first frame render without key event
+ *
+ * @param game Pointer to the game structure to be initialized
  */
 void	init_game(t_game *game)
 {
 	game->mlx_ptr = NULL;
 	game->win_ptr = NULL;
 	game->running = false;
+	game->changed = true;
     init_map(game);
-	init_minimap(game);
 	init_display(game);
 	init_player(game);
 	init_textures(game);

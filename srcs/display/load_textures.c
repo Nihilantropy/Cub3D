@@ -2,6 +2,12 @@
 
 static bool load_single_texture(t_game *game, void **texture, char identifier);
 
+/**
+ * @brief Loads all game textures from XPM files
+ *
+ * @param game Game structure containing texture data
+ * @return bool true if all textures loaded, false on any failure
+ */
 bool	load_textures(t_game *game)
 {
 	game->textures.size = TEXTURE_SIZE;
@@ -18,6 +24,14 @@ bool	load_textures(t_game *game)
 	return (true);
 }
 
+/**
+ * @brief Loads single texture from XPM file
+ *
+ * @param game Game structure containing MLX data
+ * @param texture Pointer to store loaded texture
+ * @param identifier Wall direction identifier (N,S,E,W)
+ * @return bool true if texture loaded correctly, false on any error
+ */
 static bool load_single_texture(t_game *game, void **texture, char identifier)
 {
 	int		width;
@@ -42,6 +56,13 @@ static bool load_single_texture(t_game *game, void **texture, char identifier)
 	return (true);
 }
 
+/**
+ * @brief Retrieves texture path for specified identifier
+ *
+ * @param info List of map information nodes
+ * @param identifier Texture identifier (N,S,E,W,F,C)
+ * @return char* Duplicated path string, NULL if not found
+ */
 char	*find_texture_path(t_info *info, char identifier)
 {
 	t_info	*current_info;

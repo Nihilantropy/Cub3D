@@ -4,14 +4,16 @@ static bool	is_valid_cell(const char **matrix, int y, int x);
 static bool	**create_bool_matrix(t_game *game, const char **matrix);
 static void	dfs_mark_region(const char **matrix, bool **visited, int y, int x);
 
-/*	check map island:
-**	1) create a boolean matrix to mark the visited cells
-**	2) 
-*/
+/**
+ * @brief Detects isolated regions in map using DFS algorithm
+ *
+ * @param game Game structure containing map validation data
+ * @param matrix Map content as 2D array
+ */
 void	check_map_matrix_island(t_game *game, const char **matrix)
 {
-	int		y;
-	int		x;
+	int	y;
+	int	x;
 
 	y = 0;
 	game->map.check.visited = create_bool_matrix(game, matrix);
@@ -70,10 +72,14 @@ static bool	is_valid_cell(const char **matrix, int y, int x)
 			is_player_char(matrix[y][x])));
 }
 
-/*	dfs mark region:
-**	use a dfs (Depth-First Search) algorithm to
-**	identify isolated portions of map
-*/
+/**
+ * @brief Recursively marks connected regions using DFS traversal
+ *
+ * @param matrix Map array
+ * @param visited Visited cells tracking array
+ * @param y Current y position
+ * @param x Current x position
+ */
 static void	dfs_mark_region(const char **matrix, bool **visited, int y, int x)
 {
 	if (!is_valid_cell(matrix, y, x) || visited[y][x])

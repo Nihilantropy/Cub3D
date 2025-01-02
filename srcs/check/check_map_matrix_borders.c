@@ -4,10 +4,11 @@ static void	check_borders(t_game *game, const char **matrix, int y, int x);
 static bool	is_valid_tile(char c);
 
 /**
- * @brief Check map matrix borders:
- * 1) Verify that all floor cells ('0') and space cells are surrounded
- *    by either walls ('1') or other valid cells
- * 2) Ensure the map is completely enclosed by walls
+ * @brief Checks if map borders are closed by examining adjacent cells
+ * around floor tiles and player position
+ *
+ * @param game Game structure for map validation
+ * @param matrix Map content as 2D array
  */
 void	check_map_matrix_borders(t_game *game, const char **matrix)
 {

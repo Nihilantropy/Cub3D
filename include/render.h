@@ -42,6 +42,7 @@ typedef struct s_render_state
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
+	int		color;
 }	t_render_state;
 
 #endif
