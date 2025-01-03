@@ -10,15 +10,11 @@
 # define R_LEFT -1
 # define R_RIGHT 1
 # define R_STILL 0
-# define P_SPEED 0.3
+# define P_SPEED 0.2
 # define R_SPEED 0.1
 
 /* player hitbox radius for wall collision */
 # define PLAYER_RADIUS 0.2
-
-/* Minimap related */
-# define MINI_PLAYER_SIZE 16
-# define MINI_PLAYER_TEXTURE "texture/debug/minimap_player.xpm"
 
 #ifndef M_PI
 # define M_PI 3.14159265358979323846

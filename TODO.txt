@@ -1,2 +1,0 @@
-Have to change the floor and ceiling implementation and texture implementatio.
-based on the map file parameters.

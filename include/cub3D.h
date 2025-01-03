@@ -167,8 +167,27 @@ void	handle_key_events(t_game *game);
 /* player movement */
 void	set_player_movement(t_game *game, int moving);
 void	set_player_rot_angle(t_game *game, int rotating);
-/* raycast */
+/* player collision */
+bool	try_slide_movement(t_game *game, t_pos *new_pos, 
+							double step_x, double step_y);
+/* player collision utils */
+bool	is_valid_pos(const char **matrix, double new_y, double new_x);
 
+/*** raycast ***/
+/* raycast */
+void	cast_ray(t_game *game, t_player *player, int x);
+void	init_ray(t_camera *camera, double ray_dir_x, 
+		double ray_dir_y, t_pos *pos);
+/* ray step */
+void	calculate_step_dist(t_camera *camera, t_pos *pos);
+int		step_in_x_direction(t_camera *camera);
+int		step_in_y_direction(t_camera *camera);
+void	calculate_wall_dist(t_camera *camera, t_pos *pos, int side);
+/* ray dda */
+int		perform_dda(t_game *game, t_camera *camera);
+int		check_wall_hit(t_game *game, t_camera *camera);
+/* ray render */
+int		calculate_wall_height(t_game *game, double perp_wall_dist);
 
 /*** rendering ***/
 /* render frame */
@@ -176,10 +195,12 @@ int		render_frame(t_game *game);
 /* render walls */
 void render_walls(t_game *game, t_render_state *state, int x);
 /* render walls utils */
-void calculate_wall_slice(t_wall_slice *slice, t_game *game, 
+void 	calculate_wall_slice(t_wall_slice *slice, t_game *game, 
 	double perp_wall_dist);
-void select_wall_texture(t_wall_slice *slice, t_game *game, t_camera *cam);
-void calculate_texture_coords(t_wall_slice *slice, t_game *game, t_camera *cam);
+void 	select_wall_texture(t_wall_slice *slice, t_game *game, t_camera *cam);
+void 	calculate_texture_coords(t_wall_slice *slice, t_game *game, t_camera *cam);
+void	apply_texture_color(t_render_state *state, t_render_state *tex_data,
+							t_wall_slice *slice, int position);
 /* render floor and ceiling */
 void	render_floor_ceiling(t_game *game, t_render_state *state);
 
@@ -197,23 +218,6 @@ void	print_info_list(t_info *info);
 void	free_info_list(t_info **info);
 /* textures utils */
 void	free_textures(t_game *game);
-
-/*** test ***/
-/* test */
-bool	test_raycasting(t_game *game);
-
-
-void cast_ray(t_game *game, t_player *player, int x);
-void	init_ray(t_camera *camera, double ray_dir_x, double ray_dir_y, t_pos *pos);
-void	calculate_step_dist(t_camera *camera, t_pos *pos);
-void	set_y_step_dist(t_camera *camera, t_pos *pos);
-int	step_in_x_direction(t_camera *camera);
-int	step_in_y_direction(t_camera *camera);
-int	check_wall_hit(t_game *game, t_camera *camera);
-int	perform_dda(t_game *game, t_camera *camera);
-void calculate_wall_dist(t_camera *camera, t_pos *pos, int side);
-int	calculate_wall_height(t_game *game, double perp_wall_dist);
-void render_floor_ceiling(t_game *game, t_render_state *state);
 
 
 #endif

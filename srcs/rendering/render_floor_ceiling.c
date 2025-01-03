@@ -8,6 +8,7 @@ static void	fill_horizontal_line(t_render_state *state, int y,
  * 
  * The function fills the top half of the screen with the ceiling color and 
  * the bottom half with the floor color.
+ *
  * @param game The game state containing display and texture information.
  * @param state The current rendering state.
  */
@@ -38,6 +39,7 @@ void	render_floor_ceiling(t_game *game, t_render_state *state)
  * @brief Fills a horizontal line in the render state with a specified color.
  * 
  * This function sets the color of each pixel in the given row.
+ *
  * @param state The current rendering state.
  * @param y The row (y-coordinate) to fill.
  * @param width The width of the screen.

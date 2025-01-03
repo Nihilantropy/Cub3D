@@ -9,6 +9,7 @@ static void clear_frame_buffer(t_render_state *state, t_game *game);
  * 
  * This function checks the time elapsed since the last frame and, if sufficient time has passed,
  * triggers the rendering of a new 3D view.
+ *
  * @param game The game state that holds the necessary data for rendering.
  * @return Always returns 0.
  */
@@ -40,6 +41,7 @@ int	render_frame(t_game *game)
  * 
  * This function initializes and clears the frame buffer, renders the floor and ceiling, 
  * then iterates over each column of the screen to render the walls. Finally, it displays the image.
+ *
  * @param game The game state used to access rendering and display parameters.
  * @param state The render state used to store the image data during the rendering process.
  */
@@ -66,6 +68,7 @@ static void render_3d_view(t_game *game)
  * @brief Initializes the frame buffer for rendering.
  * 
  * This function creates a new image and sets up the necessary data pointer for the frame buffer.
+ *
  * @param game The game state that provides access to the display dimensions and mlx pointer.
  * @param state The render state where the image pointer and data are stored.
  */
@@ -80,7 +83,8 @@ static void init_frame_buffer(t_game *game, t_render_state *state)
 /**
  * @brief Clears the frame buffer by setting all pixels to black.
  * 
- * This function iterates through all pixels in the frame buffer and sets their color to black.
+ * This function iterates through all pixels in the frame buffer and sets their color to black
+ *
  * @param state The render state containing the image data to be cleared.
  * @param game The game state used to access display dimensions.
  */
