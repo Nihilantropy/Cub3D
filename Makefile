@@ -1,3 +1,5 @@
+### MANDATORY PART ###
+
 NAME		= cub3D
 
 CUB3D_DIR	= ./srcs
@@ -41,7 +43,6 @@ SRCS		=	$(MAIN_DIR)/main.c \
 				$(DISPLAY_DIR)/load_floor_and_ceiling_utils.c \
 				$(EVENTS_DIR)/key_events.c \
 				$(PLAYER_DIR)/player_movement.c \
-				$(PLAYER_DIR)/player_collision.c \
 				$(PLAYER_DIR)/player_collision_utils.c \
 				$(RAYCAST_DIR)/raycast.c \
 				$(RAYCAST_DIR)/ray_step.c \
@@ -50,11 +51,9 @@ SRCS		=	$(MAIN_DIR)/main.c \
 				$(RENDER_DIR)/render_walls.c \
 				$(RENDER_DIR)/render_walls_utils.c \
 				$(RENDER_DIR)/render_frame.c \
-				$(RENDER_DIR)/render_floor_ceiling.c \
+				$(RENDER_DIR)/render_floor_ceiling.c
 						
 OBJS		= $(patsubst %.c, $(CUB3D_DIR)/%.o, $(SRCS))
-
-SECRET_OBJS	= $(patsubst %.c, $(SECRET_DIR)/%.o, $(SECRET_SRCS))
 
 LIBFT_DIR	= ./libft
 LIBFT		= libft.a
@@ -63,7 +62,7 @@ MLX_DIR		= ./minilibx-linux
 MLX_LIB		= libmlx_Linux.a
 
 CC			= gcc
-CFLAGS		= -Wall -Wextra -Werror -g
+CFLAGS		= -Wall -Wextra -Werror
 RM 			= rm -f
 LINK 		= -lX11 -lXext -lm
 
@@ -77,18 +76,17 @@ $(NAME):	$(OBJS)
 			$(CC) $(CFLAGS) $(OBJS) -L$(LIBFT_DIR) -lft -L$(MLX_DIR) -lmlx_Linux $(LINK) -o $(NAME)
 
 
-# Rule to compile object files
-%.o:		%.c
-			$(CC) $(CFLAGS) $(INC) -c $< -o $@
+$(CUB3D_DIR)/%.o:	$(CUB3D_DIR)/%.c
+					$(CC) $(CFLAGS) $(INC) -c $< -o $@
 
 all:		$(NAME)
 
 clean:
-			$(RM) $(OBJS)
+			$(RM) $(OBJS) $(OBJS_BONUS)
 			$(MAKE) -C $(LIBFT_DIR) clean
 
 fclean:		clean
-			$(RM) $(NAME)
+			$(RM) $(NAME) $(NAME_BONUS)
 			$(MAKE) -C $(LIBFT_DIR) fclean
 			$(MAKE) -C $(MLX_DIR) clean
 
@@ -98,4 +96,79 @@ rec:		clean all
 
 fc:			fclean
 
-.PHONY:		all clean fclean re rec fc
+### BONUS PART ###
+
+NAME_BONUS			= cub3D_bonus
+
+BONUS_DIR			= bonus
+
+CUB3D_BONUS_DIR		= $(BONUS_DIR)/srcs
+CUB3D_BONUS_HEAD	= $(BONUS_DIR)/include
+
+# Bonus subdirectories
+MAIN_BONUS_DIR    = ./main
+INIT_BONUS_DIR    = ./init
+CHECK_BONUS_DIR   = ./check
+PARSER_BONUS_DIR  = ./parser
+DISPLAY_BONUS_DIR = ./display
+EVENTS_BONUS_DIR  = ./events
+PLAYER_BONUS_DIR  = ./player
+RAYCAST_BONUS_DIR = ./raycast
+UTILS_BONUS_DIR   = ./utils
+RENDER_BONUS_DIR  = ./rendering
+
+SRCS_BONUS	=	$(MAIN_BONUS_DIR)/main_bonus.c \
+				$(MAIN_BONUS_DIR)/handle_closure_bonus.c \
+				$(INIT_BONUS_DIR)/init_game_bonus.c \
+				$(INIT_BONUS_DIR)/init_game_utils_bonus.c \
+				$(INIT_BONUS_DIR)/init_textures_bonus.c \
+				$(UTILS_BONUS_DIR)/main_utils_bonus.c \
+				$(UTILS_BONUS_DIR)/matrix_utils_bonus.c \
+				$(UTILS_BONUS_DIR)/info_utils_bonus.c \
+				$(UTILS_BONUS_DIR)/textures_utils_bonus.c \
+				$(CHECK_BONUS_DIR)/check_arg_bonus.c \
+				$(CHECK_BONUS_DIR)/check_map_bonus.c \
+				$(CHECK_BONUS_DIR)/check_map_info_bonus.c \
+				$(CHECK_BONUS_DIR)/check_map_matrix_bonus.c \
+				$(CHECK_BONUS_DIR)/check_map_matrix_dfs_bonus.c \
+				$(CHECK_BONUS_DIR)/check_map_matrix_borders_bonus.c \
+				$(PARSER_BONUS_DIR)/parser_get_map_bonus.c \
+				$(PARSER_BONUS_DIR)/parser_matrix_bonus.c \
+				$(PARSER_BONUS_DIR)/parser_get_infos_bonus.c \
+				$(PARSER_BONUS_DIR)/parser_matrix_utils_bonus.c \
+				$(PARSER_BONUS_DIR)/parser_get_player_bonus.c \
+				$(PARSER_BONUS_DIR)/parser_get_player_utils_bonus.c \
+				$(DISPLAY_BONUS_DIR)/handle_display_bonus.c \
+				$(DISPLAY_BONUS_DIR)/load_textures_bonus.c \
+				$(DISPLAY_BONUS_DIR)/load_floor_and_ceiling_bonus.c \
+				$(DISPLAY_BONUS_DIR)/load_floor_and_ceiling_utils_bonus.c \
+				$(EVENTS_BONUS_DIR)/key_events_bonus.c \
+				$(PLAYER_BONUS_DIR)/player_movement_bonus.c \
+				$(PLAYER_BONUS_DIR)/player_collision_bonus.c \
+				$(PLAYER_BONUS_DIR)/player_collision_utils_bonus.c \
+				$(RAYCAST_BONUS_DIR)/raycast_bonus.c \
+				$(RAYCAST_BONUS_DIR)/ray_step_bonus.c \
+				$(RAYCAST_BONUS_DIR)/ray_dda_bonus.c \
+				$(RAYCAST_BONUS_DIR)/ray_render_bonus.c \
+				$(RENDER_BONUS_DIR)/render_walls_bonus.c \
+				$(RENDER_BONUS_DIR)/render_walls_utils_bonus.c \
+				$(RENDER_BONUS_DIR)/render_frame_bonus.c \
+				$(RENDER_BONUS_DIR)/render_floor_ceiling_bonus.c
+
+OBJS_BONUS	= $(patsubst %.c, $(CUB3D_BONUS_DIR)/%.o, $(SRCS_BONUS))
+
+# Include directory for header files
+INC_BONUS 	= -I$(CUB3D_BONUS_HEAD) -I$(LIBFT_DIR) -I$(MLX_DIR)
+
+# Compilation rule for the program
+$(NAME_BONUS):	$(OBJS_BONUS)
+				$(MAKE) -C $(LIBFT_DIR)
+				$(MAKE) -C $(MLX_DIR)
+				$(CC) $(CFLAGS) $(OBJS_BONUS) -L$(LIBFT_DIR) -lft -L$(MLX_DIR) -lmlx_Linux $(LINK) -o $(NAME_BONUS)
+
+$(CUB3D_BONUS_DIR)/%.o:	$(CUB3D_BONUS_DIR)/%.c
+						$(CC) $(CFLAGS) $(INC_BONUS) -c $< -o $@
+
+bonus:		$(NAME_BONUS)
+
+.PHONY:		all clean fclean re rec fc bonus

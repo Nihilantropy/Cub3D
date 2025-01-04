@@ -1,4 +1,4 @@
-#include "../include/cub3D.h"
+#include "../../include/cub3D_bonus.h"
 
 /**
  * @brief Handles the game closure process freeing allocated resources

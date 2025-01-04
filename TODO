@@ -1,0 +1,4 @@
+Adjust player movement based on this evals test:
+Press A (or Q) then D.
+
+The player's view must go to the left and then to the right in a straight line.

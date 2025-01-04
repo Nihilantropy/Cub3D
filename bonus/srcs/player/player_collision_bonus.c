@@ -1,4 +1,4 @@
-#include "../include/cub3D.h"
+#include "../../include/cub3D_bonus.h"
 
 /**
  * @brief Attempts to slide player along walls when direct movement is blocked.

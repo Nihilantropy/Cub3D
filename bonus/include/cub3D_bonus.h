@@ -12,12 +12,12 @@
 # include <sys/time.h>
 # include "../libft/include/libft.h"
 # include "../minilibx-linux/mlx.h"
-# include "keys.h"
-# include "messages.h"
-# include "error.h"
-# include "player.h"
-# include "colors.h"
-# include "render.h"
+# include "keys_bonus.h"
+# include "messages_bonus.h"
+# include "error_bonus.h"
+# include "player_bonus.h"
+# include "colors_bonus.h"
+# include "render_bonus.h"
 
 # define DISPLAY_NAME "Cub3D"
 
@@ -167,6 +167,9 @@ void	handle_key_events(t_game *game);
 /* player movement */
 void	set_player_movement(t_game *game, int moving);
 void	set_player_rot_angle(t_game *game, int rotating);
+/* player collision */
+bool try_slide_movement(t_game *game, t_pos *new_pos, 
+							double step_x, double step_y);
 /* player collision utils */
 bool	is_valid_pos(const char **matrix, double new_y, double new_x);
 

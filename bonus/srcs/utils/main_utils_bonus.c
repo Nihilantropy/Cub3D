@@ -1,4 +1,4 @@
-#include "../include/cub3D.h"
+#include "../../include/cub3D_bonus.h"
 
 void	free_all_and_exit(t_game *game, int status)
 {

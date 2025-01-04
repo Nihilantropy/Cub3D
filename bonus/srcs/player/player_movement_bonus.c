@@ -1,8 +1,8 @@
-#include "../include/cub3D.h"
+#include "../../include/cub3D_bonus.h"
 
-static void	calculate_move_step(t_player *p, double *step_x, double *step_y);
 static void	update_player_pos(t_game *game);
 static void	update_direction(t_camera *cam, double rot_speed);
+static void	calculate_move_step(t_player *p, double *step_x, double *step_y);
 
 /**
  * @brief Updates player movement state based on input.
@@ -22,40 +22,6 @@ void	set_player_movement(t_game *game, int moving)
 	game->player.moving.forward = (moving == M_FORWARD);
 	game->player.moving.backward = (moving == M_BACKWARD);
 	update_player_pos(game);
-}
-/**
- * @brief Updates the player's position in the game world.
- *
- * Calculates new position based on movement steps and collision detection.
- * If direct movement is blocked, attempts to slide along walls.
- * Only updates position if the new location is valid within the map bounds.
- *
- * @param game Pointer to main game structure containing player and map data
- */
-
-static void	update_player_pos(t_game *game)
-{
-	double	step_x;
-	double	step_y;
-	t_pos	new_pos;
-
-	new_pos = game->player.pos;
-	calculate_move_step(&game->player, &step_x, &step_y);
-	if (step_x == 0 && step_y == 0)
-		return ;
-	if (is_valid_pos((const char **)game->map.matrix, 
-		game->player.pos.y + step_y, game->player.pos.x + step_x))
-	{
-		new_pos.x = game->player.pos.x + step_x;
-		new_pos.y = game->player.pos.y + step_y;
-	}
-	else
-	{
-		ft_putstr_fd(ERR_OUT_OF_BOUND, 2);
-		close_game(game);
-	}
-	game->player.pos = new_pos;
-	game->changed = true;
 }
 
 /**
@@ -106,6 +72,37 @@ void	set_player_rot_angle(t_game *game, int rotating)
 	else
 		rot_speed = game->player.rot_speed;
 	update_direction(&game->player.camera, rot_speed);
+	game->changed = true;
+}
+
+/**
+ * @brief Updates the player's position in the game world.
+ *
+ * Calculates new position based on movement steps and collision detection.
+ * If direct movement is blocked, attempts to slide along walls.
+ * Only updates position if the new location is valid within the map bounds.
+ *
+ * @param game Pointer to main game structure containing player and map data
+ */
+static void	update_player_pos(t_game *game)
+{
+	double	step_x;
+	double	step_y;
+	t_pos	new_pos;
+
+	new_pos = game->player.pos;
+	calculate_move_step(&game->player, &step_x, &step_y);
+	if (step_x == 0 && step_y == 0)
+		return ;
+	if (is_valid_pos((const char **)game->map.matrix, 
+		game->player.pos.y + step_y, game->player.pos.x + step_x))
+	{
+		new_pos.x = game->player.pos.x + step_x;
+		new_pos.y = game->player.pos.y + step_y;
+	}
+	else if (!try_slide_movement(game, &new_pos, step_x, step_y))
+		return ;
+	game->player.pos = new_pos;
 	game->changed = true;
 }
 

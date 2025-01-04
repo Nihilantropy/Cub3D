@@ -1,0 +1,282 @@
+.
+├── bonus
+│   ├── include
+│   │   ├── colors_bonus.h
+│   │   ├── cub3D_bonus.h
+│   │   ├── error_bonus.h
+│   │   ├── keys_bonus.h
+│   │   ├── messages_bonus.h
+│   │   ├── minimap_bonus.h
+│   │   ├── player_bonus.h
+│   │   └── render_bonus.h
+│   └── srcs
+│       ├── check
+│       │   ├── check_arg_bonus.c
+│       │   ├── check_arg_bonus.o
+│       │   ├── check_map_bonus.c
+│       │   ├── check_map_bonus.o
+│       │   ├── check_map_info_bonus.c
+│       │   ├── check_map_info_bonus.o
+│       │   ├── check_map_matrix_bonus.c
+│       │   ├── check_map_matrix_bonus.o
+│       │   ├── check_map_matrix_borders_bonus.c
+│       │   ├── check_map_matrix_borders_bonus.o
+│       │   ├── check_map_matrix_dfs_bonus.c
+│       │   └── check_map_matrix_dfs_bonus.o
+│       ├── display
+│       │   ├── handle_display_bonus.c
+│       │   ├── handle_display_bonus.o
+│       │   ├── load_floor_and_ceiling_bonus.c
+│       │   ├── load_floor_and_ceiling_bonus.o
+│       │   ├── load_floor_and_ceiling_utils_bonus.c
+│       │   ├── load_floor_and_ceiling_utils_bonus.o
+│       │   ├── load_textures_bonus.c
+│       │   └── load_textures_bonus.o
+│       ├── events
+│       │   ├── key_events_bonus.c
+│       │   └── key_events_bonus.o
+│       ├── init
+│       │   ├── init_game_bonus.c
+│       │   ├── init_game_bonus.o
+│       │   ├── init_game_utils_bonus.c
+│       │   ├── init_game_utils_bonus.o
+│       │   ├── init_textures_bonus.c
+│       │   └── init_textures_bonus.o
+│       ├── main
+│       │   ├── handle_closure_bonus.c
+│       │   ├── handle_closure_bonus.o
+│       │   ├── main_bonus.c
+│       │   └── main_bonus.o
+│       ├── parser
+│       │   ├── parser_get_infos_bonus.c
+│       │   ├── parser_get_infos_bonus.o
+│       │   ├── parser_get_map_bonus.c
+│       │   ├── parser_get_map_bonus.o
+│       │   ├── parser_get_player_bonus.c
+│       │   ├── parser_get_player_bonus.o
+│       │   ├── parser_get_player_utils_bonus.c
+│       │   ├── parser_get_player_utils_bonus.o
+│       │   ├── parser_matrix_bonus.c
+│       │   ├── parser_matrix_bonus.o
+│       │   ├── parser_matrix_utils_bonus.c
+│       │   └── parser_matrix_utils_bonus.o
+│       ├── player
+│       │   ├── player_collision_bonus.c
+│       │   ├── player_collision_utils_bonus.c
+│       │   └── player_movement_bonus.c
+│       ├── raycast
+│       │   ├── raycast_bonus.c
+│       │   ├── ray_dda_bonus.c
+│       │   ├── ray_render_bonus.c
+│       │   └── ray_step_bonus.c
+│       ├── rendering
+│       │   ├── render_floor_ceiling_bonus.c
+│       │   ├── render_frame_bonus.c
+│       │   ├── render_walls_bonus.c
+│       │   └── render_walls_utils_bonus.c
+│       └── utils
+│           ├── info_utils_bonus.c
+│           ├── info_utils_bonus.o
+│           ├── main_utils_bonus.c
+│           ├── main_utils_bonus.o
+│           ├── matrix_utils_bonus.c
+│           ├── matrix_utils_bonus.o
+│           ├── textures_utils_bonus.c
+│           └── textures_utils_bonus.o
+├── include
+│   ├── colors.h
+│   ├── cub3D.h
+│   ├── error.h
+│   ├── keys.h
+│   ├── messages.h
+│   ├── player.h
+│   └── render.h
+├── libft
+│   ├── include
+│   │   └── libft.h
+│   ├── Makefile
+│   └── srcs
+│       ├── ft_atoi.c
+│       ├── ft_bool_putstr_fd.c
+│       ├── ft_bzero.c
+│       ├── ft_calloc.c
+│       ├── ft_exit_result.c
+│       ├── ft_isalnum.c
+│       ├── ft_isalpha.c
+│       ├── ft_isascii.c
+│       ├── ft_isdigit.c
+│       ├── ft_isprint.c
+│       ├── ft_isspace.c
+│       ├── ft_itoa.c
+│       ├── ft_memchr.c
+│       ├── ft_memcmp.c
+│       ├── ft_memcpy.c
+│       ├── ft_memmove.c
+│       ├── ft_memset.c
+│       ├── ft_putchar.c
+│       ├── ft_putchar_fd.c
+│       ├── ft_putendl_fd.c
+│       ├── ft_putnbr_fd.c
+│       ├── ft_putstr_fd.c
+│       ├── ft_split.c
+│       ├── ft_strchr.c
+│       ├── ft_strdup.c
+│       ├── ft_striteri.c
+│       ├── ft_strjoin.c
+│       ├── ft_strlcat.c
+│       ├── ft_strlcpy.c
+│       ├── ft_strlen.c
+│       ├── ft_strmapi.c
+│       ├── ft_strncmp.c
+│       ├── ft_strnstr.c
+│       ├── ft_strrchr.c
+│       ├── ft_strtrim.c
+│       ├── ft_substr.c
+│       ├── ft_tolower.c
+│       ├── ft_toupper.c
+│       ├── get_next_line.c
+│       └── get_next_line_utils.c
+├── Makefile
+├── map
+│   ├── invalid_map_hole.cub
+│   ├── invalid_missing_texture.cub
+│   ├── invalid_multiple_players.cub
+│   ├── invalid_no_player.cub
+│   ├── invalid_not_closed.cub
+│   ├── invalid_rgb_values.cub
+│   ├── large_map.cub
+│   ├── tiny_valid_map.cub
+│   ├── valid_basic.cub
+│   ├── valid_complex_spaces.cub
+│   ├── valid_minimal.cub
+│   └── valid_spaces.cub
+├── minilibx-linux
+│   ├── configure
+│   ├── LICENSE
+│   ├── Makefile
+│   ├── Makefile.gen
+│   ├── Makefile.mk
+│   ├── man
+│   │   ├── man1
+│   │   │   ├── mlx.1
+│   │   │   ├── mlx_loop.1
+│   │   │   ├── mlx_new_image.1
+│   │   │   ├── mlx_new_window.1
+│   │   │   └── mlx_pixel_put.1
+│   │   └── man3
+│   │       ├── mlx.3
+│   │       ├── mlx_loop.3
+│   │       ├── mlx_new_image.3
+│   │       ├── mlx_new_window.3
+│   │       └── mlx_pixel_put.3
+│   ├── mlx_clear_window.c
+│   ├── mlx_destroy_display.c
+│   ├── mlx_destroy_image.c
+│   ├── mlx_destroy_window.c
+│   ├── mlx_expose_hook.c
+│   ├── mlx_ext_randr.c
+│   ├── mlx_flush_event.c
+│   ├── mlx_get_color_value.c
+│   ├── mlx_get_data_addr.c
+│   ├── mlx.h
+│   ├── mlx_hook.c
+│   ├── mlx_init.c
+│   ├── mlx_int_anti_resize_win.c
+│   ├── mlx_int_do_nothing.c
+│   ├── mlx_int_get_visual.c
+│   ├── mlx_int.h
+│   ├── mlx_int_param_event.c
+│   ├── mlx_int_set_win_event_mask.c
+│   ├── mlx_int_str_to_wordtab.c
+│   ├── mlx_int_wait_first_expose.c
+│   ├── mlx_key_hook.c
+│   ├── mlx_lib_xpm.c
+│   ├── mlx_loop.c
+│   ├── mlx_loop_hook.c
+│   ├── mlx_mouse.c
+│   ├── mlx_mouse_hook.c
+│   ├── mlx_new_image.c
+│   ├── mlx_new_window.c
+│   ├── mlx_pixel_put.c
+│   ├── mlx_put_image_to_window.c
+│   ├── mlx_rgb.c
+│   ├── mlx_screen_size.c
+│   ├── mlx_set_font.c
+│   ├── mlx_string_put.c
+│   ├── mlx_xpm.c
+│   ├── mlx_xpm.c.ok
+│   ├── README.md
+│   ├── rgb2c.pl
+│   └── test
+│       ├── main.c
+│       ├── Makefile.gen
+│       ├── Makefile.mk
+│       ├── new_win.c
+│       ├── open24.xpm
+│       ├── open30.xpm
+│       ├── open.xpm
+│       └── run_tests.sh
+├── README.md
+├── reguarding_memory_leaks.txt
+├── reguarding_spaces_in_map.txt
+├── srcs
+│   ├── check
+│   │   ├── check_arg.c
+│   │   ├── check_map.c
+│   │   ├── check_map_info.c
+│   │   ├── check_map_matrix_borders.c
+│   │   ├── check_map_matrix.c
+│   │   └── check_map_matrix_dfs.c
+│   ├── display
+│   │   ├── handle_display.c
+│   │   ├── load_floor_and_ceiling.c
+│   │   ├── load_floor_and_ceiling_utils.c
+│   │   └── load_textures.c
+│   ├── events
+│   │   └── key_events.c
+│   ├── init
+│   │   ├── init_game.c
+│   │   ├── init_game_utils.c
+│   │   └── init_textures.c
+│   ├── main
+│   │   ├── handle_closure.c
+│   │   └── main.c
+│   ├── parser
+│   │   ├── parser_get_infos.c
+│   │   ├── parser_get_map.c
+│   │   ├── parser_get_player.c
+│   │   ├── parser_get_player_utils.c
+│   │   ├── parser_matrix.c
+│   │   └── parser_matrix_utils.c
+│   ├── player
+│   │   ├── player_collision_utils.c
+│   │   └── player_movement.c
+│   ├── raycast
+│   │   ├── raycast.c
+│   │   ├── ray_dda.c
+│   │   ├── ray_render.c
+│   │   └── ray_step.c
+│   ├── rendering
+│   │   ├── render_floor_ceiling.c
+│   │   ├── render_frame.c
+│   │   ├── render_walls.c
+│   │   └── render_walls_utils.c
+│   └── utils
+│       ├── info_utils.c
+│       ├── main_utils.c
+│       ├── matrix_utils.c
+│       └── textures_utils.c
+├── texture
+│   ├── ceiling
+│   │   └── ceiling_texture.xpm
+│   ├── floor
+│   │   └── floor_texture.xpm
+│   └── walls
+│       ├── east_wall_texture.xpm
+│       ├── north_wall_texture.xpm
+│       ├── south_wall_texture.xpm
+│       └── west_wall_texture.xpm
+├── TODO
+└── tree.txt
+
+39 directories, 241 files
