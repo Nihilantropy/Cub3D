@@ -31,7 +31,10 @@ int	render_frame(t_game *game)
 		return (0);
 	last_frame_time = tv;
 	if (game->changed)
+	{
 		render_3d_view(game);
+		render_minimap(game);
+	}
 	game->changed = false;
 	return (0);
 }

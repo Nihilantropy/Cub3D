@@ -3,7 +3,8 @@
 static bool	open_display(t_game *game);
 
 /**
- * @brief Sets up game display by loading textures and initializing window
+ * @brief Sets up game display by loading textures, initializing
+ * window and minimap
  *
  * @param game Game structure containing display data
  * @return bool true if setup successful, false otherwise
@@ -13,6 +14,7 @@ bool	handle_display(t_game *game)
 	if (!load_textures(game) || !open_display(game))
 		return (false);
 	game->display.open = true;
+	get_minimap_dimension(game);
 	return (true);
 }
 

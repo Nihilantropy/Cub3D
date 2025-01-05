@@ -1,4 +1,5 @@
 #include "../../include/cub3D_bonus.h"
+
 static void	init_map(t_game *game);
 static void	init_display(t_game *game);
 static void	init_map_checks(t_game *game);
@@ -21,6 +22,7 @@ void	init_game(t_game *game)
 	init_display(game);
 	init_player(game);
 	init_textures(game);
+	init_minimap(game);
 }
 
 static void	init_map(t_game *game)

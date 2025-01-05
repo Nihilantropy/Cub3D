@@ -106,22 +106,24 @@ CUB3D_BONUS_DIR		= $(BONUS_DIR)/srcs
 CUB3D_BONUS_HEAD	= $(BONUS_DIR)/include
 
 # Bonus subdirectories
-MAIN_BONUS_DIR    = ./main
-INIT_BONUS_DIR    = ./init
-CHECK_BONUS_DIR   = ./check
-PARSER_BONUS_DIR  = ./parser
-DISPLAY_BONUS_DIR = ./display
-EVENTS_BONUS_DIR  = ./events
-PLAYER_BONUS_DIR  = ./player
-RAYCAST_BONUS_DIR = ./raycast
-UTILS_BONUS_DIR   = ./utils
-RENDER_BONUS_DIR  = ./rendering
+MAIN_BONUS_DIR    	= ./main
+INIT_BONUS_DIR    	= ./init
+CHECK_BONUS_DIR   	= ./check
+PARSER_BONUS_DIR  	= ./parser
+DISPLAY_BONUS_DIR 	= ./display
+EVENTS_BONUS_DIR  	= ./events
+PLAYER_BONUS_DIR  	= ./player
+RAYCAST_BONUS_DIR 	= ./raycast
+UTILS_BONUS_DIR   	= ./utils
+RENDER_BONUS_DIR  	= ./rendering
+MINIMAP_BONUS_DIR	= ./minimap
 
 SRCS_BONUS	=	$(MAIN_BONUS_DIR)/main_bonus.c \
 				$(MAIN_BONUS_DIR)/handle_closure_bonus.c \
 				$(INIT_BONUS_DIR)/init_game_bonus.c \
 				$(INIT_BONUS_DIR)/init_game_utils_bonus.c \
 				$(INIT_BONUS_DIR)/init_textures_bonus.c \
+				$(INIT_BONUS_DIR)/init_minimap_bonus.c \
 				$(UTILS_BONUS_DIR)/main_utils_bonus.c \
 				$(UTILS_BONUS_DIR)/matrix_utils_bonus.c \
 				$(UTILS_BONUS_DIR)/info_utils_bonus.c \
@@ -142,6 +144,7 @@ SRCS_BONUS	=	$(MAIN_BONUS_DIR)/main_bonus.c \
 				$(DISPLAY_BONUS_DIR)/load_textures_bonus.c \
 				$(DISPLAY_BONUS_DIR)/load_floor_and_ceiling_bonus.c \
 				$(DISPLAY_BONUS_DIR)/load_floor_and_ceiling_utils_bonus.c \
+				$(MINIMAP_BONUS_DIR)/minimap_bonus.c \
 				$(EVENTS_BONUS_DIR)/key_events_bonus.c \
 				$(PLAYER_BONUS_DIR)/player_movement_bonus.c \
 				$(PLAYER_BONUS_DIR)/player_collision_bonus.c \
@@ -153,7 +156,9 @@ SRCS_BONUS	=	$(MAIN_BONUS_DIR)/main_bonus.c \
 				$(RENDER_BONUS_DIR)/render_walls_bonus.c \
 				$(RENDER_BONUS_DIR)/render_walls_utils_bonus.c \
 				$(RENDER_BONUS_DIR)/render_frame_bonus.c \
-				$(RENDER_BONUS_DIR)/render_floor_ceiling_bonus.c
+				$(RENDER_BONUS_DIR)/render_floor_ceiling_bonus.c \
+				$(RENDER_BONUS_DIR)/render_minimap_bonus.c \
+				$(RENDER_BONUS_DIR)/render_minimap_utils_bonus.c \
 
 OBJS_BONUS	= $(patsubst %.c, $(CUB3D_BONUS_DIR)/%.o, $(SRCS_BONUS))
 
@@ -171,4 +176,6 @@ $(CUB3D_BONUS_DIR)/%.o:	$(CUB3D_BONUS_DIR)/%.c
 
 bonus:		$(NAME_BONUS)
 
-.PHONY:		all clean fclean re rec fc bonus
+rebonus:	fc bonus
+
+.PHONY:		all clean fclean re rec fc bonus rebonus

@@ -15,9 +15,11 @@
 # include "keys_bonus.h"
 # include "messages_bonus.h"
 # include "error_bonus.h"
+# include "checks_bonus.h"
 # include "player_bonus.h"
 # include "colors_bonus.h"
 # include "render_bonus.h"
+# include "minimap_bonus.h"
 
 # define DISPLAY_NAME "Cub3D"
 
@@ -27,50 +29,6 @@
 # define TILE_SIZE 64
 
 # define FRAME_TIME_MS 1000 / 60
-
-/* enum for map tiles symbols */
-typedef enum e_tiles
-{
-	FLOOR = '0',
-	WALL = '1',
-	NORTH = 'N',
-	SOUTH = 'S',
-	EAST = 'E',
-	WEST = 'W',
-	MAP_FILLER = 'H',
-	SPACE = ' ',
-	TAB = '\t',
-}	e_tiles;
-
-/* keep track of the necessary map infos */
-typedef struct s_info
-{
-	char			identifier;
-	bool			found;
-	int				index;
-	char			*content;
-	struct s_info	*next;
-}	t_info;
-
-/* checks for map validation */
-typedef struct s_check
-{
-	bool	wrong_char;
-	bool	wrong_info_char;
-	bool	wrong_info_nbr;
-	bool	map_started;
-	bool	map_order;
-	bool	map_infos_id;
-	bool	map_infos_cont;
-	bool	**visited;
-	bool	map_island;
-	bool	found_region;
-	bool	map_open;
-	int		player;
-	bool	map_matrix;
-	int		map_start_row;
-	t_info	*info;
-}	t_check;
 
 typedef struct s_display
 {
@@ -94,6 +52,7 @@ typedef struct s_game
 	t_display	display;
 	t_player	player;
 	t_textures	textures;
+	t_minimap	minimap;
 	bool		running;
 	bool		changed;
 	void		*mlx_ptr;
@@ -113,6 +72,8 @@ void	init_game(t_game *game);
 void	init_info_list(t_game *game);
 /* init textures */
 void	init_textures(t_game *game);
+/* init minimap */
+void	init_minimap(t_game *game);
 
 /*** check ***/
 /* check arg */
@@ -160,6 +121,10 @@ bool	load_floor_and_ceiling(t_game *game);
 bool	check_rgb_values(const char **rgb);
 int		create_rgb(const char **rgb);
 
+/*** minimap ***/
+/* minimap */
+void	get_minimap_dimension(t_game *game);
+
 /*** events ***/
 void	handle_key_events(t_game *game);
 
@@ -203,6 +168,12 @@ void	apply_texture_color(t_render_state *state, t_render_state *tex_data,
 							t_wall_slice *slice, int position);
 /* render floor and ceiling */
 void	render_floor_ceiling(t_game *game, t_render_state *state);
+/* render minimap */
+void	render_minimap(t_game *game);
+/* render minimap utils */
+void	draw_minimap_walls(t_game *game, t_render_state *state, t_minimap *minimap);
+void	draw_minimap_player(t_game *game, t_render_state *state, t_minimap *minimap);
+void	draw_player_fov(t_game *game, t_render_state *state, t_minimap *minimap);
 
 /*** utils ***/
 /* main utils */
