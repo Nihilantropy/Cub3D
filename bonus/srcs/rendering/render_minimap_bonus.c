@@ -36,6 +36,7 @@ void	render_minimap(t_game *game)
 	draw_minimap_background(&state, minimap);
 	draw_minimap_borders(&state, minimap);
 	draw_minimap_walls(game, &state, minimap);
+	draw_minimap_door(game, &state, minimap);
 	draw_minimap_player(game, &state, minimap);
 	draw_player_fov(game, &state, minimap);
 	mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, state.img_ptr,

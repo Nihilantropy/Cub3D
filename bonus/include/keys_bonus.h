@@ -14,6 +14,7 @@
 # define KEY_RIGHT		65363
 # define KEY_FORWARD 	65362
 # define KEY_BACKWARD	65364
+# define KEY_SPACE		32
 
 # define KEY_ESC		65307
 

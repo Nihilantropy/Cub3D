@@ -11,6 +11,7 @@ typedef enum e_tiles
 	EAST = 'E',
 	WEST = 'W',
 	MAP_FILLER = 'H',
+	DOOR = 'D',
 	SPACE = ' ',
 	TAB = '\t',
 }	e_tiles;

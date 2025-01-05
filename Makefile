@@ -117,17 +117,21 @@ RAYCAST_BONUS_DIR 	= ./raycast
 UTILS_BONUS_DIR   	= ./utils
 RENDER_BONUS_DIR  	= ./rendering
 MINIMAP_BONUS_DIR	= ./minimap
+DOOR_BONUS_DIR		= ./door
 
 SRCS_BONUS	=	$(MAIN_BONUS_DIR)/main_bonus.c \
 				$(MAIN_BONUS_DIR)/handle_closure_bonus.c \
 				$(INIT_BONUS_DIR)/init_game_bonus.c \
 				$(INIT_BONUS_DIR)/init_game_utils_bonus.c \
+				$(INIT_BONUS_DIR)/init_player_bonus.c \
 				$(INIT_BONUS_DIR)/init_textures_bonus.c \
 				$(INIT_BONUS_DIR)/init_minimap_bonus.c \
+				$(INIT_BONUS_DIR)/init_door_system_bonus.c \
 				$(UTILS_BONUS_DIR)/main_utils_bonus.c \
 				$(UTILS_BONUS_DIR)/matrix_utils_bonus.c \
 				$(UTILS_BONUS_DIR)/info_utils_bonus.c \
 				$(UTILS_BONUS_DIR)/textures_utils_bonus.c \
+				$(UTILS_BONUS_DIR)/door_utils_bonus.c \
 				$(CHECK_BONUS_DIR)/check_arg_bonus.c \
 				$(CHECK_BONUS_DIR)/check_map_bonus.c \
 				$(CHECK_BONUS_DIR)/check_map_info_bonus.c \
@@ -140,11 +144,17 @@ SRCS_BONUS	=	$(MAIN_BONUS_DIR)/main_bonus.c \
 				$(PARSER_BONUS_DIR)/parser_matrix_utils_bonus.c \
 				$(PARSER_BONUS_DIR)/parser_get_player_bonus.c \
 				$(PARSER_BONUS_DIR)/parser_get_player_utils_bonus.c \
+				$(PARSER_BONUS_DIR)/parser_get_door_bonus.c \
 				$(DISPLAY_BONUS_DIR)/handle_display_bonus.c \
 				$(DISPLAY_BONUS_DIR)/load_textures_bonus.c \
 				$(DISPLAY_BONUS_DIR)/load_floor_and_ceiling_bonus.c \
 				$(DISPLAY_BONUS_DIR)/load_floor_and_ceiling_utils_bonus.c \
+				$(DISPLAY_BONUS_DIR)/load_door_textures_bonus.c \
 				$(MINIMAP_BONUS_DIR)/minimap_bonus.c \
+				$(DOOR_BONUS_DIR)/init_door_bonus.c \
+				$(DOOR_BONUS_DIR)/door_state_bonus.c \
+				$(DOOR_BONUS_DIR)/door_interaction_bonus.c \
+				$(DOOR_BONUS_DIR)/door_animation_bonus.c \
 				$(EVENTS_BONUS_DIR)/key_events_bonus.c \
 				$(PLAYER_BONUS_DIR)/player_movement_bonus.c \
 				$(PLAYER_BONUS_DIR)/player_collision_bonus.c \
@@ -159,6 +169,9 @@ SRCS_BONUS	=	$(MAIN_BONUS_DIR)/main_bonus.c \
 				$(RENDER_BONUS_DIR)/render_floor_ceiling_bonus.c \
 				$(RENDER_BONUS_DIR)/render_minimap_bonus.c \
 				$(RENDER_BONUS_DIR)/render_minimap_utils_bonus.c \
+				$(RENDER_BONUS_DIR)/render_door_bonus.c \
+				$(RENDER_BONUS_DIR)/render_manager_bonus.c \
+				$(RENDER_BONUS_DIR)/render_3d_map_bonus.c \
 
 OBJS_BONUS	= $(patsubst %.c, $(CUB3D_BONUS_DIR)/%.o, $(SRCS_BONUS))
 

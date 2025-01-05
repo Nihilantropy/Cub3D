@@ -20,6 +20,7 @@
 # include "colors_bonus.h"
 # include "render_bonus.h"
 # include "minimap_bonus.h"
+# include "door_bonus.h"
 
 # define DISPLAY_NAME "Cub3D"
 
@@ -48,15 +49,16 @@ typedef struct s_map
 
 typedef struct s_game
 {
-	t_map		map;
-	t_display	display;
-	t_player	player;
-	t_textures	textures;
-	t_minimap	minimap;
-	bool		running;
-	bool		changed;
-	void		*mlx_ptr;
-	void		*win_ptr;
+	t_map			map;
+	t_display		display;
+	t_player		player;
+	t_textures		textures;
+	t_minimap		minimap;
+	t_door_system   door_system;
+	bool			running;
+	bool			changed;
+	void			*mlx_ptr;
+	void			*win_ptr;
 }	t_game;
 
 /*** main ***/
@@ -70,10 +72,14 @@ int		close_game(void *param);
 void	init_game(t_game *game);
 /* init game utils */
 void	init_info_list(t_game *game);
+/* init player */
+void 	init_player(t_game *game);
 /* init textures */
 void	init_textures(t_game *game);
 /* init minimap */
 void	init_minimap(t_game *game);
+/* init door system */
+void	init_door_system(t_game *game);
 
 /*** check ***/
 /* check arg */
@@ -108,6 +114,8 @@ void	set_north_rot(t_game *game);
 void	set_east_rot(t_game *game);
 void	set_south_rot(t_game *game);
 void	set_west_rot(t_game *game);
+/* parser get door */
+bool	get_doors(t_game *game);
 
 /*** display ***/
 /* handle display */
@@ -120,12 +128,26 @@ bool	load_floor_and_ceiling(t_game *game);
 /* load floor and ceiling utils */
 bool	check_rgb_values(const char **rgb);
 int		create_rgb(const char **rgb);
+/* load door textures */
+bool	load_door_texture(t_game *game);
 
 /*** minimap ***/
 /* minimap */
 void	get_minimap_dimension(t_game *game);
 
+/*** doors ***/
+/* init doors */
+void	init_doors(t_game *game);
+/* door state */
+bool	player_on_door_pos(t_player *player, t_door *door);
+/* door interaction */
+void	handle_door_interaction(t_game *game);
+void	update_map_matrix(t_game *game, int y, int x, bool open);
+/* door animation */
+void	update_door_animation(t_game *game, t_door *door);
+
 /*** events ***/
+/* key events */
 void	handle_key_events(t_game *game);
 
 /*** player ***/
@@ -157,15 +179,21 @@ int		calculate_wall_height(t_game *game, double perp_wall_dist);
 /*** rendering ***/
 /* render frame */
 int		render_frame(t_game *game);
+/* render manager */
+void	*get_texture(t_game *game, t_camera *cam, int side);
+void	get_texture_color(t_render_state *state, t_render_state *tex_data,
+						t_wall_slice *slice, int position);
+/* render 3d map */
+void	render_3d_map(t_game *game, t_render_state *state, int x);
 /* render walls */
-void render_walls(t_game *game, t_render_state *state, int x);
+void	render_textured_wall_slice(t_render_state *state, t_wall_slice *slice,
+									t_game *game, int x);
+void	render_transparent_slice(t_render_state *state, t_wall_slice *slice,
+								t_game *game, int x);
 /* render walls utils */
 void 	calculate_wall_slice(t_wall_slice *slice, t_game *game, 
 	double perp_wall_dist);
-void 	select_wall_texture(t_wall_slice *slice, t_game *game, t_camera *cam);
 void 	calculate_texture_coords(t_wall_slice *slice, t_game *game, t_camera *cam);
-void	apply_texture_color(t_render_state *state, t_render_state *tex_data,
-							t_wall_slice *slice, int position);
 /* render floor and ceiling */
 void	render_floor_ceiling(t_game *game, t_render_state *state);
 /* render minimap */
@@ -174,6 +202,11 @@ void	render_minimap(t_game *game);
 void	draw_minimap_walls(t_game *game, t_render_state *state, t_minimap *minimap);
 void	draw_minimap_player(t_game *game, t_render_state *state, t_minimap *minimap);
 void	draw_player_fov(t_game *game, t_render_state *state, t_minimap *minimap);
+void	draw_minimap_door(t_game *game, t_render_state *state, t_minimap *minimap);
+/* render door */
+void	*select_door_texture(t_game *game, t_door *door);
+bool	is_door_collision(t_game *game, double x, double y);
+t_door	*find_door_at_position(t_game *game, int x, int y);
 
 /*** utils ***/
 /* main utils */
@@ -189,6 +222,8 @@ void	print_info_list(t_info *info);
 void	free_info_list(t_info **info);
 /* textures utils */
 void	free_textures(t_game *game);
+/* door utils */
+void	free_door_system(t_game *game);
 
 
 #endif

@@ -32,6 +32,8 @@ static int	key_press(int keycode, t_game *game)
 		set_player_rot_angle(game, R_LEFT);
 	else if (keycode == KEY_D || keycode == KEY_RIGHT)
 		set_player_rot_angle(game, R_RIGHT);
+	else if (keycode == KEY_SPACE)
+		handle_door_interaction(game);
 	return (0);
 }
 

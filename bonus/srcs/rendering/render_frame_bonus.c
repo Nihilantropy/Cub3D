@@ -3,6 +3,7 @@
 static void render_3d_view(t_game *game);
 static void init_frame_buffer(t_game *game, t_render_state *state);
 static void clear_frame_buffer(t_render_state *state, t_game *game);
+static void	update_animations(t_game *game);
 
 /**
  * @brief Renders a new frame if enough time has passed since the last frame.
@@ -29,13 +30,14 @@ int	render_frame(t_game *game)
 					(tv.tv_usec - last_frame_time.tv_usec) / 1000;
 	if (elapsed_time < FRAME_TIME_MS)
 		return (0);
-	last_frame_time = tv;
+	update_animations(game);
 	if (game->changed)
 	{
 		render_3d_view(game);
 		render_minimap(game);
+		game->changed = false;
 	}
-	game->changed = false;
+	last_frame_time = tv;
 	return (0);
 }
 
@@ -59,7 +61,7 @@ static void render_3d_view(t_game *game)
 	x = 0;
 	while (x < game->display.width)
 	{
-		render_walls(game, &state, x);
+		render_3d_map(game, &state, x);
 		x++;
 	}
 	mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, 
@@ -103,4 +105,20 @@ static void clear_frame_buffer(t_render_state *state, t_game *game)
 		state->img_data[i] = BLACK;
 		i++;
 	}
+}
+
+static void	update_animations(t_game *game)
+{
+	int	i;
+
+	i = 0;
+	while (i < game->door_system.door_counter)
+    {
+        if (game->door_system.door[i].active)
+        {
+            update_door_animation(game, &game->door_system.door[i]);
+            game->changed = true;
+        }
+		i++;
+    }
 }

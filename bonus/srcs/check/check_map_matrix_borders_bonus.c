@@ -58,5 +58,6 @@ static bool	is_valid_tile(char c)
 			c == SOUTH || 
 			c == EAST || 
 			c == WEST ||
-			c == MAP_FILLER);
+			c == MAP_FILLER ||
+			c == DOOR);
 }

@@ -27,6 +27,7 @@ bool	parse_matrix(t_game *game, const char **matrix)
 	copy_matrix(new_matrix, matrix + game->map.check.map_start_row);
 	game->map.matrix = new_matrix;
 	get_player_infos(game);
+	get_doors(game);
 	return (true);
 }
 

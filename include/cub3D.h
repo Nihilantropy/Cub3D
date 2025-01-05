@@ -147,7 +147,7 @@ int		calculate_wall_height(t_game *game, double perp_wall_dist);
 /* render frame */
 int		render_frame(t_game *game);
 /* render walls */
-void render_walls(t_game *game, t_render_state *state, int x);
+void 	render_walls(t_game *game, t_render_state *state, int x);
 /* render walls utils */
 void 	calculate_wall_slice(t_wall_slice *slice, t_game *game, 
 	double perp_wall_dist);

@@ -10,6 +10,7 @@ void	free_all_and_exit(t_game *game, int status)
 		free_bool_matrix(game->map.check.visited);
 		free_info_list(&game->map.check.info);
 		free_textures(game);
+		free_door_system(game);
 		if (game->mlx_ptr)
 		{
 			mlx_destroy_display(game->mlx_ptr);

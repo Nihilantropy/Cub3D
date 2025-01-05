@@ -3,7 +3,6 @@
 static void	init_map(t_game *game);
 static void	init_display(t_game *game);
 static void	init_map_checks(t_game *game);
-static void	init_player(t_game *game);
 
 /**
  * @brief Initializes all game components to their default values:
@@ -23,6 +22,7 @@ void	init_game(t_game *game)
 	init_player(game);
 	init_textures(game);
 	init_minimap(game);
+	init_door_system(game);
 }
 
 static void	init_map(t_game *game)
@@ -38,35 +38,6 @@ static void	init_display(t_game *game)
 	game->display.width = WIN_WIDTH;
 	game->display.height = WIN_HEIGHT;
 	game->display.open = false;
-}
-
-static void init_player(t_game *game)
-{
-	game->player.face = 0;
-	game->player.pos.x = 0.0;
-	game->player.pos.y = 0.0;
-	game->player.pos.x_screen = 0;
-	game->player.pos.y_screen = 0;
-	game->player.speed = 0.0;
-	game->player.rot_speed = 0.0;
-	game->player.moving.forward = false;
-	game->player.moving.backward = false;
-	game->player.camera.dir_x = 0.0;
-	game->player.camera.dir_y = 0.0;
-	game->player.camera.plane_x = 0.0;
-	game->player.camera.plane_y = 0.0;
-	game->player.camera.ray_dir_x = 0.0;
-	game->player.camera.ray_dir_y = 0.0;
-	game->player.camera.delta_dist_x = 0.0;
-	game->player.camera.delta_dist_y = 0.0;
-	game->player.camera.side_dist_x = 0.0;
-	game->player.camera.side_dist_y = 0.0;
-	game->player.camera.map_x = 0;
-	game->player.camera.map_y = 0;
-	game->player.camera.step_x = 0;
-	game->player.camera.step_y = 0;
-	game->player.camera.perp_wall_dist = 0.0;
-	game->player.camera.side = 0;
 }
 
 static void	init_map_checks(t_game *game)
@@ -88,4 +59,3 @@ static void	init_map_checks(t_game *game)
 	game->map.check.info = NULL;
 	init_info_list(game);
 }
-

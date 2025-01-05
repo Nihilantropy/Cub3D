@@ -16,6 +16,9 @@
 /* player hitbox radius for wall collision */
 # define PLAYER_RADIUS 0.2
 
+/* Door interaction constants */
+# define DOOR_INTERACT_DIST 4.0
+
 #ifndef M_PI
 # define M_PI 3.14159265358979323846
 #endif
@@ -42,7 +45,12 @@ typedef struct s_camera
 	int		step_x;
 	int		step_y;
 	double	perp_wall_dist;
+	char	hit_type;
 	int		side;
+	double	perp_door_dist;
+	bool	door_hit;
+	int		door_side;
+	int		door_frame;
 }	t_camera;
 
 /**

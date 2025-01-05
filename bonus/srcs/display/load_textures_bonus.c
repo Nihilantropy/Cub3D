@@ -16,7 +16,8 @@ bool	load_textures(t_game *game)
 		!load_single_texture(game, &game->textures.south, 'S') ||
 		!load_single_texture(game, &game->textures.east, 'E') ||
 		!load_single_texture(game, &game->textures.west, 'W') ||
-		!load_floor_and_ceiling(game))
+		!load_floor_and_ceiling(game) ||
+		!load_door_texture(game))
 	{
 		return (ft_bool_putstr_fd(ERR_TEXTURE_LOAD, 2));
 	}

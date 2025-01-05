@@ -14,13 +14,15 @@ static void    perform_dda_step(t_camera *camera, int *side);
  */
 int	perform_dda(t_game *game, t_camera *camera)
 {
-	int	hit;
-	int	side;
-	int	iter;
+	int		hit;
+	int		side;
+	int		iter;
+	t_door	*door;
 
 	hit = 0;
 	side = -1;
 	iter = 0;
+	camera->door_hit = false;
 	while (hit == 0 && iter < game->map.width * game->map.height)
 	{
 		perform_dda_step(camera, &side);
@@ -28,12 +30,28 @@ int	perform_dda(t_game *game, t_camera *camera)
 			camera->map_x < 0 || camera->map_x >= game->map.width)
 			return (-1);
 		if (game->map.matrix[camera->map_y][camera->map_x] == WALL)
+		{
 			hit = 1;
+			camera->hit_type = WALL;
+		}
+		else if (game->map.matrix[camera->map_y][camera->map_x] == DOOR)
+		{
+			door = find_door_at_position(game, camera->map_x, camera->map_y);
+			if (door && (door->state == DOOR_OPENING || door->state == DOOR_CLOSING))
+			{
+				camera->door_hit = true;
+				camera->door_frame = door->frame;
+				// camera->perp_door_dist = camera->perp_wall_dist;
+			}
+			else if (door->state == DOOR_CLOSED)
+			{
+				hit = 1;
+				camera->hit_type = DOOR;
+			}
+		}
 		iter++;
 	}
-	if (hit)
-		return (side);
-	return (-1);
+	return (side);
 }
 
 /**

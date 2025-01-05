@@ -56,5 +56,5 @@ static void	check_map_matrix_wrong_char(t_game *game,
 static bool	is_tile(char c)
 {
 	return (c == FLOOR || c == WALL || c == NORTH || c == SOUTH ||
-			c == EAST || c == WEST || c == MAP_FILLER);
+			c == EAST || c == WEST || c == MAP_FILLER || c == DOOR);
 }

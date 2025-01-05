@@ -1,23 +1,8 @@
 #include "../../include/cub3D_bonus.h"
 
-static void render_textured_wall_slice(t_render_state *state, t_wall_slice *slice, 
-									t_game *game, int x);
 static bool	init_texture_rendering(t_wall_slice *slice, t_render_state *tex_data, 
 								double *step);
 static bool get_texture_data(t_wall_slice *slice, t_render_state *tex_data);
-
-void render_walls(t_game *game, t_render_state *state, int x)
-{
-	t_wall_slice slice;
-	
-	cast_ray(game, &game->player, x);
-	calculate_wall_slice(&slice, game, game->player.camera.perp_wall_dist);
-	slice.side = game->player.camera.side;
-	slice.distance = game->player.camera.perp_wall_dist;
-	calculate_texture_coords(&slice, game, &game->player.camera);
-	select_wall_texture(&slice, game, &game->player.camera);
-	render_textured_wall_slice(state, &slice, game, x);
-}
 
 /**
 * @brief Renders a textured wall slice to the screen.
@@ -31,7 +16,7 @@ void render_walls(t_game *game, t_render_state *state, int x)
 * @param x The x-coordinate of the current slice on the screen.
 * @return None.
 */
-static void	render_textured_wall_slice(t_render_state *state, t_wall_slice *slice,
+void	render_textured_wall_slice(t_render_state *state, t_wall_slice *slice,
 									t_game *game, int x)
 {
 	int				y;
@@ -46,7 +31,7 @@ static void	render_textured_wall_slice(t_render_state *state, t_wall_slice *slic
 	y = slice->start_y;
 	while (y < slice->end_y)
 	{
-		apply_texture_color(state, &tex_data, slice, 
+		get_texture_color(state, &tex_data, slice, 
 						TEXTURE_SIZE * ((int)tex_pos & (TEXTURE_SIZE - 1)) + 
 						slice->tex_x);
 		if (y * game->display.width + x >= 0 && 
@@ -102,6 +87,5 @@ static bool get_texture_data(t_wall_slice *slice, t_render_state *tex_data)
 		printf("Error: Failed to get texture data\n");
 		return (false);
 	}
-
 	return (true);
 }

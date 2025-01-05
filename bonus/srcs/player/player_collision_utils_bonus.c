@@ -107,8 +107,7 @@ static bool	is_valid_grid_point(const char **matrix, double x, double y)
 	if (grid_y < 0 || matrix[grid_y] == NULL || 
 		grid_x < 0 || matrix[grid_y][grid_x] == '\0')
 		return (false);
-	if (matrix[grid_y][grid_x] != FLOOR && 
-		!is_player_char(matrix[grid_y][grid_x]))
+	if (matrix[grid_y][grid_x] != FLOOR)
 		return (false);
 	return (true);
 }
