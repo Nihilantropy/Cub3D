@@ -5,13 +5,13 @@
 
 /* Movement and rotation constants */
 # define P_SPEED 0.2
-# define R_SPEED 0.1
+# define R_SPEED 0.2
 
 /* player hitbox radius for wall collision */
 # define PLAYER_RADIUS 0.1
 
 /* Door interaction constants */
-# define DOOR_INTERACT_DIST 3.0
+# define DOOR_INTERACT_DIST 2
 
 #ifndef M_PI
 # define M_PI 3.14159265358979323846
@@ -45,6 +45,12 @@ typedef struct s_camera
 	bool	door_hit;
 	int		door_side;
 	int		door_frame;
+
+	
+    int     current_door_id;     // Track which door we're rendering
+    int     door_start_x;        // Screen X where door starts
+    int     door_end_x;          // Screen X where door ends
+    bool    is_same_door;        // Flag to check if we're still on same door
 }	t_camera;
 
 /**

@@ -69,7 +69,7 @@ int		close_game(void *param);
 
 /*** init ***/
 /* init game */
-void	init_game(t_game *game);
+t_game	*init_game(void);
 /* init game utils */
 void	init_info_list(t_game *game);
 /* init player */
@@ -181,10 +181,9 @@ void	init_ray(t_camera *camera, double ray_dir_x,
 void	calculate_step_dist(t_camera *camera, t_pos *pos);
 int		step_in_x_direction(t_camera *camera);
 int		step_in_y_direction(t_camera *camera);
-void	calculate_wall_dist(t_camera *camera, t_pos *pos, int side);
+double	calculate_wall_dist(t_camera *camera, t_pos *pos, int side);
 /* ray dda */
 int		perform_dda(t_game *game, t_camera *camera);
-int		check_wall_hit(t_game *game, t_camera *camera);
 /* ray render */
 int		calculate_wall_height(t_game *game, double perp_wall_dist);
 
@@ -200,12 +199,16 @@ void	render_3d_map(t_game *game, t_render_state *state, int x);
 /* render walls */
 void	render_textured_wall_slice(t_render_state *state, t_wall_slice *slice,
 									t_game *game, int x);
-void	render_transparent_slice(t_render_state *state, t_wall_slice *slice,
-								t_game *game, int x);
+bool	init_texture_rendering(t_wall_slice *slice, t_render_state *tex_data, 
+								double *step);
+bool	get_texture_data(t_wall_slice *slice, t_render_state *tex_data);
 /* render walls utils */
 void 	calculate_wall_slice(t_wall_slice *slice, t_game *game, 
 	double perp_wall_dist);
 void 	calculate_texture_coords(t_wall_slice *slice, t_game *game, t_camera *cam);
+/* render door animation */
+void	render_transparent_slice(t_render_state *state, t_wall_slice *slice,
+								t_game *game, int x);
 /* render floor and ceiling */
 void	render_floor_ceiling(t_game *game, t_render_state *state);
 /* render minimap */

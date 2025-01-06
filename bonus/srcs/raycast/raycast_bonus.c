@@ -24,10 +24,7 @@ void	cast_ray(t_game *game, t_player *player, int x)
 	calculate_step_dist(&player->camera, &player->pos);
 	side = perform_dda(game, &player->camera);
 	if (side != -1)
-	{
 		player->camera.side = side;
-		calculate_wall_dist(&player->camera, &player->pos, side);
-	}
 }
 
 /**

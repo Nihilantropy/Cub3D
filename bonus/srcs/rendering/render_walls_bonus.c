@@ -1,9 +1,5 @@
 #include "../../include/cub3D_bonus.h"
 
-static bool	init_texture_rendering(t_wall_slice *slice, t_render_state *tex_data, 
-								double *step);
-static bool get_texture_data(t_wall_slice *slice, t_render_state *tex_data);
-
 /**
 * @brief Renders a textured wall slice to the screen.
 * 
@@ -53,7 +49,7 @@ void	render_textured_wall_slice(t_render_state *state, t_wall_slice *slice,
 * @param step Calculated step size for texture mapping.
 * @return True if initialization succeeds, false otherwise.
 */
-static bool	init_texture_rendering(t_wall_slice *slice, t_render_state *tex_data, 
+bool	init_texture_rendering(t_wall_slice *slice, t_render_state *tex_data, 
 								double *step)
 {
 	if (!get_texture_data(slice, tex_data))
@@ -72,11 +68,11 @@ static bool	init_texture_rendering(t_wall_slice *slice, t_render_state *tex_data
 * @param tex_data A pointer to a t_render_state structure to store the texture data.
 * @return True if the texture data was successfully retrieved, otherwise false.
 */
-static bool get_texture_data(t_wall_slice *slice, t_render_state *tex_data)
+bool get_texture_data(t_wall_slice *slice, t_render_state *tex_data)
 {
 	if (!slice->texture)
 	{
-		printf("Error: Null texture for wall slice\n");
+		ft_putstr_fd(ERR_WALL_SLICE_TEXTURE, 2);
 		return (false);
 	}
 
@@ -84,7 +80,7 @@ static bool get_texture_data(t_wall_slice *slice, t_render_state *tex_data)
 												&tex_data->line_length, &tex_data->endian);
 	if (!tex_data->img_data)
 	{
-		printf("Error: Failed to get texture data\n");
+		ft_putstr_fd(ERR_GET_TEXTURE_DATA, 2);
 		return (false);
 	}
 	return (true);

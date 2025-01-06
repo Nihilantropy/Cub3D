@@ -10,24 +10,25 @@
  */
 int	main(int argc, char **argv)
 {
-	t_game	game;
+	t_game	*game;
 
+	game = NULL;
 	if (check_valid_arg(argc, argv) == false)
 	{
 		ft_putstr_fd(ERR_ARG, 2);
 		ft_putstr_fd(P_USAGE, 2);
-		exit (EXIT_FAILURE);
+		exit(EXIT_FAILURE);
 	}
-	init_game(&game);
-	if (get_map(&game, argv[1]) == false)
-		free_all_and_exit(&game, EXIT_FAILURE);
-	game.mlx_ptr = mlx_init();
-	if (!handle_display(&game))
-		free_all_and_exit(&game, EXIT_FAILURE);
-	game.running = true;
-	game_loop(&game);
-	game.running = false;
-	free_all_and_exit(&game, EXIT_SUCCESS);
+	game = init_game();
+	if (get_map(game, argv[1]) == false)
+		free_all_and_exit(game, EXIT_FAILURE);
+	game->mlx_ptr = mlx_init();
+	if (!handle_display(game))
+		free_all_and_exit(game, EXIT_FAILURE);
+	game->running = true;
+	game_loop(game);
+	game->running = false;
+	free_all_and_exit(game, EXIT_SUCCESS);
 	return (0);
 }
 

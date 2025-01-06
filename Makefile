@@ -52,7 +52,7 @@ SRCS		=	$(MAIN_DIR)/main.c \
 				$(RENDER_DIR)/render_walls.c \
 				$(RENDER_DIR)/render_walls_utils.c \
 				$(RENDER_DIR)/render_frame.c \
-				$(RENDER_DIR)/render_floor_ceiling.c
+				$(RENDER_DIR)/render_floor_ceiling.c \
 						
 OBJS		= $(patsubst %.c, $(CUB3D_DIR)/%.o, $(SRCS))
 
@@ -162,9 +162,10 @@ SRCS_BONUS	=	$(MAIN_BONUS_DIR)/main_bonus.c \
 				$(RAYCAST_BONUS_DIR)/ray_step_bonus.c \
 				$(RAYCAST_BONUS_DIR)/ray_dda_bonus.c \
 				$(RAYCAST_BONUS_DIR)/ray_render_bonus.c \
+				$(RENDER_BONUS_DIR)/render_frame_bonus.c \
 				$(RENDER_BONUS_DIR)/render_walls_bonus.c \
 				$(RENDER_BONUS_DIR)/render_walls_utils_bonus.c \
-				$(RENDER_BONUS_DIR)/render_frame_bonus.c \
+				$(RENDER_BONUS_DIR)/render_door_animation_bonus.c \
 				$(RENDER_BONUS_DIR)/render_floor_ceiling_bonus.c \
 				$(RENDER_BONUS_DIR)/render_minimap_bonus.c \
 				$(RENDER_BONUS_DIR)/render_minimap_utils_bonus.c \

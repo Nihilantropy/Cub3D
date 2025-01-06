@@ -4,6 +4,8 @@
 # define X_EVENT_KEY_PRESS		2
 # define X_EVENT_KEY_RELEASE	3
 
+# define X_BUTTON_PRESS 4
+
 # define DESTROY_WIN_CLIENT_MSG 17
 
 # define KEY_W			119
@@ -15,6 +17,9 @@
 # define KEY_FORWARD 	65362
 # define KEY_BACKWARD	65364
 # define KEY_SPACE		32
+
+# define MOUSE_LEFT		1
+# define MOUSE_RIGHT	3
 
 # define KEY_ESC		65307
 

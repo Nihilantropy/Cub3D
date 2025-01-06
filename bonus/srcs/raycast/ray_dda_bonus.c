@@ -1,23 +1,22 @@
 #include "../../include/cub3D_bonus.h"
 
-static void    perform_dda_step(t_camera *camera, int *side);
+static int	check_map_bounds(t_camera *camera, t_game *game);
+static int	check_collision(t_game *game, t_camera *camera, int side);
+static int	handle_door_collision(t_game *game, t_camera *camera, int side);
+static void	perform_dda_step(t_camera *camera, int *side);
 
 /**
- * @brief Executes Digital Differential Analysis for ray casting.
- *
- * Performs DDA algorithm to find wall intersection point by stepping
- * through grid cells until a wall is hit or map bounds exceeded.
- *
- * @param game Game structure containing map data
- * @param camera Camera structure with ray information
- * @return Wall side hit (0 for X, 1 for Y) or -1 if no hit
- */
+* @brief Performs DDA algorithm for raycasting
+*
+* @param game Game state containing map and camera data
+* @param camera Camera containing ray information
+* @return int Wall side hit or -1 if no hit
+*/
 int	perform_dda(t_game *game, t_camera *camera)
 {
 	int		hit;
 	int		side;
 	int		iter;
-	t_door	*door;
 
 	hit = 0;
 	side = -1;
@@ -26,51 +25,80 @@ int	perform_dda(t_game *game, t_camera *camera)
 	while (hit == 0 && iter < game->map.width * game->map.height)
 	{
 		perform_dda_step(camera, &side);
-		if (camera->map_y < 0 || camera->map_y >= game->map.height ||
-			camera->map_x < 0 || camera->map_x >= game->map.width)
+		if (check_map_bounds(camera, game) == -1)
 			return (-1);
-		if (game->map.matrix[camera->map_y][camera->map_x] == WALL)
-		{
-			hit = 1;
-			camera->hit_type = WALL;
-		}
-		else if (game->map.matrix[camera->map_y][camera->map_x] == DOOR)
-		{
-			door = find_door_at_position(game, camera->map_x, camera->map_y);
-			if (door && (door->state == door_opening || door->state == door_closing))
-			{
-				camera->door_hit = true;
-				camera->door_frame = door->frame;
-				// camera->perp_door_dist = camera->perp_wall_dist;
-			}
-			else if (door->state == door_closed)
-			{
-				hit = 1;
-				camera->hit_type = DOOR;
-			}
-		}
+		hit = check_collision(game, camera, side);
 		iter++;
 	}
+	camera->perp_wall_dist = calculate_wall_dist(camera, &game->player.pos, side);
 	return (side);
 }
 
 /**
- * @brief Checks if ray has hit a wall at current position.
- *
- * Verifies map boundaries and wall collision at current map coordinates.
- * Returns true for both out-of-bounds and wall hits.
- *
- * @param game Game structure containing map data
- * @param camera Camera structure with current map position
- * @return 1 if wall hit or out of bounds, 0 otherwise
- */
-int	check_wall_hit(t_game *game, t_camera *camera)
+* @brief Checks if position is within map boundaries
+*
+* @param camera Camera containing position data
+* @param game Game containing map dimensions
+* @return int -1 if out of bounds, 0 if valid
+*/
+static int	check_map_bounds(t_camera *camera, t_game *game)
 {
-	if (camera->map_y < 0 || camera->map_x < 0
-		|| camera->map_y >= game->map.height
-		|| camera->map_x >= game->map.width)
+	if (camera->map_y < 0 || camera->map_y >= game->map.height ||
+		camera->map_x < 0 || camera->map_x >= game->map.width)
+		return (-1);
+	return (0);
+}
+
+/**
+* @brief Checks collision with walls and doors
+*
+* @param game Game state containing map data
+* @param camera Camera data for ray
+* @param side Current wall side hit
+* @return int 1 if collision detected, 0 otherwise
+*/
+static int	check_collision(t_game *game, t_camera *camera, int side)
+{
+	if (game->map.matrix[camera->map_y][camera->map_x] == DOOR)
+		return (handle_door_collision(game, camera, side));
+	if (game->map.matrix[camera->map_y][camera->map_x] == WALL)
+	{
+		camera->hit_type = WALL;
 		return (1);
-	return (game->map.matrix[camera->map_y][camera->map_x] == WALL);
+	}
+	return (0);
+}
+
+/**
+* @brief Handles door collision and state updates
+*
+* @param game Game state containing door data
+* @param camera Camera data for ray calculations
+* @param side Current wall side hit
+* @return int 1 if closed door hit, 0 otherwise
+*/
+static int	handle_door_collision(t_game *game, t_camera *camera, int side)
+{
+	t_door	*door;
+
+	door = find_door_at_position(game, camera->map_x, camera->map_y);
+	if (!door)
+		return (0);
+	if (door->state == door_opening || door->state == door_closing)
+	{
+		camera->door_hit = true;
+		camera->door_frame = door->frame;
+		camera->door_side = side;
+		camera->perp_door_dist = calculate_wall_dist(camera, 
+								&game->player.pos, side);
+		return (0);
+	}
+	if (door->state == door_closed)
+	{
+		camera->hit_type = DOOR;
+		return (1);
+	}
+	return (0);
 }
 
 /**

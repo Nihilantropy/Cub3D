@@ -16,6 +16,7 @@ void	free_all_and_exit(t_game *game, int status)
 			mlx_destroy_display(game->mlx_ptr);
 			free(game->mlx_ptr);
 		}
+		free(game);
 	}
 	exit(status);
 }

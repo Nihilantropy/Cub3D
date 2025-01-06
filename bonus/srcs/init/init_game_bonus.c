@@ -11,8 +11,13 @@ static void	init_map_checks(t_game *game);
  *
  * @param game Pointer to the game structure to be initialized
  */
-void	init_game(t_game *game)
+t_game	*init_game(void)
 {
+	t_game	*game;
+
+	game = malloc(sizeof(t_game));
+	if (!game)
+		ft_exit_error(ERR_ALLOC_GAME);
 	game->mlx_ptr = NULL;
 	game->win_ptr = NULL;
 	game->running = false;
@@ -23,6 +28,7 @@ void	init_game(t_game *game)
 	init_textures(game);
 	init_minimap(game);
 	init_door_system(game);
+	return (game);
 }
 
 static void	init_map(t_game *game)

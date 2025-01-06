@@ -25,6 +25,7 @@
 # define ERR_DISPLAY_OPEN "Error\nCould not open display. Exiting...\n"
 
 /* allocation err msg */
+# define ERR_ALLOC_GAME "Error\nGame alloc failed\n"
 # define ERR_ALLOC_MATRIX "Error\nMatrix alloc failed\n"
 # define ERR_ALLOC_MATRIX_DUP "Error\nMatrix duplicate alloc failed\n"
 # define ERR_ALLOC_INFO "Error\nInfo list alloc failed\n"
@@ -41,6 +42,8 @@
 
 /* load texture error msg */
 # define ERR_TEXTURE_LOAD_DOOR "Error\nFail loading door texture\n"
+# define ERR_WALL_SLICE_TEXTURE "Error\nNull texture for wall slice\n"
+# define ERR_GET_TEXTURE_DATA "Error\nFailed to get texture data\n"
 /* player out of bound error msg */
 # define ERR_OUT_OF_BOUND "Error\nYou exceeded map limts. No wall collision implemented\n"
 

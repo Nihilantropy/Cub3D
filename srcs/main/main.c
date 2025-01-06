@@ -12,6 +12,7 @@ int	main(int argc, char **argv)
 {
 	t_game	game;
 
+
 	if (check_valid_arg(argc, argv) == false)
 	{
 		ft_putstr_fd(ERR_ARG, 2);

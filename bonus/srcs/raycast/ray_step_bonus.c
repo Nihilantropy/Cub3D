@@ -57,7 +57,7 @@ int	step_in_y_direction(t_camera *camera)
  * @param pos Current position in world space
  * @param side Wall side hit (0 for X, 1 for Y)
  */
-void	calculate_wall_dist(t_camera *camera, t_pos *pos, int side)
+double	calculate_wall_dist(t_camera *camera, t_pos *pos, int side)
 {
 	double	original_dist;
 
@@ -67,5 +67,5 @@ void	calculate_wall_dist(t_camera *camera, t_pos *pos, int side)
 	else
 		original_dist = (camera->map_y - pos->y + 
 			(1 - camera->step_y) / 2) / camera->ray_dir_y;
-	camera->perp_wall_dist = fabs(original_dist);
+	return (fabs(original_dist));
 }

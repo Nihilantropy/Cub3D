@@ -8,7 +8,8 @@
 # define BLACK 0x000000
 # define GRAY 0xAAAAAA
 
-# define TRANSPARENT 0x00000000
+/* mlx handle None param in xpm file as fully opaque black */
+# define TRANSPARENT 0xFF000000
 
 /* Minimap colors with alpha channel (ARGB format) */
 # define MINIMAP_WALL_COLOR     0xFF666666

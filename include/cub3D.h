@@ -145,7 +145,6 @@ int		step_in_y_direction(t_camera *camera);
 void	calculate_wall_dist(t_camera *camera, t_pos *pos, int side);
 /* ray dda */
 int		perform_dda(t_game *game, t_camera *camera);
-int		check_wall_hit(t_game *game, t_camera *camera);
 /* ray render */
 int		calculate_wall_height(t_game *game, double perp_wall_dist);
 

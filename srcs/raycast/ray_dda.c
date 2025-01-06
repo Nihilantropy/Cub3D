@@ -37,25 +37,6 @@ int	perform_dda(t_game *game, t_camera *camera)
 }
 
 /**
- * @brief Checks if ray has hit a wall at current position.
- *
- * Verifies map boundaries and wall collision at current map coordinates.
- * Returns true for both out-of-bounds and wall hits.
- *
- * @param game Game structure containing map data
- * @param camera Camera structure with current map position
- * @return 1 if wall hit or out of bounds, 0 otherwise
- */
-int	check_wall_hit(t_game *game, t_camera *camera)
-{
-	if (camera->map_y < 0 || camera->map_x < 0
-		|| camera->map_y >= game->map.height
-		|| camera->map_x >= game->map.width)
-		return (1);
-	return (game->map.matrix[camera->map_y][camera->map_x] == WALL);
-}
-
-/**
  * @brief Performs a single step in DDA algorithm.
  *
  * Updates ray position and side distances by stepping in either X or Y

@@ -4,6 +4,8 @@ static void	create_static_background(t_render_state *state,
 								t_minimap *minimap);
 static void create_static_walls(t_game *game, t_render_state *state, 
 							t_minimap *minimap);
+static void	draw_wall_tile(t_render_state *state, t_minimap *minimap,
+						t_pos *tile_pos, int line_length);
 static void	draw_minimap_borders(t_render_state *state, t_minimap *minimap);
 
 /**
@@ -65,22 +67,19 @@ static void	create_static_background(t_render_state *state,
 }
 
 /**
-* @brief Creates the walls layer of static texture
+* @brief Creates static wall textures for the minimap
 *
 * @param game Game structure containing map data
 * @param state Render state for pixel manipulation
 * @param minimap Minimap structure
 */
-static void create_static_walls(t_game *game, t_render_state *state, 
+static void	create_static_walls(t_game *game, t_render_state *state,
 							t_minimap *minimap)
 {
-	int	map_x;
-	int	map_y;
-	int	pixel_x;
-	int	pixel_y;
-	int	*img;
+	int		map_x;
+	int		map_y;
+	t_pos	tile_pos;
 
-	img = state->img_data;
 	map_y = 0;
 	while (map_y < game->map.height)
 	{
@@ -89,17 +88,9 @@ static void create_static_walls(t_game *game, t_render_state *state,
 		{
 			if (game->map.matrix[map_y][map_x] == WALL)
 			{
-				pixel_y = map_y * minimap->tile_size + MINIMAP_BORDER_SIZE;
-				while (pixel_y < (map_y + 1) * minimap->tile_size + MINIMAP_BORDER_SIZE)
-				{
-					pixel_x = map_x * minimap->tile_size + MINIMAP_BORDER_SIZE;
-					while (pixel_x < (map_x + 1) * minimap->tile_size + MINIMAP_BORDER_SIZE)
-					{
-						img[pixel_y * (state->line_length / 4) + pixel_x] = MINIMAP_WALL_COLOR;
-						pixel_x++;
-					}
-					pixel_y++;
-				}
+				tile_pos.x = map_x;
+				tile_pos.y = map_y;
+				draw_wall_tile(state, minimap, &tile_pos, state->line_length);
 			}
 			map_x++;
 		}
@@ -107,6 +98,37 @@ static void create_static_walls(t_game *game, t_render_state *state,
 	}
 }
 
+/**
+* @brief Draws a single wall tile on the minimap
+*
+* @param state Render state containing image data
+* @param minimap Minimap structure with dimensions
+* @param tile_pos Structure containing map x,y coordinates
+* @param line_length Length of image line in pixels
+*/
+static void	draw_wall_tile(t_render_state *state, t_minimap *minimap,
+						t_pos *tile_pos, int line_length)
+{
+	int	pixel_x;
+	int	pixel_y;
+	int	start_y;
+	int	*img;
+
+	img = state->img_data;
+	start_y = tile_pos->y * minimap->tile_size + MINIMAP_BORDER_SIZE;
+	pixel_y = start_y;
+	while (pixel_y < (tile_pos->y + 1) * minimap->tile_size + MINIMAP_BORDER_SIZE)
+	{
+		pixel_x = tile_pos->x * minimap->tile_size + MINIMAP_BORDER_SIZE;
+		while (pixel_x < (tile_pos->x + 1) * minimap->tile_size + 
+				MINIMAP_BORDER_SIZE)
+		{
+			img[pixel_y * (line_length / 4) + pixel_x] = MINIMAP_WALL_COLOR;
+			pixel_x++;
+		}
+		pixel_y++;
+	}
+}
 
 /**
  * @brief Draws the border frame around the minimap

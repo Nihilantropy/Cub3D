@@ -10,27 +10,27 @@ static void	set_door_close(t_door *door);
 */
 void	update_door_animation(t_game *game, t_door *door)
 {
-    if (!door->active)
-        return;
-    door->anim_counter++;
-    if (door->anim_counter >= DOOR_ANIM_SPEED)
-    {
-        door->anim_counter = 0;
-        if (door->state == door_opening)
-        {
-            if (door->frame < DOOR_FRAMES - 1)
-                door->frame++;
-            else
+	if (!door->active)
+		return;
+	door->anim_counter++;
+	if (door->anim_counter >= DOOR_ANIM_SPEED)
+	{
+		door->anim_counter = 0;
+		if (door->state == door_opening)
+		{
+			if (door->frame < DOOR_FRAMES - 1)
+				door->frame++;
+			else
 				set_door_open(game, door);
-        }
-        else if (door->state == door_closing)
-        {
-            if (door->frame > 0)
-                door->frame--;
-            else
+		}
+		else if (door->state == door_closing)
+		{
+			if (door->frame > 0)
+				door->frame--;
+			else
 				set_door_close(door);
-        }
-    }
+		}
+	}
 }
 
 static void	set_door_open(t_game *game, t_door *door)
