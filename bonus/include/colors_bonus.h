@@ -8,6 +8,8 @@
 # define BLACK 0x000000
 # define GRAY 0xAAAAAA
 
+# define TRANSPARENT 0x00000000
+
 /* Minimap colors with alpha channel (ARGB format) */
 # define MINIMAP_WALL_COLOR     0xFF666666
 # define MINIMAP_DOOR_COLOR     0x00AF0000

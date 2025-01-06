@@ -16,14 +16,14 @@ void	get_minimap_dimension(t_game *game)
 	minimap = &game->minimap;
 	minimap->width = (int)(game->display.width * MINIMAP_SCALE);
 	minimap->height = (int)(game->display.height * MINIMAP_SCALE);
-	minimap->pos_x = game->display.width - minimap->width - MINIMAP_PADDING;
-	minimap->pos_x = game->display.width - minimap->width - MINIMAP_PADDING;
 	minimap->tile_size = fmin(
 		(minimap->width - 2 * MINIMAP_BORDER_SIZE) / game->map.width,
-		(minimap->height -2 * MINIMAP_BORDER_SIZE) / game->map.height
+		(minimap->height - 2 * MINIMAP_BORDER_SIZE) / game->map.height
 	);
 	minimap->width = game->map.width * minimap->tile_size + 2 * MINIMAP_BORDER_SIZE;
 	minimap->height = game->map.height * minimap->tile_size + 2 * MINIMAP_BORDER_SIZE;
 	minimap->pos_x = game->display.width - minimap->width - MINIMAP_PADDING;
 	minimap->pos_y = game->display.height - minimap->height - MINIMAP_PADDING;
+	if (!init_static_minimap_texture(game))
+		ft_exit_error("Failed to create minimap static texture\n");
 }

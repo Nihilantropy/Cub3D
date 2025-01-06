@@ -1,157 +1,110 @@
 #include "../../include/cub3D_bonus.h"
 
-static void	draw_fov_line(t_game *game, t_render_state *state, 
-				t_minimap *minimap, double angle);
-
 /**
- * @brief Draws the walls on the minimap
- *
- * @param game Game structure containing map data
- * @param state Render state for drawing
- * @param minimap Minimap structure with dimensions
- */
-void	draw_minimap_walls(t_game *game, t_render_state *state, t_minimap *minimap)
+* @brief Draws player position on minimap
+*
+* @param game Game structure containing player and minimap data
+*/
+void    draw_minimap_player(t_game *game, t_minimap *minimap)
 {
-	int	map_x;
-	int	map_y;
-	int	pixel_x;
-	int	pixel_y;
-	int	*img;
+	int	center_x;
+	int	center_y;
+	int	x;
+	int	y;
+	int	radius;
 
-	img = state->img_data;
-	map_y = 0;
-	while (map_y < game->map.height)
+	center_x = minimap->pos_x + 
+		(int)(game->player.pos.x * minimap->tile_size) + MINIMAP_BORDER_SIZE;
+	center_y = minimap->pos_y + 
+		(int)(game->player.pos.y * minimap->tile_size) + MINIMAP_BORDER_SIZE;
+	radius = PLAYER_DOT_SIZE / 2;
+	y = -radius;
+	while (y <= radius)
 	{
-		map_x = 0;
-		while (map_x < game->map.width)
+		x = -radius;
+		while (x <= radius)
 		{
-			if (game->map.matrix[map_y][map_x] == WALL)
-			{
-				pixel_y = map_y * minimap->tile_size + MINIMAP_BORDER_SIZE;
-				while (pixel_y < (map_y + 1) * minimap->tile_size + MINIMAP_BORDER_SIZE)
-				{
-					pixel_x = map_x * minimap->tile_size + MINIMAP_BORDER_SIZE;
-					while (pixel_x < (map_x + 1) * minimap->tile_size + MINIMAP_BORDER_SIZE)
-					{
-						img[pixel_y * (state->line_length / 4) + pixel_x] = MINIMAP_WALL_COLOR;
-						pixel_x++;
-					}
-					pixel_y++;
-				}
-			}
-			map_x++;
+			if (x * x + y * y <= radius * radius)
+				mlx_pixel_put(game->mlx_ptr, game->win_ptr, 
+					center_x + x, center_y + y, MINIMAP_PLAYER_COLOR);
+			x++;
 		}
-		map_y++;
+		y++;
 	}
 }
 
 /**
- * @brief Draws the player dot on the minimap
- *
- * @param game Game structure containing player position
- * @param state Render state for drawing
- * @param minimap Minimap structure with dimensions
- */
-void	draw_minimap_player(t_game *game, t_render_state *state, t_minimap *minimap)
+* @brief Draws FOV lines on minimap
+*
+* @param game Game structure containing player and camera data
+*/
+void    draw_player_fov(t_game *game, t_minimap *minimap)
 {
-	int	pixel_x;
-	int	pixel_y;
-	int	start_x;
-	int	start_y;
-	int	*img;
+	int     start_x;
+	int     start_y;
+	double  angle;
+	int     i;
+	double  dx, dy;
 
-	img = state->img_data;
-	start_x = (int)(game->player.pos.x * minimap->tile_size) + MINIMAP_BORDER_SIZE;
-	start_y = (int)(game->player.pos.y * minimap->tile_size) + MINIMAP_BORDER_SIZE;
-	pixel_y = start_y - PLAYER_DOT_SIZE / 2;
-	while (pixel_y < start_y + PLAYER_DOT_SIZE / 2)
-	{
-		pixel_x = start_x - PLAYER_DOT_SIZE / 2;
-		while (pixel_x < start_x + PLAYER_DOT_SIZE / 2)
-		{
-			if (pixel_x >= 0 && pixel_x < minimap->width &&
-				pixel_y >= 0 && pixel_y < minimap->height)
-				img[pixel_y * (state->line_length / 4) + pixel_x] = MINIMAP_PLAYER_COLOR;
-			pixel_x++;
-		}
-		pixel_y++;
-	}
-}
+	start_x = minimap->pos_x + 
+		(int)(game->player.pos.x * minimap->tile_size) + MINIMAP_BORDER_SIZE;
+	start_y = minimap->pos_y + 
+		(int)(game->player.pos.y * minimap->tile_size) + MINIMAP_BORDER_SIZE;
 
-/**
- * @brief Draws the player's field of view on the minimap
- *
- * @param game Game structure containing player direction
- * @param state Render state for drawing
- * @param minimap Minimap structure with dimensions
- */
-void	draw_player_fov(t_game *game, t_render_state *state, t_minimap *minimap)
-{
-	double	player_angle;
-	double	fov_start;
-	double	fov_end;
-
-	player_angle = atan2(game->player.camera.dir_y, game->player.camera.dir_x);
-	fov_start = player_angle - (FOV_ANGLE * M_PI / 360.0);
-	fov_end = player_angle + (FOV_ANGLE * M_PI / 360.0);
-	draw_fov_line(game, state, minimap, player_angle);
-	draw_fov_line(game, state, minimap, fov_start);
-	draw_fov_line(game, state, minimap, fov_end);
-}
-
-void	draw_minimap_door(t_game *game, t_render_state *state, t_minimap *minimap)
-{
-	int	map_x;
-	int	map_y;
-	int	pixel_x;
-	int	pixel_y;
-	int	*img;
-
-	img = state->img_data;
-	map_y = 0;
-	while (map_y < game->map.height)
-	{
-		map_x = 0;
-		while (map_x < game->map.width)
-		{
-			if (game->map.matrix[map_y][map_x] == DOOR)
-			{
-				pixel_y = map_y * minimap->tile_size + MINIMAP_BORDER_SIZE;
-				while (pixel_y < (map_y + 1) * minimap->tile_size + MINIMAP_BORDER_SIZE)
-				{
-					pixel_x = map_x * minimap->tile_size + MINIMAP_BORDER_SIZE;
-					while (pixel_x < (map_x + 1) * minimap->tile_size + MINIMAP_BORDER_SIZE)
-					{
-						img[pixel_y * (state->line_length / 4) + pixel_x] = MINIMAP_DOOR_COLOR;
-						pixel_x++;
-					}
-					pixel_y++;
-				}
-			}
-			map_x++;
-		}
-		map_y++;
-	}
-}
-
-static void	draw_fov_line(t_game *game, t_render_state *state, 
-				t_minimap *minimap, double angle)
-{
-	int		i;
-	int		start_x;
-	int		start_y;
-	int		x;
-	int		y;
-
-	start_x = (int)(game->player.pos.x * minimap->tile_size) + MINIMAP_BORDER_SIZE;
-	start_y = (int)(game->player.pos.y * minimap->tile_size) + MINIMAP_BORDER_SIZE;
+	angle = atan2(game->player.camera.dir_y, game->player.camera.dir_x);
 	i = 0;
 	while (i < FOV_LINE_LENGTH)
 	{
-		x = start_x + (int)(cos(angle) * i);
-		y = start_y + (int)(sin(angle) * i);
-		if (x >= 0 && x < minimap->width && y >= 0 && y < minimap->height)
-			state->img_data[y * (state->line_length / 4) + x] = MINIMAP_FOV_COLOR;
+		dx = cos(angle) * i;
+		dy = sin(angle) * i;
+		mlx_pixel_put(game->mlx_ptr, game->win_ptr,
+			start_x + (int)dx, start_y + (int)dy, MINIMAP_FOV_COLOR);
+		dx = cos(angle - FOV_ANGLE * M_PI / 360.0) * i;
+		dy = sin(angle - FOV_ANGLE * M_PI / 360.0) * i;
+		mlx_pixel_put(game->mlx_ptr, game->win_ptr,
+			start_x + (int)dx, start_y + (int)dy, MINIMAP_FOV_COLOR);
+		dx = cos(angle + FOV_ANGLE * M_PI / 360.0) * i;
+		dy = sin(angle + FOV_ANGLE * M_PI / 360.0) * i;
+		mlx_pixel_put(game->mlx_ptr, game->win_ptr,
+			start_x + (int)dx, start_y + (int)dy, MINIMAP_FOV_COLOR);
+		i++;
+	}
+}
+
+/**
+* @brief Draws doors on minimap
+*
+* @param game Game structure containing door system data
+*/
+void    draw_minimap_door(t_game *game, t_minimap *minimap)
+{
+	int	door_x;
+	int	door_y;
+	int	x;
+	int	y;
+	int	i;
+
+	i = 0;
+	while (i < game->door_system.door_counter)
+	{
+		door_x = game->minimap.pos_x + 
+			(int)(game->door_system.door[i].pos.x * minimap->tile_size) + 
+			MINIMAP_BORDER_SIZE;
+		door_y = game->minimap.pos_y + 
+			(int)(game->door_system.door[i].pos.y * minimap->tile_size) + 
+			MINIMAP_BORDER_SIZE;
+		y = 0;
+		while (y < minimap->tile_size)
+		{
+			x = 0;
+			while (x < game->minimap.tile_size)
+			{
+				mlx_pixel_put(game->mlx_ptr, game->win_ptr,
+					door_x + x, door_y + y, MINIMAP_DOOR_COLOR);
+				x++;
+			}
+			y++;
+		}
 		i++;
 	}
 }

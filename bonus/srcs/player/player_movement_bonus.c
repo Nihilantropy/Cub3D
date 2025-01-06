@@ -13,14 +13,9 @@ static void	calculate_move_step(t_player *p, double *step_x, double *step_y);
  */
 void	set_player_movement(t_game *game, int moving)
 {
-	if (moving == M_STILL)
-	{
-		game->player.moving.forward = false;
-		game->player.moving.backward = false;
-		return;
-	}
-	game->player.moving.forward = (moving == M_FORWARD);
-	game->player.moving.backward = (moving == M_BACKWARD);
+	game->player.moving = moving;
+	if (moving == m_still)
+		return ;
 	update_player_pos(game);
 }
 
@@ -32,23 +27,18 @@ void	set_player_movement(t_game *game, int moving)
 * @param step_x Pointer to store calculated x step.
 * @param step_y Pointer to store calculated y step.
 */
-static void	calculate_move_step(t_player *p, double *step_x, double *step_y)
+static void	calculate_move_step(t_player *player, double *step_x, double *step_y)
 {
-	if (p->moving.forward)
-	{
-		*step_x = p->camera.dir_x * p->speed;
-		*step_y = p->camera.dir_y * p->speed;
-	}
-	else if (p->moving.backward)
-	{
-		*step_x = -p->camera.dir_x * p->speed;
-		*step_y = -p->camera.dir_y * p->speed;
-	}
+	if (player->moving == m_forward)
+		move_step_forward(player, step_x, step_y);
+	else if (player->moving == m_backward)
+		move_step_backward(player, step_x, step_y);
+	else if (player->moving == m_left)
+		move_step_left(player, step_x, step_y);
+	else if (player->moving == m_right)
+		move_step_right(player, step_x, step_y);
 	else
-	{
-		*step_x = 0;
-		*step_y = 0;
-	}
+		move_step_still(step_x, step_y);
 }
 
 /**
@@ -65,9 +55,9 @@ void	set_player_rot_angle(t_game *game, int rotating)
 {
 	double	rot_speed;
 
-	if (rotating == R_STILL)
-		return;
-	if (rotating == R_LEFT)
+	if (rotating == r_still)
+		return ;
+	if (rotating == r_left)
 		rot_speed = -game->player.rot_speed;
 	else
 		rot_speed = game->player.rot_speed;

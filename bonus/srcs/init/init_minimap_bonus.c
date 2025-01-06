@@ -9,4 +9,6 @@ void	init_minimap(t_game *game)
 	game->minimap.tile_size = 0;
 	game->minimap.player_x = 0;
 	game->minimap.player_y = 0;
+	game->minimap.static_texture = NULL;
+	game->minimap.texture_data = NULL;
 }

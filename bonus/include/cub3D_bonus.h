@@ -134,7 +134,13 @@ bool	load_door_texture(t_game *game);
 /*** minimap ***/
 /* minimap */
 void	get_minimap_dimension(t_game *game);
-
+/* minimap static texture */
+bool	init_static_minimap_texture(t_game *game);
+/* minimap static texture utils */
+void	draw_horizontal_border(t_render_state *state, t_minimap *minimap,
+			int y);
+void	draw_vertical_border(t_render_state *state, t_minimap *minimap,
+			int x);
 /*** doors ***/
 /* init doors */
 void	init_doors(t_game *game);
@@ -154,6 +160,12 @@ void	handle_key_events(t_game *game);
 /* player movement */
 void	set_player_movement(t_game *game, int moving);
 void	set_player_rot_angle(t_game *game, int rotating);
+/* player movement utils */
+void	move_step_forward(t_player *player, double *step_x, double *step_y);
+void	move_step_backward(t_player *player, double *step_x, double *step_y);
+void	move_step_left(t_player *player, double *step_x, double *step_y);
+void	move_step_right(t_player *player, double *step_x, double *step_y);
+void	move_step_still(double *step_x, double *step_y);
 /* player collision */
 bool try_slide_movement(t_game *game, t_pos *new_pos, 
 							double step_x, double step_y);
@@ -199,10 +211,9 @@ void	render_floor_ceiling(t_game *game, t_render_state *state);
 /* render minimap */
 void	render_minimap(t_game *game);
 /* render minimap utils */
-void	draw_minimap_walls(t_game *game, t_render_state *state, t_minimap *minimap);
-void	draw_minimap_player(t_game *game, t_render_state *state, t_minimap *minimap);
-void	draw_player_fov(t_game *game, t_render_state *state, t_minimap *minimap);
-void	draw_minimap_door(t_game *game, t_render_state *state, t_minimap *minimap);
+void	draw_minimap_player(t_game *game, t_minimap *minimap);
+void	draw_player_fov(t_game *game, t_minimap *minimap);
+void	draw_minimap_door(t_game *game, t_minimap *minimap);
 /* render door */
 void	*select_door_texture(t_game *game, t_door *door);
 bool	is_door_collision(t_game *game, double x, double y);
@@ -224,6 +235,8 @@ void	free_info_list(t_info **info);
 void	free_textures(t_game *game);
 /* door utils */
 void	free_door_system(t_game *game);
+/* minimap utils */
+void	destroy_minimap_texture(t_game *game);
 
 
 #endif

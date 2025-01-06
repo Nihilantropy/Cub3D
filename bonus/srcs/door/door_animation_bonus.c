@@ -16,14 +16,14 @@ void	update_door_animation(t_game *game, t_door *door)
     if (door->anim_counter >= DOOR_ANIM_SPEED)
     {
         door->anim_counter = 0;
-        if (door->state == DOOR_OPENING)
+        if (door->state == door_opening)
         {
             if (door->frame < DOOR_FRAMES - 1)
                 door->frame++;
             else
 				set_door_open(game, door);
         }
-        else if (door->state == DOOR_CLOSING)
+        else if (door->state == door_closing)
         {
             if (door->frame > 0)
                 door->frame--;
@@ -35,13 +35,13 @@ void	update_door_animation(t_game *game, t_door *door)
 
 static void	set_door_open(t_game *game, t_door *door)
 {
-	door->state = DOOR_OPEN;
+	door->state = door_open;
 	update_map_matrix(game, (int)door->pos.y, (int)door->pos.x, true);
 	door->active = false;
 }
 
 static void	set_door_close(t_door *door)
 {
-	door->state = DOOR_CLOSED;
+	door->state = door_closed;
 	door->active = false;
 }

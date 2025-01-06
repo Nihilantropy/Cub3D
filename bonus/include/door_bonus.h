@@ -15,10 +15,10 @@
 
 typedef enum e_door_state
 {
-	DOOR_CLOSED = 0,
-	DOOR_OPENING,
-	DOOR_OPEN,
-	DOOR_CLOSING
+	door_closed = 0,
+	door_opening,
+	door_open,
+	door_closing
 }	t_door_state;
 
 typedef struct s_door

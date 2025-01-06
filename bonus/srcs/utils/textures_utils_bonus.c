@@ -14,4 +14,5 @@ void	free_textures(t_game *game)
 		mlx_destroy_image(game->mlx_ptr, game->textures.floor);
 	if (game->textures.ceiling)
 		mlx_destroy_image(game->mlx_ptr, game->textures.ceiling);
+	destroy_minimap_texture(game);
 }

@@ -19,7 +19,7 @@ void	handle_door_interaction(t_game *game)
 	if (closest_door->active || player_on_door_pos(&game->player, closest_door))
 		return ;
 	toggle_door_state(closest_door);
-	if (closest_door->state == DOOR_CLOSING)
+	if (closest_door->state == door_closing)
 		update_map_matrix(game, (int)closest_door->pos.y, (int)closest_door->pos.x, false);
 	closest_door->active = true;
 	game->changed = true;
@@ -33,10 +33,10 @@ void	handle_door_interaction(t_game *game)
 static void	toggle_door_state(t_door *door)
 {
 	door->anim_counter = 0;
-	if (door->state == DOOR_CLOSED)
-		door->state = DOOR_OPENING;
-	else if (door->state == DOOR_OPEN)
-		door->state = DOOR_CLOSING;
+	if (door->state == door_closed)
+		door->state = door_opening;
+	else if (door->state == door_open)
+		door->state = door_closing;
 }
 
 /**

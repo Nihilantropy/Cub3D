@@ -14,7 +14,7 @@ void	init_doors(t_game *game)
 		game->door_system.door[i].pos.y = 0;
 		game->door_system.door[i].frame = 0;
 		game->door_system.door[i].anim_counter = 0;
-		game->door_system.door[i].state = DOOR_CLOSED;
+		game->door_system.door[i].state = door_closed;
 		game->door_system.door[i].active = false;
 		game->door_system.door[i].open_percentage = 0.0;
 		i++;

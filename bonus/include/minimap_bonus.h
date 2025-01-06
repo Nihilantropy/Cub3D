@@ -20,6 +20,8 @@ typedef struct s_minimap
 	int		tile_size;
 	int		player_x;
 	int		player_y;
+	void	*static_texture;
+	int		*texture_data;
 }	t_minimap;
 
 #endif

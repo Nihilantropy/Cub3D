@@ -37,13 +37,13 @@ int	perform_dda(t_game *game, t_camera *camera)
 		else if (game->map.matrix[camera->map_y][camera->map_x] == DOOR)
 		{
 			door = find_door_at_position(game, camera->map_x, camera->map_y);
-			if (door && (door->state == DOOR_OPENING || door->state == DOOR_CLOSING))
+			if (door && (door->state == door_opening || door->state == door_closing))
 			{
 				camera->door_hit = true;
 				camera->door_frame = door->frame;
 				// camera->perp_door_dist = camera->perp_wall_dist;
 			}
-			else if (door->state == DOOR_CLOSED)
+			else if (door->state == door_closed)
 			{
 				hit = 1;
 				camera->hit_type = DOOR;

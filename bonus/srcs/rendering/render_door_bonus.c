@@ -32,7 +32,7 @@ bool	is_door_collision(t_game *game, double x, double y)
 	door = find_door_at_position(game, map_x, map_y);
 	if (!door)
 		return (false);
-	if (door->state == DOOR_OPEN)
+	if (door->state == door_open)
 		return (false);
 	return (true);
 }

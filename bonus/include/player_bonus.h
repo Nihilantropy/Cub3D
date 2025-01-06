@@ -4,20 +4,14 @@
 # include <stdbool.h>
 
 /* Movement and rotation constants */
-# define M_FORWARD 1
-# define M_BACKWARD -1
-# define M_STILL 0
-# define R_LEFT -1
-# define R_RIGHT 1
-# define R_STILL 0
 # define P_SPEED 0.2
 # define R_SPEED 0.1
 
 /* player hitbox radius for wall collision */
-# define PLAYER_RADIUS 0.2
+# define PLAYER_RADIUS 0.1
 
 /* Door interaction constants */
-# define DOOR_INTERACT_DIST 4.0
+# define DOOR_INTERACT_DIST 3.0
 
 #ifndef M_PI
 # define M_PI 3.14159265358979323846
@@ -67,11 +61,21 @@ typedef struct s_pos
 /**
  * @brief Movement state structure tracking all possible movement directions
  */
-typedef struct s_moving
+typedef enum e_moving
 {
-	bool	forward;
-	bool	backward;
+	m_forward,
+	m_backward,
+	m_left,
+	m_right,
+	m_still
 }	t_moving;
+
+typedef enum e_rotating
+{
+	r_left,
+	r_right,
+	r_still
+}	t_rotating;
 
 /**
  * @brief Player structure containing all player-related data including
@@ -81,6 +85,7 @@ typedef struct s_player
 {
 	t_pos		pos;
 	t_moving	moving;
+	t_rotating	rotating;
 	t_camera	camera;
 	double		speed;
 	double		rot_speed;

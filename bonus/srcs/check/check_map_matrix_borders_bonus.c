@@ -21,8 +21,8 @@ void	check_map_matrix_borders(t_game *game, const char **matrix)
 		x = 0;
 		while (matrix[y][x])
 		{
-			if (matrix[y][x] == FLOOR ||
-				is_player_char(matrix[y][x]))
+			if (matrix[y][x] == FLOOR || matrix[y][x] == DOOR
+				|| is_player_char(matrix[y][x]))
 				check_borders(game, matrix, y, x);
 			if (game->map.check.map_open == true)
 				return ;
@@ -58,6 +58,5 @@ static bool	is_valid_tile(char c)
 			c == SOUTH || 
 			c == EAST || 
 			c == WEST ||
-			c == MAP_FILLER ||
 			c == DOOR);
 }

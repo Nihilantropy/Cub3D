@@ -11,8 +11,8 @@ void init_player(t_game *game)
 	game->player.pos.y_screen = 0;
 	game->player.speed = 0.0;
 	game->player.rot_speed = 0.0;
-	game->player.moving.forward = false;
-	game->player.moving.backward = false;
+	game->player.moving = m_still;
+	game->player.rotating = r_still;
 	init_camera(game);
 }
 
