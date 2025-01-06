@@ -13,16 +13,36 @@ static void	update_direction(t_camera *cam, double rot_speed);
  */
 void	set_player_movement(t_game *game, int moving)
 {
-	if (moving == M_STILL)
-	{
-		game->player.moving.forward = false;
-		game->player.moving.backward = false;
-		return;
-	}
-	game->player.moving.forward = (moving == M_FORWARD);
-	game->player.moving.backward = (moving == M_BACKWARD);
+	game->player.moving = moving;
+	if (moving == m_still)
+		return ;
 	update_player_pos(game);
 }
+
+/**
+ * @brief Updates player's rotation angle based on rotation state.
+ *
+ * Modifies the player's camera direction by applying rotation speed
+ * in the specified direction. No rotation occurs if state is R_STILL.
+ * Updates game state to reflect changes in player orientation.
+ *
+ * @param game Pointer to main game structure containing player data
+ * @param rotating Rotation state (R_STILL, R_LEFT, or R_RIGHT)
+ */
+void	set_player_rot_angle(t_game *game, int rotating)
+{
+	double	rot_speed;
+
+	if (rotating == r_still)
+		return ;
+	if (rotating == r_left)
+		rot_speed = -game->player.rot_speed;
+	else
+		rot_speed = game->player.rot_speed;
+	update_direction(&game->player.camera, rot_speed);
+	game->changed = true;
+}
+
 /**
  * @brief Updates the player's position in the game world.
  *
@@ -66,47 +86,18 @@ static void	update_player_pos(t_game *game)
 * @param step_x Pointer to store calculated x step.
 * @param step_y Pointer to store calculated y step.
 */
-static void	calculate_move_step(t_player *p, double *step_x, double *step_y)
+static void	calculate_move_step(t_player *player, double *step_x, double *step_y)
 {
-	if (p->moving.forward)
-	{
-		*step_x = p->camera.dir_x * p->speed;
-		*step_y = p->camera.dir_y * p->speed;
-	}
-	else if (p->moving.backward)
-	{
-		*step_x = -p->camera.dir_x * p->speed;
-		*step_y = -p->camera.dir_y * p->speed;
-	}
+	if (player->moving == m_forward)
+		move_step_forward(player, step_x, step_y);
+	else if (player->moving == m_backward)
+		move_step_backward(player, step_x, step_y);
+	else if (player->moving == m_left)
+		move_step_left(player, step_x, step_y);
+	else if (player->moving == m_right)
+		move_step_right(player, step_x, step_y);
 	else
-	{
-		*step_x = 0;
-		*step_y = 0;
-	}
-}
-
-/**
- * @brief Updates player's rotation angle based on rotation state.
- *
- * Modifies the player's camera direction by applying rotation speed
- * in the specified direction. No rotation occurs if state is R_STILL.
- * Updates game state to reflect changes in player orientation.
- *
- * @param game Pointer to main game structure containing player data
- * @param rotating Rotation state (R_STILL, R_LEFT, or R_RIGHT)
- */
-void	set_player_rot_angle(t_game *game, int rotating)
-{
-	double	rot_speed;
-
-	if (rotating == R_STILL)
-		return;
-	if (rotating == R_LEFT)
-		rot_speed = -game->player.rot_speed;
-	else
-		rot_speed = game->player.rot_speed;
-	update_direction(&game->player.camera, rot_speed);
-	game->changed = true;
+		move_step_still(step_x, step_y);
 }
 
 /**

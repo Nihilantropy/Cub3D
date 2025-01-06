@@ -43,6 +43,7 @@ SRCS		=	$(MAIN_DIR)/main.c \
 				$(DISPLAY_DIR)/load_floor_and_ceiling_utils.c \
 				$(EVENTS_DIR)/key_events.c \
 				$(PLAYER_DIR)/player_movement.c \
+				$(PLAYER_DIR)/player_movement_utils.c \
 				$(PLAYER_DIR)/player_collision_utils.c \
 				$(RAYCAST_DIR)/raycast.c \
 				$(RAYCAST_DIR)/ray_step.c \

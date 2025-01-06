@@ -20,28 +20,6 @@ void	set_player_movement(t_game *game, int moving)
 }
 
 /**
-* @brief Calculates movement step based on player direction.
-* 
-* Computes x and y movement steps using player's direction and speed.
-* @param p Player data containing movement state and camera info.
-* @param step_x Pointer to store calculated x step.
-* @param step_y Pointer to store calculated y step.
-*/
-static void	calculate_move_step(t_player *player, double *step_x, double *step_y)
-{
-	if (player->moving == m_forward)
-		move_step_forward(player, step_x, step_y);
-	else if (player->moving == m_backward)
-		move_step_backward(player, step_x, step_y);
-	else if (player->moving == m_left)
-		move_step_left(player, step_x, step_y);
-	else if (player->moving == m_right)
-		move_step_right(player, step_x, step_y);
-	else
-		move_step_still(step_x, step_y);
-}
-
-/**
  * @brief Updates player's rotation angle based on rotation state.
  *
  * Modifies the player's camera direction by applying rotation speed
@@ -94,6 +72,28 @@ static void	update_player_pos(t_game *game)
 		return ;
 	game->player.pos = new_pos;
 	game->changed = true;
+}
+
+/**
+* @brief Calculates movement step based on player direction.
+* 
+* Computes x and y movement steps using player's direction and speed.
+* @param p Player data containing movement state and camera info.
+* @param step_x Pointer to store calculated x step.
+* @param step_y Pointer to store calculated y step.
+*/
+static void	calculate_move_step(t_player *player, double *step_x, double *step_y)
+{
+	if (player->moving == m_forward)
+		move_step_forward(player, step_x, step_y);
+	else if (player->moving == m_backward)
+		move_step_backward(player, step_x, step_y);
+	else if (player->moving == m_left)
+		move_step_left(player, step_x, step_y);
+	else if (player->moving == m_right)
+		move_step_right(player, step_x, step_y);
+	else
+		move_step_still(step_x, step_y);
 }
 
 /**

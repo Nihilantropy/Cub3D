@@ -25,13 +25,17 @@ void	handle_key_events(t_game *game)
 static int	key_press(int keycode, t_game *game)
 {
 	if (keycode == KEY_W || keycode == KEY_FORWARD)
-		set_player_movement(game, M_FORWARD);
+		set_player_movement(game, m_forward);
 	else if (keycode == KEY_S || keycode == KEY_BACKWARD)
-		set_player_movement(game, M_BACKWARD);
-	if (keycode == KEY_A || keycode == KEY_LEFT)
-		set_player_rot_angle(game, R_LEFT);
-	else if (keycode == KEY_D || keycode == KEY_RIGHT)
-		set_player_rot_angle(game, R_RIGHT);
+		set_player_movement(game, m_backward);
+	if (keycode == KEY_A)
+		set_player_movement(game, m_left);
+	else if (keycode == KEY_D)
+		set_player_movement(game, m_right);
+	else if (keycode == KEY_LEFT)
+		set_player_rot_angle(game, r_left);
+	else if (keycode == KEY_RIGHT)
+		set_player_rot_angle(game, r_right);
 	return (0);
 }
 
@@ -46,13 +50,11 @@ static int	key_release(int keycode, t_game *game)
 {
 	if (keycode == KEY_ESC)
 		close_game(game);
-	if (keycode == KEY_W || keycode == KEY_FORWARD)
-		set_player_movement(game, M_STILL);
-	else if (keycode == KEY_S || keycode == KEY_BACKWARD)
-		set_player_movement(game, M_STILL);
-	if (keycode == KEY_A || keycode == KEY_LEFT)
-		set_player_rot_angle(game, R_STILL);
-	else if (keycode == KEY_D || keycode == KEY_RIGHT)
-		set_player_rot_angle(game, R_STILL);
+	if (keycode == KEY_W || keycode == KEY_FORWARD
+		|| keycode == KEY_S || keycode == KEY_BACKWARD
+		|| keycode == KEY_A || keycode == KEY_D)
+		set_player_movement(game, m_still);
+	if (keycode == KEY_LEFT || keycode == KEY_RIGHT)
+		set_player_rot_angle(game, r_still);
 	return (0);
 }

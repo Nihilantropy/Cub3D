@@ -124,6 +124,12 @@ void	handle_key_events(t_game *game);
 /* player movement */
 void	set_player_movement(t_game *game, int moving);
 void	set_player_rot_angle(t_game *game, int rotating);
+/* player movement utils */
+void	move_step_forward(t_player *player, double *step_x, double *step_y);
+void	move_step_backward(t_player *player, double *step_x, double *step_y);
+void	move_step_left(t_player *player, double *step_x, double *step_y);
+void	move_step_right(t_player *player, double *step_x, double *step_y);
+void	move_step_still(double *step_x, double *step_y);
 /* player collision utils */
 bool	is_valid_pos(const char **matrix, double new_y, double new_x);
 
