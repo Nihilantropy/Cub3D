@@ -48,16 +48,16 @@ int	step_in_y_direction(t_camera *camera)
 }
 
 /**
- * @brief Calculates perpendicular wall distance for rendering.
+ * @brief Calculates perpendicular distance for rendering.
  *
- * Computes the distance to wall impact point based on DDA results,
+ * Computes the distance to cell impact point based on DDA results,
  * avoiding fisheye effect by using perpendicular distance.
  *
  * @param camera Camera structure containing ray and map info
  * @param pos Current position in world space
- * @param side Wall side hit (0 for X, 1 for Y)
+ * @param side side hit (0 for X, 1 for Y)
  */
-double	calculate_wall_dist(t_camera *camera, t_pos *pos, int side)
+double	calculate_perp_dist(t_camera *camera, t_pos *pos, int side)
 {
 	double	original_dist;
 

@@ -181,7 +181,7 @@ void	init_ray(t_camera *camera, double ray_dir_x,
 void	calculate_step_dist(t_camera *camera, t_pos *pos);
 int		step_in_x_direction(t_camera *camera);
 int		step_in_y_direction(t_camera *camera);
-double	calculate_wall_dist(t_camera *camera, t_pos *pos, int side);
+double	calculate_perp_dist(t_camera *camera, t_pos *pos, int side);
 /* ray dda */
 int		perform_dda(t_game *game, t_camera *camera);
 /* ray render */

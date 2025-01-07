@@ -19,7 +19,7 @@ void	render_transparent_slice(t_render_state *state, t_wall_slice *slice,
 	double			step;
 	double			tex_pos;
 	t_render_state	tex_data;
-	unsigned int				color;
+	unsigned int	color;
 
 	if (!init_texture_rendering(slice, &tex_data, &step))
 		return ;
@@ -32,7 +32,7 @@ void	render_transparent_slice(t_render_state *state, t_wall_slice *slice,
 		if (!is_transparent_pixel(color))
 		{
 			if (y >= 0 && y < game->display.height)
-				state->img_data[y * game->display.width + x] = color;
+				state->img_data[y * game->display.width + x] = color; // + - 1
 		}
 		tex_pos += step;
 		y++;

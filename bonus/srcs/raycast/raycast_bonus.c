@@ -16,7 +16,7 @@ void	cast_ray(t_game *game, t_player *player, int x)
 	double	ray_dir_x;
 	double	ray_dir_y;
 	int		side;
-
+	
 	camera_x = 2 * x / (double)game->display.width - 1;
 	ray_dir_x = player->camera.dir_x + player->camera.plane_x * camera_x;
 	ray_dir_y = player->camera.dir_y + player->camera.plane_y * camera_x;

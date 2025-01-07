@@ -1,9 +1,30 @@
 #include "../../include/cub3D_bonus.h"
 
 static int	check_map_bounds(t_camera *camera, t_game *game);
-static int	check_collision(t_game *game, t_camera *camera, int side);
-static int	handle_door_collision(t_game *game, t_camera *camera, int side);
+static int	check_collision(t_game *game, t_camera *camera);
+// static int	handle_door_collision(t_game *game, t_camera *camera, int side);
 static void	perform_dda_step(t_camera *camera, int *side);
+
+
+bool	handle_door_rendering(t_game *game, t_camera *camera, int side)
+{
+	t_door	*current_door;
+
+	if (!(game->map.matrix[camera->map_y][camera->map_x] == DOOR))
+		return (false);
+	current_door = find_door_at_position(game, camera->map_x, camera->map_y);
+	if (current_door)
+	{
+		if (current_door->is_rendering)
+			return (false);
+		camera->door_hit = true;
+		camera->perp_door_dist = calculate_perp_dist(camera,
+									&game->player.pos, side);
+		camera->door_frame = current_door->frame;
+		camera->door_side = side;
+	}
+	return (true);
+}
 
 /**
 * @brief Performs DDA algorithm for raycasting
@@ -27,10 +48,11 @@ int	perform_dda(t_game *game, t_camera *camera)
 		perform_dda_step(camera, &side);
 		if (check_map_bounds(camera, game) == -1)
 			return (-1);
-		hit = check_collision(game, camera, side);
+		handle_door_rendering(game, camera, side);
+		hit = check_collision(game, camera);
 		iter++;
 	}
-	camera->perp_wall_dist = calculate_wall_dist(camera, &game->player.pos, side);
+	camera->perp_wall_dist = calculate_perp_dist(camera, &game->player.pos, side);
 	return (side);
 }
 
@@ -57,16 +79,14 @@ static int	check_map_bounds(t_camera *camera, t_game *game)
 * @param side Current wall side hit
 * @return int 1 if collision detected, 0 otherwise
 */
-static int	check_collision(t_game *game, t_camera *camera, int side)
+static int check_collision(t_game *game, t_camera *camera)
 {
-	if (game->map.matrix[camera->map_y][camera->map_x] == DOOR)
-		return (handle_door_collision(game, camera, side));
-	if (game->map.matrix[camera->map_y][camera->map_x] == WALL)
-	{
-		camera->hit_type = WALL;
-		return (1);
-	}
-	return (0);
+    if (game->map.matrix[camera->map_y][camera->map_x] == WALL)
+    {
+        camera->hit_type = WALL;
+        return (1);
+    }
+    return (0);
 }
 
 /**
@@ -77,29 +97,21 @@ static int	check_collision(t_game *game, t_camera *camera, int side)
 * @param side Current wall side hit
 * @return int 1 if closed door hit, 0 otherwise
 */
-static int	handle_door_collision(t_game *game, t_camera *camera, int side)
-{
-	t_door	*door;
+// static int	handle_door_collision(t_game *game, t_camera *camera, int side)
+// {
+// 	t_door	*door;
 
-	door = find_door_at_position(game, camera->map_x, camera->map_y);
-	if (!door)
-		return (0);
-	if (door->state == door_opening || door->state == door_closing)
-	{
-		camera->door_hit = true;
-		camera->door_frame = door->frame;
-		camera->door_side = side;
-		camera->perp_door_dist = calculate_wall_dist(camera, 
-								&game->player.pos, side);
-		return (0);
-	}
-	if (door->state == door_closed)
-	{
-		camera->hit_type = DOOR;
-		return (1);
-	}
-	return (0);
-}
+// 	door = find_door_at_position(game, camera->map_x, camera->map_y);
+// 	if (!door)
+// 		return (0);
+// 	camera->door_hit = true;
+// 	camera->door_frame = door->frame;
+// 	camera->door_side = side;
+// 	camera->perp_door_dist = calculate_perp_dist(camera, 
+// 							&game->player.pos, side);
+// 		return (0);
+// 	return (0);
+// }
 
 /**
  * @brief Performs a single step in DDA algorithm.

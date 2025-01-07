@@ -16,7 +16,10 @@ void	init_doors(t_game *game)
 		game->door_system.door[i].anim_counter = 0;
 		game->door_system.door[i].state = door_closed;
 		game->door_system.door[i].active = false;
-		game->door_system.door[i].open_percentage = 0.0;
+		game->door_system.door[i].id = i + 1;
+		game->door_system.door[i].perp_dist = 0.0;
+		game->door_system.door[i].side = -1;
+		game->door_system.door[i].is_rendering = false;
 		i++;
 	}
 }

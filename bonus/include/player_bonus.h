@@ -41,16 +41,10 @@ typedef struct s_camera
 	double	perp_wall_dist;
 	char	hit_type;
 	int		side;
-	double	perp_door_dist;
 	bool	door_hit;
-	int		door_side;
+	double	perp_door_dist;
 	int		door_frame;
-
-	
-    int     current_door_id;     // Track which door we're rendering
-    int     door_start_x;        // Screen X where door starts
-    int     door_end_x;          // Screen X where door ends
-    bool    is_same_door;        // Flag to check if we're still on same door
+	int		door_side;
 }	t_camera;
 
 /**

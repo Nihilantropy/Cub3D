@@ -27,8 +27,11 @@ typedef struct s_door
 	t_door_state	state;
 	int				frame;
 	int				anim_counter;
-	double			open_percentage;
 	bool			active;
+	double			perp_dist;
+	int				side;
+	int				id;
+	bool			is_rendering;
 }	t_door;
 
 typedef struct s_door_system
