@@ -4,10 +4,15 @@
 
 # include "cub3D_bonus.h"
 
-// Wall rendering constants
 # define TEXTURE_SIZE 64
 # define MAX_WALL_HEIGHT 1080
 # define MIN_WALL_HEIGHT 20
+
+typedef enum e_render_type
+{
+	static_render,
+	dynamic_render
+}	t_render_type;
 
 typedef struct s_textures
 {
@@ -22,7 +27,7 @@ typedef struct s_textures
     int		size;
 }	t_textures;
 
-typedef struct s_wall_slice
+typedef struct s_slice
 {
 	int		height;
 	int		start_y;
@@ -33,7 +38,7 @@ typedef struct s_wall_slice
 	int		tex_y;
 	int		side;
 	void	*texture;
-}	t_wall_slice;
+}	t_slice;
 
 typedef struct s_render_state
 {

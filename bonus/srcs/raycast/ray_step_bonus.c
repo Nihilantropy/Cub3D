@@ -33,20 +33,6 @@ void	calculate_step_dist(t_camera *camera, t_pos *pos)
 	}
 }
 
-int	step_in_x_direction(t_camera *camera)
-{
-	camera->side_dist_x += camera->delta_dist_x;
-	camera->map_x += camera->step_x;
-	return (0);
-}
-
-int	step_in_y_direction(t_camera *camera)
-{
-	camera->side_dist_y += camera->delta_dist_y;
-	camera->map_y += camera->step_y;
-	return (1);
-}
-
 /**
  * @brief Calculates perpendicular distance for rendering.
  *
@@ -68,4 +54,29 @@ double	calculate_perp_dist(t_camera *camera, t_pos *pos, int side)
 		original_dist = (camera->map_y - pos->y + 
 			(1 - camera->step_y) / 2) / camera->ray_dir_y;
 	return (fabs(original_dist));
+}
+
+/**
+ * @brief Performs a single step in DDA algorithm.
+ *
+ * Updates ray position and side distances by stepping in either X or Y
+ * direction depending on current side distances.
+ *
+ * @param camera Camera structure with ray and step info
+ * @param side Pointer to store hit side (0 for X, 1 for Y)
+ */
+void	perform_dda_step(t_camera *camera, int *side)
+{
+	if (camera->side_dist_x < camera->side_dist_y)
+	{
+		camera->side_dist_x += camera->delta_dist_x;
+		camera->map_x += camera->step_x;
+		*side = 0;
+	}
+	else
+	{
+		camera->side_dist_y += camera->delta_dist_y;
+		camera->map_y += camera->step_y;
+		*side = 1;
+	}
 }

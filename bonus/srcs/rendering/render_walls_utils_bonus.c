@@ -9,7 +9,7 @@
  * @param game Game state containing display parameters.
  * @param perp_wall_dist Perpendicular distance to the wall.
  */
-void calculate_wall_slice(t_wall_slice *slice, t_game *game, 
+void calculate_slice(t_slice *slice, t_game *game, 
 	double perp_wall_dist)
 {
 	slice->height = (int)(game->display.height / perp_wall_dist);
@@ -31,12 +31,12 @@ void calculate_wall_slice(t_wall_slice *slice, t_game *game,
 * @param game Game state containing player position.
 * @param cam Camera data with ray and wall distance info.
 */
-void calculate_texture_coords(t_wall_slice *slice, t_game *game, t_camera *cam)
+void calculate_texture_coords(t_slice *slice, t_game *game, t_camera *cam)
 {
 	if (slice->side == 0)
-		slice->wall_x = game->player.pos.y + cam->perp_wall_dist * cam->ray_dir_y;
+		slice->wall_x = game->player.pos.y + cam->perp_dist * cam->ray_dir_y;
 	else
-		slice->wall_x = game->player.pos.x + cam->perp_wall_dist * cam->ray_dir_x;
+		slice->wall_x = game->player.pos.x + cam->perp_dist * cam->ray_dir_x;
 	slice->wall_x -= floor(slice->wall_x);
 	slice->tex_x = (int)(slice->wall_x * TEXTURE_SIZE);
 	if (slice->side == 0 && cam->ray_dir_x > 0)

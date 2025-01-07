@@ -13,7 +13,7 @@ void	*get_texture(t_game *game, t_camera *cam, int side)
 	t_door	*door;
 
 	door = NULL;
-	if (cam->hit_type == DOOR)
+	if (cam->hit_obj == e_door)
 	{
 		door = find_door_at_position(game, cam->map_x, cam->map_y);
 		return (select_door_texture(game, door));
@@ -36,7 +36,7 @@ void	*get_texture(t_game *game, t_camera *cam, int side)
  * @param position Position in texture
  */
 void	get_texture_color(t_render_state *state, t_render_state *tex_data,
-						t_wall_slice *slice, int position)
+						t_slice *slice, int position)
 {
 	if (position >= 0 && position < TEXTURE_SIZE * TEXTURE_SIZE)
 	{

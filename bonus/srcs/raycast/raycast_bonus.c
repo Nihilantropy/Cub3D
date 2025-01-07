@@ -10,21 +10,26 @@
  * @param player Player structure with position and camera data
  * @param x Screen x coordinate for which to cast the ray
  */
-void	cast_ray(t_game *game, t_player *player, int x)
+int	cast_ray(t_game *game, t_player *player, int x, t_render_type render_type)
 {
 	double	camera_x;
 	double	ray_dir_x;
 	double	ray_dir_y;
 	int		side;
 	
+	side = -1;
 	camera_x = 2 * x / (double)game->display.width - 1;
 	ray_dir_x = player->camera.dir_x + player->camera.plane_x * camera_x;
 	ray_dir_y = player->camera.dir_y + player->camera.plane_y * camera_x;
 	init_ray(&player->camera, ray_dir_x, ray_dir_y, &player->pos);
 	calculate_step_dist(&player->camera, &player->pos);
-	side = perform_dda(game, &player->camera);
+	if (render_type == static_render)
+		side = perform_static_dda(game, &player->camera);
+	else if (render_type == dynamic_render)
+		side = perform_dynamic_dda(game, &player->camera);
 	if (side != -1)
 		player->camera.side = side;
+	return (side);
 }
 
 /**

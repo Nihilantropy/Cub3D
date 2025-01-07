@@ -42,7 +42,7 @@
 
 /* load texture error msg */
 # define ERR_TEXTURE_LOAD_DOOR "Error\nFail loading door texture\n"
-# define ERR_WALL_SLICE_TEXTURE "Error\nNull texture for wall slice\n"
+# define ERR_slice_TEXTURE "Error\nNull texture for wall slice\n"
 # define ERR_GET_TEXTURE_DATA "Error\nFailed to get texture data\n"
 /* player out of bound error msg */
 # define ERR_OUT_OF_BOUND "Error\nYou exceeded map limts. No wall collision implemented\n"

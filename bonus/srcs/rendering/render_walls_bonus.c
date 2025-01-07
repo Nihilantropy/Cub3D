@@ -12,7 +12,7 @@
 * @param x The x-coordinate of the current slice on the screen.
 * @return None.
 */
-void	render_textured_wall_slice(t_render_state *state, t_wall_slice *slice,
+void	render_textured_slice(t_render_state *state, t_slice *slice,
 									t_game *game, int x)
 {
 	int				y;
@@ -49,7 +49,7 @@ void	render_textured_wall_slice(t_render_state *state, t_wall_slice *slice,
 * @param step Calculated step size for texture mapping.
 * @return True if initialization succeeds, false otherwise.
 */
-bool	init_texture_rendering(t_wall_slice *slice, t_render_state *tex_data, 
+bool	init_texture_rendering(t_slice *slice, t_render_state *tex_data, 
 								double *step)
 {
 	if (!get_texture_data(slice, tex_data))
@@ -68,11 +68,11 @@ bool	init_texture_rendering(t_wall_slice *slice, t_render_state *tex_data,
 * @param tex_data A pointer to a t_render_state structure to store the texture data.
 * @return True if the texture data was successfully retrieved, otherwise false.
 */
-bool get_texture_data(t_wall_slice *slice, t_render_state *tex_data)
+bool get_texture_data(t_slice *slice, t_render_state *tex_data)
 {
 	if (!slice->texture)
 	{
-		ft_putstr_fd(ERR_WALL_SLICE_TEXTURE, 2);
+		ft_putstr_fd(ERR_slice_TEXTURE, 2);
 		return (false);
 	}
 

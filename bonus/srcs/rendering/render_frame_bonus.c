@@ -41,24 +41,6 @@ int	render_frame(t_game *game)
 	return (0);
 }
 
-
-
-
-
-static void reset_door_render_state(t_game *game)
-{
-    int i;
-
-    i = 0;
-    while (i < game->door_system.door_counter)
-    {
-        game->door_system.door[i].is_rendering = false;
-        i++;
-    }
-}
-
-
-
 /**
  * @brief Renders the 3D view of the game, including the floor, ceiling, and walls.
  * 
@@ -71,18 +53,10 @@ static void reset_door_render_state(t_game *game)
 static void render_3d_view(t_game *game)
 {
 	t_render_state	state;
-	int				x;
 
 	init_frame_buffer(game, &state);
 	clear_frame_buffer(&state, game);
-	render_floor_ceiling(game, &state);
-	x = 0;
-	while (x < game->display.width)
-	{
-		render_3d_map(game, &state, x);
-		x++;
-	}
-    reset_door_render_state(game);
+	render_3d_map(game, &state);
 	mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, 
 		state.img_ptr, 0, 0);
 	mlx_destroy_image(game->mlx_ptr, state.img_ptr);

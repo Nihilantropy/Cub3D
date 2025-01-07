@@ -1,7 +1,7 @@
 #ifndef PLAYER_H
 # define PLAYER_H
 
-# include <stdbool.h>
+# include "cub3D_bonus.h"
 
 /* Movement and rotation constants */
 # define P_SPEED 0.2
@@ -38,13 +38,9 @@ typedef struct s_camera
 	int		map_y;
 	int		step_x;
 	int		step_y;
-	double	perp_wall_dist;
-	char	hit_type;
+	double	perp_dist;
+	t_obj	hit_obj;
 	int		side;
-	bool	door_hit;
-	double	perp_door_dist;
-	int		door_frame;
-	int		door_side;
 }	t_camera;
 
 /**

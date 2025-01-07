@@ -160,8 +160,9 @@ SRCS_BONUS	=	$(MAIN_BONUS_DIR)/main_bonus.c \
 				$(PLAYER_BONUS_DIR)/player_collision_utils_bonus.c \
 				$(RAYCAST_BONUS_DIR)/raycast_bonus.c \
 				$(RAYCAST_BONUS_DIR)/ray_step_bonus.c \
-				$(RAYCAST_BONUS_DIR)/ray_dda_bonus.c \
-				$(RAYCAST_BONUS_DIR)/ray_render_bonus.c \
+				$(RAYCAST_BONUS_DIR)/ray_static_dda_bonus.c \
+				$(RAYCAST_BONUS_DIR)/ray_dynamic_dda_bonus.c \
+				$(RAYCAST_BONUS_DIR)/ray_render_utils_bonus.c \
 				$(RENDER_BONUS_DIR)/render_frame_bonus.c \
 				$(RENDER_BONUS_DIR)/render_walls_bonus.c \
 				$(RENDER_BONUS_DIR)/render_walls_utils_bonus.c \

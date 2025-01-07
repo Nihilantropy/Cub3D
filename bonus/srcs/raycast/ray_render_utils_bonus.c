@@ -21,3 +21,18 @@ int	calculate_wall_height(t_game *game, double perp_wall_dist)
 		return (max_height);
 	return (line_height);
 }
+
+/**
+* @brief Checks if position is within map boundaries
+*
+* @param camera Camera containing position data
+* @param game Game containing map dimensions
+* @return int -1 if out of bounds, 0 if valid
+*/
+int	check_map_bounds(t_camera *camera, t_game *game)
+{
+	if (camera->map_y < 0 || camera->map_y >= game->map.height ||
+		camera->map_x < 0 || camera->map_x >= game->map.width)
+		return (-1);
+	return (0);
+}

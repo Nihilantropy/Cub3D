@@ -24,14 +24,11 @@ typedef enum e_door_state
 typedef struct s_door
 {
 	t_pos			pos;
-	t_door_state	state;
+	t_door_state	anim_state;
 	int				frame;
 	int				anim_counter;
 	bool			active;
-	double			perp_dist;
-	int				side;
 	int				id;
-	bool			is_rendering;
 }	t_door;
 
 typedef struct s_door_system

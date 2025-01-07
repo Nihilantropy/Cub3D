@@ -15,6 +15,7 @@
 # include "keys_bonus.h"
 # include "messages_bonus.h"
 # include "error_bonus.h"
+# include "object_bonus.h"
 # include "checks_bonus.h"
 # include "player_bonus.h"
 # include "colors_bonus.h"
@@ -167,25 +168,27 @@ void	move_step_left(t_player *player, double *step_x, double *step_y);
 void	move_step_right(t_player *player, double *step_x, double *step_y);
 void	move_step_still(double *step_x, double *step_y);
 /* player collision */
-bool try_slide_movement(t_game *game, t_pos *new_pos, 
+bool 	try_slide_movement(t_game *game, t_pos *new_pos, 
 							double step_x, double step_y);
 /* player collision utils */
 bool	is_valid_pos(const char **matrix, double new_y, double new_x);
 
 /*** raycast ***/
 /* raycast */
-void	cast_ray(t_game *game, t_player *player, int x);
+int		cast_ray(t_game *game, t_player *player, int x, t_render_type render_type);
 void	init_ray(t_camera *camera, double ray_dir_x, 
 		double ray_dir_y, t_pos *pos);
 /* ray step */
 void	calculate_step_dist(t_camera *camera, t_pos *pos);
-int		step_in_x_direction(t_camera *camera);
-int		step_in_y_direction(t_camera *camera);
 double	calculate_perp_dist(t_camera *camera, t_pos *pos, int side);
-/* ray dda */
-int		perform_dda(t_game *game, t_camera *camera);
-/* ray render */
+void	perform_dda_step(t_camera *camera, int *side);
+/* ray static dda */
+int		perform_static_dda(t_game *game, t_camera *camera);
+/* ray dynamic dda */
+int		perform_dynamic_dda(t_game *game, t_camera *camera);
+/* ray render utils */
 int		calculate_wall_height(t_game *game, double perp_wall_dist);
+int		check_map_bounds(t_camera *camera, t_game *game);
 
 /*** rendering ***/
 /* render frame */
@@ -193,21 +196,21 @@ int		render_frame(t_game *game);
 /* render manager */
 void	*get_texture(t_game *game, t_camera *cam, int side);
 void	get_texture_color(t_render_state *state, t_render_state *tex_data,
-						t_wall_slice *slice, int position);
+						t_slice *slice, int position);
 /* render 3d map */
-void	render_3d_map(t_game *game, t_render_state *state, int x);
+void	render_3d_map(t_game *game, t_render_state *state);
 /* render walls */
-void	render_textured_wall_slice(t_render_state *state, t_wall_slice *slice,
+void	render_textured_slice(t_render_state *state, t_slice *slice,
 									t_game *game, int x);
-bool	init_texture_rendering(t_wall_slice *slice, t_render_state *tex_data, 
+bool	init_texture_rendering(t_slice *slice, t_render_state *tex_data, 
 								double *step);
-bool	get_texture_data(t_wall_slice *slice, t_render_state *tex_data);
+bool	get_texture_data(t_slice *slice, t_render_state *tex_data);
 /* render walls utils */
-void 	calculate_wall_slice(t_wall_slice *slice, t_game *game, 
+void 	calculate_slice(t_slice *slice, t_game *game, 
 	double perp_wall_dist);
-void 	calculate_texture_coords(t_wall_slice *slice, t_game *game, t_camera *cam);
+void 	calculate_texture_coords(t_slice *slice, t_game *game, t_camera *cam);
 /* render door animation */
-void	render_transparent_slice(t_render_state *state, t_wall_slice *slice,
+void	render_transparent_slice(t_render_state *state, t_slice *slice,
 								t_game *game, int x);
 /* render floor and ceiling */
 void	render_floor_ceiling(t_game *game, t_render_state *state);
@@ -219,7 +222,6 @@ void	draw_player_fov(t_game *game, t_minimap *minimap);
 void	draw_minimap_door(t_game *game, t_minimap *minimap);
 /* render door */
 void	*select_door_texture(t_game *game, t_door *door);
-bool	is_door_collision(t_game *game, double x, double y);
 t_door	*find_door_at_position(t_game *game, int x, int y);
 
 /*** utils ***/

@@ -32,11 +32,7 @@ static void	init_camera(t_game *game)
 	game->player.camera.map_y = 0;
 	game->player.camera.step_x = 0;
 	game->player.camera.step_y = 0;
-	game->player.camera.perp_wall_dist = 0.0;
+	game->player.camera.perp_dist = 0.0;
+	game->player.camera.hit_obj = -1;
 	game->player.camera.side = 0;
-	game->player.camera.hit_type = 0;
-	game->player.camera.door_hit = false;
-	game->player.camera.perp_door_dist = 0.0;
-	game->player.camera.door_frame = 0;
-	game->player.camera.door_side = -1;
 }

@@ -1,6 +1,6 @@
 #include "../../include/cub3D_bonus.h"
 
-static int	get_texture_pixel(t_render_state *tex_data, t_wall_slice *slice,
+static int	get_texture_pixel(t_render_state *tex_data, t_slice *slice,
 							double tex_pos, int x);
 static bool	is_transparent_pixel(unsigned int color);
 
@@ -12,7 +12,7 @@ static bool	is_transparent_pixel(unsigned int color);
 * @param game Game state information
 * @param x Current x position on screen
 */
-void	render_transparent_slice(t_render_state *state, t_wall_slice *slice,
+void	render_transparent_slice(t_render_state *state, t_slice *slice,
 								t_game *game, int x)
 {
 	int				y;
@@ -48,7 +48,7 @@ void	render_transparent_slice(t_render_state *state, t_wall_slice *slice,
 * @param x Current x position
 * @return int Color value at the specified position
 */
-static int	get_texture_pixel(t_render_state *tex_data, t_wall_slice *slice,
+static int	get_texture_pixel(t_render_state *tex_data, t_slice *slice,
 							double tex_pos, int x)
 {
 	int	tex_y;
