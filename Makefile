@@ -119,6 +119,7 @@ UTILS_BONUS_DIR   	= ./utils
 RENDER_BONUS_DIR  	= ./rendering
 MINIMAP_BONUS_DIR	= ./minimap
 DOOR_BONUS_DIR		= ./door
+UPDATE_BONUS_DIR	= ./update
 
 SRCS_BONUS	=	$(MAIN_BONUS_DIR)/main_bonus.c \
 				$(MAIN_BONUS_DIR)/handle_closure_bonus.c \
@@ -173,6 +174,9 @@ SRCS_BONUS	=	$(MAIN_BONUS_DIR)/main_bonus.c \
 				$(RENDER_BONUS_DIR)/render_door_bonus.c \
 				$(RENDER_BONUS_DIR)/render_manager_bonus.c \
 				$(RENDER_BONUS_DIR)/render_3d_map_bonus.c \
+				$(UPDATE_BONUS_DIR)/handle_key_update_bonus.c \
+				$(UPDATE_BONUS_DIR)/handle_mouse_update_bonus.c \
+				$(UPDATE_BONUS_DIR)/update_animation_bonus.c \
 				$(UTILS_BONUS_DIR)/main_utils_bonus.c \
 				$(UTILS_BONUS_DIR)/matrix_utils_bonus.c \
 				$(UTILS_BONUS_DIR)/info_utils_bonus.c \

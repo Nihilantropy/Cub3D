@@ -1,10 +1,11 @@
 #ifndef KEYS_H
 # define KEYS_H
 
-# define X_EVENT_KEY_PRESS		2
-# define X_EVENT_KEY_RELEASE	3
+# define X_EVENT_KEY_PRESS 2
+# define X_EVENT_KEY_RELEASE 3
 
-# define X_BUTTON_PRESS 4
+# define X_MOUSE_PRESS 4
+# define X_MOUSE_RELEASE 5
 
 # define DESTROY_WIN_CLIENT_MSG 17
 
@@ -22,5 +23,16 @@
 # define MOUSE_RIGHT	3
 
 # define KEY_ESC		65307
+
+typedef struct s_keys
+{
+	bool	w_pressed;
+	bool	s_pressed;
+	bool	a_pressed;
+	bool	d_pressed;
+	bool	left_pressed;
+	bool	right_pressed;
+	bool	space_pressed;
+}	t_keys;
 
 #endif

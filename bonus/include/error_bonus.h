@@ -23,6 +23,7 @@
 
 /* generic err msg*/
 # define ERR_DISPLAY_OPEN "Error\nCould not open display. Exiting...\n"
+# define ERR_MOUSE_QUERY "Error\nCould not get mouse position\n"
 
 /* allocation err msg */
 # define ERR_ALLOC_GAME "Error\nGame alloc failed\n"

@@ -1,5 +1,6 @@
 #include "../../include/cub3D_bonus.h"
 
+static void	init_device(t_game *game);
 static void	init_map(t_game *game);
 static void	init_display(t_game *game);
 static void	init_map_checks(t_game *game);
@@ -22,6 +23,7 @@ t_game	*init_game(void)
 	game->win_ptr = NULL;
 	game->running = false;
 	game->changed = true;
+	init_device(game);
     init_map(game);
 	init_display(game);
 	init_player(game);
@@ -64,4 +66,20 @@ static void	init_map_checks(t_game *game)
 	game->map.check.map_start_row = 0;
 	game->map.check.info = NULL;
 	init_info_list(game);
+}
+
+static void	init_device(t_game *game)
+{
+	game->keys.w_pressed = false;
+	game->keys.s_pressed = false;
+	game->keys.a_pressed = false;
+	game->keys.d_pressed = false;
+	game->keys.left_pressed = false;
+	game->keys.right_pressed = false;
+	game->keys.space_pressed = false;
+	game->mouse.x = false;
+	game->mouse.y = false;
+	game->mouse.show = true;
+	game->mouse.right = false;
+	game->mouse.left = false;
 }

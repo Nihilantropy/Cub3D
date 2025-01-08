@@ -40,16 +40,16 @@ int	perform_static_dda(t_game *game, t_camera *camera)
 * @param side Current wall side hit
 * @return int 1 if collision detected, 0 otherwise
 */
-static int check_static_collision(t_game *game, t_camera *camera)
+static int	check_static_collision(t_game *game, t_camera *camera)
 {
 	t_door	*door;
 
 	door = NULL;
-    if (game->map.matrix[camera->map_y][camera->map_x] == WALL)
-    {
-        camera->hit_obj = e_wall;
-        return (1);
-    }
+	if (game->map.matrix[camera->map_y][camera->map_x] == WALL)
+	{
+		camera->hit_obj = e_wall;
+		return (1);
+	}
 	else if (game->map.matrix[camera->map_y][camera->map_x] == DOOR)
 	{
 		door = find_door_at_position(game, camera->map_x, camera->map_y);
@@ -64,5 +64,5 @@ static int check_static_collision(t_game *game, t_camera *camera)
 				return (0);
 		}
 	}
-    return (0);
+	return (0);
 }

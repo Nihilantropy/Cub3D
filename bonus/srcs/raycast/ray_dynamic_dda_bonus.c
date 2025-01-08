@@ -45,18 +45,18 @@ static int check_dynamic_collision(t_game *game, t_camera *camera)
 	t_door	*door;
 
 	door = NULL;
+	if (game->map.matrix[camera->map_y][camera->map_x] == WALL)
+	{
+		camera->hit_obj = e_wall;
+		return (1);
+	}
 	if (game->map.matrix[camera->map_y][camera->map_x] == DOOR)
 	{
 		door = find_door_at_position(game, camera->map_x, camera->map_y);
 		if (door)
 		{
-			if (door->anim_state != door_closed)
-			{
-				camera->hit_obj = e_door;
-				return (1);
-			}
-			else
-				return (0);
+			camera->hit_obj = e_door;
+			return (1);
 		}
 	}
     return (0);

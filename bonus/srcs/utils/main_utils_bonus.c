@@ -4,6 +4,8 @@ void	free_all_and_exit(t_game *game, int status)
 {
 	if (game)
 	{
+		if (game->mlx_ptr && game->win_ptr)
+			mlx_mouse_show(game->mlx_ptr, game->win_ptr);
 		if (game->win_ptr && game->mlx_ptr)
 			mlx_destroy_window(game->mlx_ptr, game->win_ptr);
 		free_matrix((char **)game->map.matrix);

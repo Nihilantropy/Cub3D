@@ -1,6 +1,16 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
+# define DISPLAY_NAME "Cub3D"
+
+# define WIN_WIDTH 1920
+# define WIN_HEIGHT 1080
+
+# define TILE_SIZE 64
+
+# define FRAME_TIME_MS 1000 / 60
+# define FRAME_RATE 120
+
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -22,15 +32,8 @@
 # include "render_bonus.h"
 # include "minimap_bonus.h"
 # include "door_bonus.h"
+# include "mouse_bonus.h"
 
-# define DISPLAY_NAME "Cub3D"
-
-# define WIN_WIDTH 1920
-# define WIN_HEIGHT 1080
-
-# define TILE_SIZE 64
-
-# define FRAME_TIME_MS 1000 / 60
 
 typedef struct s_display
 {
@@ -56,6 +59,8 @@ typedef struct s_game
 	t_textures		textures;
 	t_minimap		minimap;
 	t_door_system   door_system;
+	t_keys			keys;
+	t_mouse			mouse;
 	bool			running;
 	bool			changed;
 	void			*mlx_ptr;
@@ -64,7 +69,7 @@ typedef struct s_game
 
 /*** main ***/
 /* main */
-void	game_loop(t_game *game);
+int		game_loop(t_game *game);
 /* handle closure */
 int		close_game(void *param);
 
@@ -223,6 +228,15 @@ void	draw_minimap_door(t_game *game, t_minimap *minimap);
 /* render door */
 void	*select_door_texture(t_game *game, t_door *door);
 t_door	*find_door_at_position(t_game *game, int x, int y);
+
+/*** update ***/
+/* handle key update */
+void	handle_key_update(t_game *game);
+/* handle mouse update */
+void    handle_mouse_update(t_game *game);
+void 	handle_mouse_appear(t_game *game, int x, int y);
+/* update animation */
+void	update_animations(t_game *game);
 
 /*** utils ***/
 /* main utils */

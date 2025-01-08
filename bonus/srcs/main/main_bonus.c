@@ -26,7 +26,9 @@ int	main(int argc, char **argv)
 	if (!handle_display(game))
 		free_all_and_exit(game, EXIT_FAILURE);
 	game->running = true;
-	game_loop(game);
+	handle_key_events(game);
+	mlx_loop_hook(game->mlx_ptr, game_loop, game);
+	mlx_loop(game->mlx_ptr);
 	game->running = false;
 	free_all_and_exit(game, EXIT_SUCCESS);
 	return (0);
@@ -38,12 +40,20 @@ int	main(int argc, char **argv)
  *
  * @param game Pointer to the game structure containing MLX and game state data
  */
-void	game_loop(t_game *game)
+int	game_loop(t_game *game)
 {
-	if (game->running)
-	{
-		handle_key_events(game);
-		mlx_loop_hook(game->mlx_ptr, render_frame, game);
-		mlx_loop(game->mlx_ptr);
-	}
+	struct timeval			tv;
+	static struct timeval	last_frame_time;
+	long					elapsed_time;
+
+	gettimeofday(&tv, NULL);
+	elapsed_time = (tv.tv_sec - last_frame_time.tv_sec) * 1000 +
+			(tv.tv_usec - last_frame_time.tv_usec) / 2000;
+	if (elapsed_time < FRAME_TIME_MS)
+		return (0);
+	handle_key_update(game);
+	handle_mouse_update(game);
+	render_frame(game);
+	last_frame_time = tv;
+	return (0);
 }

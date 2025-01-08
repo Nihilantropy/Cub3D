@@ -4,8 +4,8 @@
 # include "cub3D_bonus.h"
 
 /* Movement and rotation constants */
-# define P_SPEED 0.2
-# define R_SPEED 0.2
+# define P_SPEED 0.1
+# define R_SPEED 0.1
 
 /* player hitbox radius for wall collision */
 # define PLAYER_RADIUS 0.1

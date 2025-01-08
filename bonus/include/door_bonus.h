@@ -4,7 +4,7 @@
 # include "cub3D_bonus.h"
 
 # define DOOR_FRAMES 6
-# define DOOR_ANIM_SPEED 8
+# define DOOR_ANIM_SPEED 0
 
 # define DOOR_TEXTURE_1 "./texture/door/door_texture_1.xpm"
 # define DOOR_TEXTURE_2 "./texture/door/door_texture_2.xpm"
@@ -33,7 +33,7 @@ typedef struct s_door
 
 typedef struct s_door_system
 {
-	void	*texture[DOOR_FRAMES];
+	void	*texture[FRAME_RATE];
 	t_door	*door;
 	int		door_counter;
 }	t_door_system;
