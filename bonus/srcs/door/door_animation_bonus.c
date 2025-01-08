@@ -18,7 +18,7 @@ void	update_door_animation(t_game *game, t_door *door)
 		door->anim_counter = 0;
 		if (door->anim_state == door_opening)
 		{
-			if (door->frame < FRAME_RATE - 1)
+			if (door->frame < DOOR_FRAME - 1)
 				door->frame++;
 			else
 				set_door_open(game, door);

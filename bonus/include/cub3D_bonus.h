@@ -9,7 +9,7 @@
 # define TILE_SIZE 64
 
 # define FRAME_TIME_MS 1000 / 60
-# define FRAME_RATE 120
+# define DOOR_FRAME 120
 
 # include <unistd.h>
 # include <stdio.h>

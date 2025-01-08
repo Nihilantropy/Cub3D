@@ -14,7 +14,7 @@ void	free_door_system(t_game *game)
 	if (game->mlx_ptr)
 	{
 		i = 0;
-		while (i < FRAME_RATE)
+		while (i < DOOR_FRAME)
 		{
 			if (game->door_system.texture[i])
 				mlx_destroy_image(game->mlx_ptr, game->door_system.texture[i]);

@@ -33,7 +33,7 @@ typedef struct s_door
 
 typedef struct s_door_system
 {
-	void	*texture[FRAME_RATE];
+	void	*texture[DOOR_FRAME];
 	t_door	*door;
 	int		door_counter;
 }	t_door_system;

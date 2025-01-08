@@ -47,7 +47,7 @@ static bool	generate_frames(t_game *game, t_render_state *orig_data, int width)
 	int	frame;
 
 	frame = 0;
-	while (frame < FRAME_RATE)
+	while (frame < DOOR_FRAME)
 	{
 		if (!create_frame(game, orig_data, frame, width))
 			return (false);
@@ -76,7 +76,7 @@ static bool	create_frame(t_game *game, t_render_state *orig_data,
 		return (false);
 	tex_data.img_data = (int *)mlx_get_data_addr(tex_data.img_ptr,
 			&tex_data.bits_per_pixel, &tex_data.line_length, &tex_data.endian);
-	offset = (width * frame) / (FRAME_RATE - 1);
+	offset = (width * frame) / (DOOR_FRAME - 1);
 	fill_frame_pixels(&tex_data, orig_data, width, offset);
 	game->door_system.texture[frame] = tex_data.img_ptr;
 	return (true);
