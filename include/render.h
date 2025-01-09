@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   render.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mcantell <mcantell@student.42roma.it>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/09 10:37:05 by mcantell          #+#    #+#             */
+/*   Updated: 2025/01/09 10:37:33 by mcantell         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef RENDER_H
 # define RENDER_H
@@ -9,21 +20,17 @@
 # define MAX_WALL_HEIGHT 1080
 # define MIN_WALL_HEIGHT 20
 
-#define PATH_TO_NORHT_WALL_TEXTURE "texture/walls/north_wall_texture.xpm"
-#define PATH_TO_SOUTH_WALL_TEXTURE "texture/walls/south_wall_texture.xpm"
-#define PATH_TO_EAST_WALL_TEXTURE "texture/walls/east_wall_texture.xpm"
-#define PATH_TO_WEST_WALL_TEXTURE "texture/walls/west_wall_texture.xpm"
-#define PATH_TO_FLOOR_TEXTURE "texture/floor/floor_texture.xpm"
-#define PATH_TO_CEILING_TEXTURE "texture/ceiling/ceiling_texture.xpm"
 typedef struct s_textures
 {
 	void	*north;
 	void	*south;
 	void	*east;
 	void	*west;
+	int		floor_color;
+	int		ceiling_color;
 	void	*floor;
 	void	*ceiling;
-    int		size;
+	int		size;
 }	t_textures;
 
 typedef struct s_wall_slice
@@ -39,12 +46,14 @@ typedef struct s_wall_slice
 	void	*texture;
 }	t_wall_slice;
 
-typedef struct s_render_state {
+typedef struct s_render_state
+{
 	void	*img_ptr;
 	int		*img_data;
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
+	int		color;
 }	t_render_state;
 
 #endif

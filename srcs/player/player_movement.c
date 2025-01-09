@@ -1,129 +1,127 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   player_movement.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mcantell <mcantell@student.42roma.it>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/09 10:59:09 by mcantell          #+#    #+#             */
+/*   Updated: 2025/01/09 11:00:48 by mcantell         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/cub3D.h"
 
+static void	calculate_move_step(t_player *p, double *step_x, double *step_y);
 static void	update_player_pos(t_game *game);
 static void	update_direction(t_camera *cam, double rot_speed);
-static bool is_valid_pos(const char **matrix, double new_y, double new_x);
 
 /**
- * @brief based on the moving input, set the correct
- *	moving boolean var and update player position.
- * 
- * @param moving incoming moving input
+ * @brief Updates player movement state based on input.
+ *
+ * Sets movement flags and updates player position
+ * according to movement direction.
+ * @param game Main game state containing player data.
+ * @param moving Movement input flag (STILL, FORWARD, or BACKWARD).
  */
 void	set_player_movement(t_game *game, int moving)
 {
-	if (moving == M_STILL)
-	{
-		game->player.moving.forward = false;
-		game->player.moving.backward = false;
-		return;
-	}
-	game->player.moving.forward = (moving == M_FORWARD);
-	game->player.moving.backward = (moving == M_BACKWARD);
+	game->player.moving = moving;
+	if (moving == m_still)
+		return ;
 	update_player_pos(game);
 }
 
 /**
- * @brief based on the rotating input, set the correct
- *	boolean var and update player rotation angle.
- * 
- * @param rotating incoming rotation input
+ * @brief Updates player's rotation angle based on rotation state.
+ *
+ * Modifies the player's camera direction by applying rotation speed
+ * in the specified direction. No rotation occurs if state is R_STILL.
+ * Updates game state to reflect changes in player orientation.
+ *
+ * @param game Pointer to main game structure containing player data
+ * @param rotating Rotation state (R_STILL, R_LEFT, or R_RIGHT)
  */
 void	set_player_rot_angle(t_game *game, int rotating)
 {
 	double	rot_speed;
 
-	if (rotating == R_STILL)
-		return;
-	if (rotating == R_LEFT)
+	if (rotating == r_still)
+		return ;
+	if (rotating == r_left)
 		rot_speed = -game->player.rot_speed;
 	else
 		rot_speed = game->player.rot_speed;
 	update_direction(&game->player.camera, rot_speed);
-	game->minimap.changed = true;
+	game->changed = true;
 }
 
 /**
- * @brief update the player position on the map
- * using the current rotation angle.
- * 
- * Check if the new position is valid before update.
+ * @brief Updates the player's position in the game world.
+ *
+ * Calculates new position based on movement steps and collision detection.
+ * If direct movement is blocked, attempts to slide along walls.
+ * Only updates position if the new location is valid within the map bounds.
+ *
+ * @param game Pointer to main game structure containing player and map data
  */
-static void update_player_pos(t_game *game)
+
+static void	update_player_pos(t_game *game)
 {
-    double new_x;
-    double new_y;
-    t_player *p;
-    double move_step_x;
-    double move_step_y;
+	double	step_x;
+	double	step_y;
+	t_pos	new_pos;
 
-    new_x = game->player.pos.x;
-    new_y = game->player.pos.y;
-    p = &game->player;
-
-    // Calculate full movement steps
-    if (p->moving.forward)
-    {
-        move_step_x = p->camera.dir_x * p->speed;
-        move_step_y = p->camera.dir_y * p->speed;
-    }
-    else if (p->moving.backward)
-    {
-        move_step_x = -p->camera.dir_x * p->speed;
-        move_step_y = -p->camera.dir_y * p->speed;
-    }
-    else
-        return;
-
-    // Try full movement first
-    if (is_valid_pos((const char **)game->map.matrix, 
-        p->pos.y + move_step_y, p->pos.x + move_step_x))
-    {
-        new_x = p->pos.x + move_step_x;
-        new_y = p->pos.y + move_step_y;
-    }
-    else
-    {
-        // Try sliding along X axis
-        if (is_valid_pos((const char **)game->map.matrix, 
-            p->pos.y, p->pos.x + move_step_x))
-        {
-            new_x = p->pos.x + move_step_x;
-            // Try partial Y movement
-            double partial_y = move_step_y * 0.5;
-            if (is_valid_pos((const char **)game->map.matrix, 
-                p->pos.y + partial_y, new_x))
-                new_y = p->pos.y + partial_y;
-        }
-
-        // Try sliding along Y axis
-        if (is_valid_pos((const char **)game->map.matrix, 
-            p->pos.y + move_step_y, p->pos.x))
-        {
-            new_y = p->pos.y + move_step_y;
-            // Try partial X movement
-            double partial_x = move_step_x * 0.5;
-            if (is_valid_pos((const char **)game->map.matrix, 
-                new_y, p->pos.x + partial_x))
-                new_x = p->pos.x + partial_x;
-        }
-    }
-
-    // Update position if any movement was valid
-    if (new_x != p->pos.x || new_y != p->pos.y)
-    {
-        p->pos.x = new_x;
-        p->pos.y = new_y;
-        game->minimap.changed = true;
-    }
+	new_pos = game->player.pos;
+	calculate_move_step(&game->player, &step_x, &step_y);
+	if (step_x == 0 && step_y == 0)
+		return ;
+	if (is_valid_pos((const char **)game->map.matrix,
+			game->player.pos.y + step_y, game->player.pos.x + step_x))
+	{
+		new_pos.x = game->player.pos.x + step_x;
+		new_pos.y = game->player.pos.y + step_y;
+	}
+	else
+	{
+		ft_putstr_fd(ERR_OUT_OF_BOUND, 2);
+		close_game(game);
+	}
+	game->player.pos = new_pos;
+	game->changed = true;
 }
 
 /**
- * @brief update camera direction and plane vectors based on rotation speed.
- * Uses rotation matrix to update both the direction vector and camera plane.
- * 
- * @param cam camera info containing direction and plane vectors
- * @param rot_speed rotation speed in radians
+* @brief Calculates movement step based on player direction.
+*
+* Computes x and y movement steps using player's direction and speed.
+* @param p Player data containing movement state and camera info.
+* @param step_x Pointer to store calculated x step.
+* @param step_y Pointer to store calculated y step.
+*/
+static void	calculate_move_step(t_player *player, double *step_x,
+			double *step_y)
+{
+	if (player->moving == m_forward)
+		move_step_forward(player, step_x, step_y);
+	else if (player->moving == m_backward)
+		move_step_backward(player, step_x, step_y);
+	else if (player->moving == m_left)
+		move_step_left(player, step_x, step_y);
+	else if (player->moving == m_right)
+		move_step_right(player, step_x, step_y);
+	else
+		move_step_still(step_x, step_y);
+}
+
+/**
+ * @brief Rotates camera direction and plane vectors.
+ *
+ * Applies rotation matrix to update camera orientation vectors
+ * using the given rotation speed.
+ *
+ * @param cam Pointer to camera structure
+ * @param rot_speed Rotation angle in radians
  */
 static void	update_direction(t_camera *cam, double rot_speed)
 {
@@ -134,59 +132,7 @@ static void	update_direction(t_camera *cam, double rot_speed)
 	old_plane_x = cam->plane_x;
 	cam->dir_x = cam->dir_x * cos(rot_speed) - cam->dir_y * sin(rot_speed);
 	cam->dir_y = old_dir_x * sin(rot_speed) + cam->dir_y * cos(rot_speed);
-	cam->plane_x = cam->plane_x * cos(rot_speed) - cam->plane_y * sin(rot_speed);
+	cam->plane_x = cam->plane_x * cos(rot_speed)
+		- cam->plane_y * sin(rot_speed);
 	cam->plane_y = old_plane_x * sin(rot_speed) + cam->plane_y * cos(rot_speed);
-}
-
-/**
- * @brief check if the next position is valid
- * returns corrisponding boolean based on condition matching
- */
-static bool is_valid_pos(const char **matrix, double new_y, double new_x)
-{
-    // Check the corners of the player's hitbox
-    double check_points[][2] = {
-        {new_x - PLAYER_RADIUS, new_y - PLAYER_RADIUS},  // Top-left
-        {new_x + PLAYER_RADIUS, new_y - PLAYER_RADIUS},  // Top-right
-        {new_x - PLAYER_RADIUS, new_y + PLAYER_RADIUS},  // Bottom-left
-        {new_x + PLAYER_RADIUS, new_y + PLAYER_RADIUS}   // Bottom-right
-    };
-
-    // Check each corner
-    for (int i = 0; i < 4; i++)
-    {
-        int grid_x = (int)check_points[i][0];
-        int grid_y = (int)check_points[i][1];
-
-        // Basic boundary check
-        if (grid_y < 0 || matrix[grid_y] == NULL ||
-            grid_x < 0 || matrix[grid_y][grid_x] == '\0')
-            return (false);
-
-        // Check if any corner would be inside a wall
-        if (matrix[grid_y][grid_x] != FLOOR &&
-            !is_player_char(matrix[grid_y][grid_x]))
-            return (false);
-    }
-
-    // Additional check for very close proximity to walls
-    const double WALL_BUFFER = 0.1;  // Extra buffer distance from walls
-    double check_radius = PLAYER_RADIUS + WALL_BUFFER;
-    
-    // Check more points around the circle for smoother collision
-    for (int angle = 0; angle < 360; angle += 45)  // Check every 45 degrees
-    {
-        double check_x = new_x + check_radius * cos(angle * M_PI / 180.0);
-        double check_y = new_y + check_radius * sin(angle * M_PI / 180.0);
-        
-        int grid_x = (int)check_x;
-        int grid_y = (int)check_y;
-
-        if (grid_y < 0 || matrix[grid_y] == NULL ||
-            grid_x < 0 || matrix[grid_y][grid_x] == '\0' ||
-            matrix[grid_y][grid_x] != FLOOR)
-            return (false);
-    }
-
-    return (true);
 }

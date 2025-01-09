@@ -1,118 +1,121 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   render_walls.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mcantell <mcantell@student.42roma.it>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/09 11:02:33 by mcantell          #+#    #+#             */
+/*   Updated: 2025/01/09 11:12:25 by mcantell         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/cub3D.h"
 
-static void calculate_wall_slice(t_wall_slice *slice, t_game *game, 
-    double perp_wall_dist)
+static void	render_textured_wall_slice(t_render_state *state,
+				t_wall_slice *slice, t_game *game, int x);
+static bool	init_texture_rendering(t_wall_slice *slice,
+				t_render_state *tex_data, double *step);
+static bool	get_texture_data(t_wall_slice *slice, t_render_state *tex_data);
+
+void	render_walls(t_game *game, t_render_state *state, int x)
 {
-    slice->height = (int)(game->display.height / perp_wall_dist);
-    slice->start_y = -slice->height / 2 + game->display.height / 2;
-    slice->end_y = slice->height / 2 + game->display.height / 2;
-    
-    if (slice->start_y < 0)
-        slice->start_y = 0;
-    if (slice->end_y >= game->display.height)
-        slice->end_y = game->display.height - 1;
-}
+	t_wall_slice	slice;
 
-static void select_wall_texture(t_wall_slice *slice, t_game *game, t_camera *cam)
-{
-    if (cam->ray_dir_y > 0 && slice->side == 1)
-        slice->texture = game->textures.south;  // Hit south face
-    else if (cam->ray_dir_y <= 0 && slice->side == 1)
-        slice->texture = game->textures.north;  // Hit north face
-    else if (cam->ray_dir_x > 0 && slice->side == 0)
-        slice->texture = game->textures.east;   // Hit east face
-    else
-        slice->texture = game->textures.west;   // Hit west face
-}
-
-static void draw_textured_wall_slice(t_render_state *state, t_wall_slice *slice, 
-    t_game *game, int x)
-{
-    int y;
-    double step;
-    double tex_pos;
-    int tex_y;
-    int color;
-    int *texture_data;
-    int bits_per_pixel;
-    int line_length;
-    int endian;
-
-    // Get texture data
-    if (!slice->texture)
-    {
-        printf("Error: Null texture for wall slice\n");
-        return;
-    }
-
-    texture_data = (int *)mlx_get_data_addr(slice->texture, &bits_per_pixel,
-        &line_length, &endian);
-    if (!texture_data)
-    {
-        printf("Error: Failed to get texture data\n");
-        return;
-    }
-
-    // Calculate texture step for vertical mapping
-    step = 1.0 * TEXTURE_SIZE / slice->height;
-    tex_pos = (slice->start_y - game->display.height / 2 + slice->height / 2) * step;
-
-    // Draw the textured wall slice
-    y = slice->start_y;
-    while (y < slice->end_y)
-    {
-        tex_y = (int)tex_pos & (TEXTURE_SIZE - 1);
-        tex_pos += step;
-
-        // Get color from texture
-        color = texture_data[TEXTURE_SIZE * tex_y + slice->tex_x];
-        
-        // Apply shading for sides
-        if (slice->side == 1)
-            color = (color >> 1) & 8355711;
-
-        // Draw pixel
-        if (y * game->display.width + x >= 0 && 
-            y * game->display.width + x < game->display.width * game->display.height)
-        {
-            state->img_data[y * game->display.width + x] = color;
-        }
-        y++;
-    }
-}
-
-static void calculate_texture_coords(t_wall_slice *slice, t_game *game, t_camera *cam)
-{
-    // Calculate wall X coordinate (where exactly the wall was hit)
-    if (slice->side == 0)
-        slice->wall_x = game->player.pos.y + cam->perp_wall_dist * cam->ray_dir_y;
-    else
-        slice->wall_x = game->player.pos.x + cam->perp_wall_dist * cam->ray_dir_x;
-    slice->wall_x -= floor(slice->wall_x);
-
-    // Calculate texture X coordinate
-    slice->tex_x = (int)(slice->wall_x * TEXTURE_SIZE);
-    if (slice->side == 0 && cam->ray_dir_x > 0)
-        slice->tex_x = TEXTURE_SIZE - slice->tex_x - 1;
-    if (slice->side == 1 && cam->ray_dir_y < 0)
-        slice->tex_x = TEXTURE_SIZE - slice->tex_x - 1;
-}
-
-void render_walls(t_game *game, t_render_state *state, int x)
-{
-    t_wall_slice slice;
-    
 	cast_ray(game, &game->player, x);
-	
-	// Calculate wall properties
 	calculate_wall_slice(&slice, game, game->player.camera.perp_wall_dist);
 	slice.side = game->player.camera.side;
 	slice.distance = game->player.camera.perp_wall_dist;
-	
-	// Get texture coordinates and select texture
 	calculate_texture_coords(&slice, game, &game->player.camera);
 	select_wall_texture(&slice, game, &game->player.camera);
-	
-	// Draw the textured wall slice
-	draw_textured_wall_slice(state, &slice, game, x);
+	render_textured_wall_slice(state, &slice, game, x);
+}
+
+/**
+* @brief Renders a textured wall slice to the screen.
+*
+* This function applies the texture to a wall slice
+* and renders it onto the display
+* based on the calculated texture position.
+*
+* @param state The render state that holds the image data to be modified.
+* @param slice The wall slice to be rendered.
+* @param game The game state to access display parameters.
+* @param x The x-coordinate of the current slice on the screen.
+* @return None.
+*/
+static void	render_textured_wall_slice(t_render_state *state,
+				t_wall_slice *slice, t_game *game, int x)
+{
+	int				y;
+	double			step;
+	double			tex_pos;
+	t_render_state	tex_data;
+
+	if (!init_texture_rendering(slice, &tex_data, &step))
+		return ;
+	tex_pos = (slice->start_y - game->display.height / 2
+			+ slice->height / 2) * step;
+	y = slice->start_y;
+	while (y < slice->end_y)
+	{
+		apply_texture_color(state, &tex_data, slice,
+			TEXTURE_SIZE * ((int)tex_pos & (TEXTURE_SIZE - 1))
+			+ slice->tex_x);
+		if (y * game->display.width + x >= 0
+			&& y * game->display.width + x < game->display.width
+			* game->display.height)
+			state->img_data[y * game->display.width + x] = state->color;
+		tex_pos += step;
+		y++;
+	}
+}
+
+/**
+* @brief Initializes rendering parameters for wall textures.
+*
+* Gets texture data and calculates texture mapping step size.
+*
+* @param slice The wall slice containing texture information.
+* @param tex_data Structure to store the texture rendering data.
+* @param step Calculated step size for texture mapping.
+* @return True if initialization succeeds, false otherwise.
+*/
+static bool	init_texture_rendering(t_wall_slice *slice,
+			t_render_state *tex_data, double *step)
+{
+	if (!get_texture_data(slice, tex_data))
+		return (false);
+	*step = 1.0 * TEXTURE_SIZE / slice->height;
+	return (true);
+}
+
+/**
+* @brief Retrieves texture data for a wall slice.
+*
+* This function extracts the texture data for
+* the given wall slice and handles errors if the texture
+* is null or retrieval fails.
+*
+* @param slice The wall slice containing the texture information.
+* @param tex_data A pointer to a t_render_state structure
+* to store the texture data.
+* @return True if the texture data was successfully retrieved, otherwise false.
+*/
+static bool	get_texture_data(t_wall_slice *slice, t_render_state *tex_data)
+{
+	if (!slice->texture)
+	{
+		printf("Error: Null texture for wall slice\n");
+		return (false);
+	}
+	tex_data->img_data = (int *)mlx_get_data_addr(slice->texture,
+			&tex_data->bits_per_pixel,
+			&tex_data->line_length, &tex_data->endian);
+	if (!tex_data->img_data)
+	{
+		printf("Error: Failed to get texture data\n");
+		return (false);
+	}
+	return (true);
 }

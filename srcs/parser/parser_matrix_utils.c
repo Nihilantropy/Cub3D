@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser_matrix_utils.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mcantell <mcantell@student.42roma.it>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/09 10:56:50 by mcantell          #+#    #+#             */
+/*   Updated: 2025/01/09 10:56:51 by mcantell         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/cub3D.h"
 
 bool	is_map_row(const char *line)
@@ -22,12 +34,12 @@ bool	is_map_row(const char *line)
 
 bool	is_info_line(const char *line)
 {
-	if (ft_strncmp(line, "NO ", 3) == 0
-		|| ft_strncmp(line, "SO ", 3) == 0
-		|| ft_strncmp(line, "WE ", 3) == 0
-		|| ft_strncmp(line, "EA ", 3) == 0
-		|| ft_strncmp(line, "F ", 2) == 0
-		|| ft_strncmp(line, "C ", 2) == 0)
+	if (ft_strncmp(line, "NO", 2) == 0
+		|| ft_strncmp(line, "SO", 2) == 0
+		|| ft_strncmp(line, "WE", 2) == 0
+		|| ft_strncmp(line, "EA", 2) == 0
+		|| ft_strncmp(line, "F", 1) == 0
+		|| ft_strncmp(line, "C", 1) == 0)
 		return (true);
 	return (false);
 }
@@ -55,4 +67,16 @@ char	**build_new_matrix(int height, int width)
 	}
 	new_matrix[y] = NULL;
 	return (new_matrix);
+}
+
+size_t	matrix_len(const char **matrix)
+{
+	int	y;
+
+	if (!matrix)
+		return (-1);
+	y = 0;
+	while (matrix[y])
+		y++;
+	return (y);
 }

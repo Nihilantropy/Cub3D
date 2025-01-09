@@ -1,52 +1,93 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   load_textures.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mcantell <mcantell@student.42roma.it>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/09 10:51:01 by mcantell          #+#    #+#             */
+/*   Updated: 2025/01/09 10:51:54 by mcantell         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/cub3D.h"
 
-static bool load_single_texture(t_game *game, void **texture, char *path);
+static bool	load_single_texture(t_game *game, void **texture, char identifier);
 
+/**
+ * @brief Loads all game textures from XPM files
+ *
+ * @param game Game structure containing texture data
+ * @return bool true if all textures loaded, false on any failure
+ */
 bool	load_textures(t_game *game)
 {
 	game->textures.size = TEXTURE_SIZE;
-
-	if (!load_single_texture(game, &game->textures.north, PATH_TO_NORHT_WALL_TEXTURE) ||
-		!load_single_texture(game, &game->textures.south, PATH_TO_SOUTH_WALL_TEXTURE) ||
-		!load_single_texture(game, &game->textures.east, PATH_TO_EAST_WALL_TEXTURE) ||
-		!load_single_texture(game, &game->textures.west, PATH_TO_WEST_WALL_TEXTURE) ||
-		!load_single_texture(game, &game->textures.floor, PATH_TO_FLOOR_TEXTURE) ||
-		!load_single_texture(game, &game->textures.ceiling, PATH_TO_CEILING_TEXTURE))
+	if (!load_single_texture(game, &game->textures.north, 'N')
+		|| !load_single_texture(game, &game->textures.south, 'S')
+		|| !load_single_texture(game, &game->textures.east, 'E')
+		|| !load_single_texture(game, &game->textures.west, 'W')
+		|| !load_floor_and_ceiling(game))
 	{
-		free_textures(game);
-		return (false);
+		return (ft_bool_putstr_fd(ERR_TEXTURE_LOAD, 2));
 	}
-
 	return (true);
 }
 
-static bool load_single_texture(t_game *game, void **texture, char *path)
+/**
+ * @brief Loads single texture from XPM file
+ *
+ * @param game Game structure containing MLX data
+ * @param texture Pointer to store loaded texture
+ * @param identifier Wall direction identifier (N,S,E,W)
+ * @return bool true if texture loaded correctly, false on any error
+ */
+static bool	load_single_texture(t_game *game, void **texture, char identifier)
 {
-	int	width;
-	int	height;
+	int		width;
+	int		height;
+	char	*path;
 
-	if (!game->mlx_ptr)
-	{
-		ft_putstr_fd("Error: MLX not initialized when loading texture\n", 2);
-		return (false);
-	}
-
+	path = find_texture_path(game->map.check.info, identifier);
 	*texture = mlx_xpm_file_to_image(game->mlx_ptr, path, &width, &height);
 	if (!(*texture))
 	{
-		ft_putstr_fd("Error: Failed to load texture: ", 2);
-		ft_putstr_fd(path, 2);
-		ft_putstr_fd("\n", 2);
+		free(path);
 		return (false);
 	}
 	if (width != TEXTURE_SIZE || height != TEXTURE_SIZE)
 	{
-		ft_putstr_fd("Error: Texture size mismatch: ", 2);
-		ft_putstr_fd(path, 2);
-		ft_putstr_fd("\n", 2);
 		mlx_destroy_image(game->mlx_ptr, *texture);
 		*texture = NULL;
+		free(path);
 		return (false);
 	}
+	free(path);
 	return (true);
+}
+
+/**
+ * @brief Retrieves texture path for specified identifier
+ *
+ * @param info List of map information nodes
+ * @param identifier Texture identifier (N,S,E,W,F,C)
+ * @return char* Duplicated path string, NULL if not found
+ */
+char	*find_texture_path(t_info *info, char identifier)
+{
+	t_info	*current_info;
+	char	*content;
+
+	current_info = info;
+	content = NULL;
+	while (current_info)
+	{
+		if (current_info->identifier == identifier)
+		{
+			content = ft_strdup(current_info->content);
+			return (content);
+		}
+		current_info = current_info->next;
+	}
+	return (NULL);
 }

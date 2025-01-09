@@ -1,21 +1,30 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser_matrix.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mcantell <mcantell@student.42roma.it>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/09 10:56:48 by mcantell          #+#    #+#             */
+/*   Updated: 2025/01/09 10:57:59 by mcantell         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/cub3D.h"
 
 static bool	set_map_start(t_game *game, const char **matrix);
-static int	get_map_width(const char **matrix);
+static int	get_map_max_width(const char **matrix);
 static int	get_map_height(const char **matrix);
 static void	copy_matrix(char **matrix_dest, const char **matrix_src);
 
-/**	
- * @brief parse matrix:
- * - set the map matrix starting row
- * - get the map width
- * - get the map height
- * - build a new matrix to make a perfect rectangle
- *  based on the max width and max height of the
- *  provided map matrix, then fill it with fille char
- *  'H' for better controls managment
- * - copy the provided map matrix into the new matrix and
- *  save it in the game structure
+/**
+ * @brief Parses the map matrix and initializes the game map structure.
+ *
+ * Build a new matrix with FILLER_CHAR ('H') where no char is found,
+ * creating a rectancle to keep controls simpler
+ * @param game The game object.
+ * @param matrix The map matrix to parse.
+ * @return True if successful, otherwise false.
  */
 bool	parse_matrix(t_game *game, const char **matrix)
 {
@@ -24,7 +33,7 @@ bool	parse_matrix(t_game *game, const char **matrix)
 	new_matrix = NULL;
 	if (set_map_start(game, matrix) == false)
 		return (ft_bool_putstr_fd(ERR_NO_MAP, 2));
-	game->map.width = get_map_width(matrix + game->map.check.map_start_row);
+	game->map.width = get_map_max_width(matrix + game->map.check.map_start_row);
 	game->map.height = get_map_height(matrix + game->map.check.map_start_row);
 	new_matrix = build_new_matrix(game->map.height, game->map.width);
 	copy_matrix(new_matrix, matrix + game->map.check.map_start_row);
@@ -34,9 +43,11 @@ bool	parse_matrix(t_game *game, const char **matrix)
 }
 
 /**
- * @brief set the starting point of the map in the file
- * passed by the user to make sure no infos are present after the
- * starting point.
+ * @brief Sets the starting row of the map in the matrix.
+ *
+ * @param game The game object.
+ * @param matrix The map matrix.
+ * @return True if a valid map row is found, otherwise false.
  */
 static bool	set_map_start(t_game *game, const char **matrix)
 {
@@ -64,7 +75,13 @@ static bool	set_map_start(t_game *game, const char **matrix)
 	return (false);
 }
 
-static int	get_map_width(const char **matrix)
+/**
+ * @brief Gets the max width of the map by finding the longest row in the matrix.
+ *
+ * @param matrix The map matrix.
+ * @return The width of the map (longest row length).
+ */
+static int	get_map_max_width(const char **matrix)
 {
 	int	y;
 	int	x;
@@ -84,6 +101,13 @@ static int	get_map_width(const char **matrix)
 	return (width);
 }
 
+/**
+ * @brief Gets the height of the map by counting
+ * the number of rows in the matrix.
+ *
+ * @param matrix The map matrix.
+ * @return The height of the map (number of rows).
+ */
 static int	get_map_height(const char **matrix)
 {
 	int	y;

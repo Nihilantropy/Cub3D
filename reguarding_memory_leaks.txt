@@ -1,0 +1,2 @@
+mlx doesn't leak at exit. if still reachable are present probably it's some images not freed or
+(like in my case) the mlx_destroy_display wasn't been called (solution found by claude ai)

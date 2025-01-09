@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   colors.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mcantell <mcantell@student.42roma.it>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/09 10:37:56 by mcantell          #+#    #+#             */
+/*   Updated: 2025/01/09 10:37:57 by mcantell         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef COLORS_H
 # define COLORS_H
 
@@ -7,9 +19,5 @@
 # define WHITE 0xFFFFFF
 # define BLACK 0x000000
 # define GRAY 0xAAAAAA
-
-# define FLOOR_COLOR 0x4A3728
-# define CEILING_COLOR 0x4B4B63
-# define NUM_SHADES 4
 
 #endif

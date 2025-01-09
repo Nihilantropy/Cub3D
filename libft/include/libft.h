@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: crea <crea@student.42roma.it>              +#+  +:+       +#+        */
+/*   By: mcantell <mcantell@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 21:56:04 by crea              #+#    #+#             */
-/*   Updated: 2024/09/07 12:27:47 by crea             ###   ########.fr       */
+/*   Updated: 2025/01/09 14:11:55 by mcantell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,16 +65,15 @@ bool	ft_bool_putstr_fd(char *str, int fd);
 
 /* get_next_line */
 
-#ifndef BUFFER_SIZE
-# define BUFFER_SIZE 1024
-#endif
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1024
+# endif
 
-typedef struct	s_list
+typedef struct s_list
 {
-	char    		*data;
-	struct  s_list  *next;
+	char			*data;
+	struct s_list	*next;
 }	t_list;
 char	*get_next_line(int fd);
-
 
 #endif
