@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   door_utils_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcantell <mcantell@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: crea <crea@student.42roma.it>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 13:57:26 by mcantell          #+#    #+#             */
-/*   Updated: 2025/01/09 13:57:27 by mcantell         ###   ########.fr       */
+/*   Updated: 2025/01/09 15:51:25 by crea             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,7 @@ void	free_door_system(t_game *game)
 {
 	int	i;
 
-	if (game->door_system.door)
-		free(game->door_system.door);
-	if (game->mlx_ptr)
+	if (game->mlx_ptr && game->door_system.door)
 	{
 		i = 0;
 		while (i < DOOR_FRAME)
@@ -33,4 +31,8 @@ void	free_door_system(t_game *game)
 			i++;
 		}
 	}
+	if (game->door_system.texture)
+		free(game->door_system.texture);
+	if (game->door_system.door)
+		free(game->door_system.door);
 }

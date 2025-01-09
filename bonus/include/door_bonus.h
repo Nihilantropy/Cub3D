@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   door_bonus.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcantell <mcantell@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: crea <crea@student.42roma.it>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 11:28:01 by mcantell          #+#    #+#             */
-/*   Updated: 2025/01/09 13:34:02 by mcantell         ###   ########.fr       */
+/*   Updated: 2025/01/09 15:53:39 by crea             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 # include "cub3D_bonus.h"
 
-# define DOOR_FRAMES 6
-# define DOOR_ANIM_SPEED 0
+# define DOOR_FRAME 30
+# define DOOR_ANIM_SPEED 1
 
 # define DOOR_TEXTURE_1 "./texture/door/door_texture_1.xpm"
 # define DOOR_TEXTURE_2 "./texture/door/door_texture_2.xpm"
@@ -52,7 +52,7 @@ typedef struct s_door
 
 typedef struct s_door_system
 {
-	void	*texture[DOOR_FRAME];
+	void	**texture;
 	t_door	*door;
 	int		door_counter;
 }	t_door_system;

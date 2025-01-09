@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcantell <mcantell@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: crea <crea@student.42roma.it>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 11:27:59 by mcantell          #+#    #+#             */
-/*   Updated: 2025/01/09 11:33:24 by mcantell         ###   ########.fr       */
+/*   Updated: 2025/01/09 15:55:12 by crea             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,12 @@
 
 # define DISPLAY_NAME "Cub3D"
 
-# define WIN_WIDTH 1920
-# define WIN_HEIGHT 1080
+# define WIN_WIDTH 3840
+# define WIN_HEIGHT 1980
 
 # define TILE_SIZE 64
 
 # define FRAME_TIME_MS 1000
-# define DOOR_FRAME 120
 
 # include <unistd.h>
 # include <stdio.h>

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_game_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcantell <mcantell@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: crea <crea@student.42roma.it>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 11:55:12 by mcantell          #+#    #+#             */
-/*   Updated: 2025/01/09 11:55:51 by mcantell         ###   ########.fr       */
+/*   Updated: 2025/01/09 15:36:26 by crea             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ t_game	*init_game(void)
 {
 	t_game	*game;
 
+	game = NULL;
 	game = malloc(sizeof(t_game));
 	if (!game)
 		ft_exit_error(ERR_ALLOC_GAME);

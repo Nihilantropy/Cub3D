@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   load_door_textures_bonus.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcantell <mcantell@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: crea <crea@student.42roma.it>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 11:45:34 by mcantell          #+#    #+#             */
-/*   Updated: 2025/01/09 11:47:39 by mcantell         ###   ########.fr       */
+/*   Updated: 2025/01/09 15:49:39 by crea             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D_bonus.h"
 
+static void	init_door_textures(t_door_system *door_system);
 static bool	generate_frames(t_game *game, t_render_state *orig_data,
 				int width);
 static bool	create_frame(t_game *game, t_render_state *orig_data,
@@ -31,7 +32,8 @@ bool	load_door_texture(t_game *game)
 	t_render_state	orig_data;
 	int				width;
 	int				height;
-
+	
+	init_door_textures(&game->door_system);
 	orig_data.img_ptr = mlx_xpm_file_to_image(game->mlx_ptr, DOOR_TEXTURE_1,
 			&width, &height);
 	if (!orig_data.img_ptr)
@@ -46,6 +48,18 @@ bool	load_door_texture(t_game *game)
 	}
 	mlx_destroy_image(game->mlx_ptr, orig_data.img_ptr);
 	return (true);
+}
+
+static void	init_door_textures(t_door_system *door_system)
+{
+	int	i;
+
+	door_system->texture = malloc(sizeof(void *) * DOOR_FRAME);
+	if (!door_system)
+		ft_exit_error(ERR_ALLOC_DOOR_TEXTURES);
+	i = 0;
+	while (i < DOOR_FRAME)
+		door_system->texture[i++] = NULL;
 }
 
 /**

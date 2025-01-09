@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcantell <mcantell@student.42roma.it>      +#+  +:+       +#+        */
+/*   By: crea <crea@student.42roma.it>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 11:28:04 by mcantell          #+#    #+#             */
-/*   Updated: 2025/01/09 11:35:00 by mcantell         ###   ########.fr       */
+/*   Updated: 2025/01/09 15:45:05 by crea             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@
 # define ERR_ALLOC_BOOL_MATRIX "Error\nBool matrix column alloc failed\n"
 # define ERR_ALLOC_RENDER_STATE "Error\nRender state alloc failed\n"
 # define ERR_ALLOC_DOOR "Error\nDoor alloc failed\n"
+# define ERR_ALLOC_DOOR_TEXTURES "Error\nDoor textures alloc failed\n"
 # define ERR_ALLOC_DOOR_PATH_MATRIX "Error\nPath matrix for door alloc failed\n"
 # define ERR_ALLOC_DOOR_PATH "Error\nPath for door alloc failed\n"
 
