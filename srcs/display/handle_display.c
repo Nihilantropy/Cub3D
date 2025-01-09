@@ -1,9 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   handle_display.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mcantell <mcantell@student.42roma.it>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/09 10:50:53 by mcantell          #+#    #+#             */
+/*   Updated: 2025/01/09 10:50:54 by mcantell         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/cub3D.h"
 
 static bool	open_display(t_game *game);
 
 /**
- * @brief create all images and open game window
+ * @brief Sets up game display by loading textures and initializing window
+ *
+ * @param game Game structure containing display data
+ * @return bool true if setup successful, false otherwise
  */
 bool	handle_display(t_game *game)
 {

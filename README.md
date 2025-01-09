@@ -1,111 +1,85 @@
+Here's the modified README.md that aligns more closely with the subject requirements:
+
 # 🎮 Cub3D - A Wolfenstein 3D-style Game Engine
 
 ## 🎯 Project Overview
-Hey there! Welcome to Cub3D, an exciting project that recreates the magic behind Wolfenstein 3D's rendering engine. We're going to dive into how we use raycasting to transform a simple 2D map into an immersive 3D world. It's like turning a maze drawn on paper into a real 3D environment you can walk through!
+Welcome to Cub3D, a project inspired by Wolfenstein 3D's rendering engine. Using raycasting, we transform a 2D map into an immersive 3D world, creating a dynamic view inside a maze.
 
 ## 🛠️ Technical Requirements 
-Before we jump in, here's what you need to know:
-- The project must be written in C
-- You can only use these functions:
- - Basic ones: open, close, read, write, printf, malloc, free, perror, strerror, exit
- - Math library functions (-lm)
- - MinilibX library functions
-- Libft library is allowed (your own C library)
+The project must follow these specifications:
+- Written in C according to the Norm
+- Allowed functions:
+  - Basic: open, close, read, write, printf, malloc, free, perror, strerror, exit
+  - Math library (-lm)
+  - MinilibX library
+- Libft library is allowed
 
 ## 🗺️ Map and Scene Description
-Your game reads a scene from a  file that contains:
-- Wall textures for each direction (NO, SO, WE, EA)
-- Floor and ceiling colors in RGB format
-- A map made of these characters:
- - '0' for empty spaces
- - '1' for walls
- - 'N', 'S', 'E' or 'W' for player's starting position and direction
+The scene is described in a .cub file containing:
+- Wall textures for each direction:
+  - NO ./texture/walls/north_wall_texture.xpm
+  - SO ./texture/walls/south_wall_texture.xpm
+  - WE ./texture/walls/west_wall_texture.xpm
+  - EA ./texture/walls/east_wall_texture.xpm
+- Floor and ceiling colors (RGB format)
+- Map using these characters:
+  - '0' for empty spaces
+  - '1' for walls
+  - 'N', 'S', 'E' or 'W' for player's starting position and direction
 
+## 🎨 Raycasting Implementation
 
-## 🎨 How Our Raycasting Works
+### 📐 Core Mechanics
+1. For each screen column:
+   - Calculate ray direction using camera plane
+   - Determine wall intersections using DDA algorithm
+   - Calculate wall height based on perpendicular distance
 
-### 📐 The Math Behind It
-Let's break down how we actually implemented raycasting in our  function:
+### 🎥 Display Requirements
+1. Texture Display:
+   - Different textures for each wall direction (N, S, E, W)
+   - Floor and ceiling colors
+   - Proper perspective correction
 
-1. For each screen column, we calculate a ray:
-   - The camera position transforms the screen x-coordinate (-1 to 1)
-   - We combine the player's direction with the camera plane
-   - This gives us our ray direction into the game world
+## 🎮 Controls
 
-2. Our magical DDA (Digital Differential Analysis) algorithm:
-   - First, we figure out the step size (how far we move in x and y)
-   - Then we calculate initial distances to the first grid lines
-   - We keep stepping through the grid until we hit a wall!
+### 👾 Basic Controls
+- Movement: W, A, S, D keys
+- Camera rotation: Left/Right arrow keys
+- Exit: ESC key or window close button
 
-### 🎥 Rendering the 3D View
-The cool part happens in our render_walls function:
-
-1. Wall Height Magic:
-   - We use the perpendicular distance to avoid that fisheye effect
-   - Calculate wall height based on distance (closer = taller)
-   - Center the walls vertically on screen
-
-2. Texture Mapping:
-   - We figure out which part of the wall we hit
-   - Pick the right texture (North, South, East, West)
-   - Add a neat shadow effect for walls hit on the sides
-
-## 🎮 Game Features
-
-### 👾 Player Movement
-- Move with W, A, S, D keys
-- Look around with left/right arrow keys
-- Press ESC to quit
-- Smooth window management included!
-
-### 🏃‍♂️ Game Loop Implementation
-Our game runs in a smooth loop that:
-1. Handles player input
-2. Updates the game state
-3. Renders the new frame
-4. Maintains consistent timing
-
-## 💡 Cool Implementation Details
-
-### 🌟 Special Effects
-- Different wall textures for each direction
-- Floor and ceiling colors
-- Distance-based shading
-- Proper perspective correction
-
-### 🔧 Performance Tricks
-- Smart use of DDA for quick ray calculations
-- Efficient texture mapping
-- Frame timing control for smooth movement
-- Careful memory management
+### 🏃‍♂️ Window Management
+- Smooth window handling (minimize, switch)
+- Clean exit on window close
 
 ## 🚀 Getting Started
 
 ### Building the Project
-- Use the provided Makefile
-- Compile with -Wall -Wextra -Werror flags
-- Link with MinilibX and math libraries
+```bash
+make        # Compile the project
+make clean  # Remove object files
+make fclean # Remove object files and executable
+make re     # Recompile everything
+```
 
-### Map Creation Rules
+### Map Requirements
 - Maps must be closed/surrounded by walls
 - Only one player starting position
-- Invalid maps should return an error
-- Spaces are valid in maps!
+- Invalid maps should return "Error\n" with explicit message
+- Spaces are valid in maps
 
-## 🎨 Bonus Features Ideas
-Want to make your Cub3D even cooler? Try adding:
+## 🎨 Bonus Features
+Optional enhancements:
 - Wall collisions
-- A minimap system
-- Opening and closing doors
+- Minimap system
+- Opening/closing doors
 - Animated sprites
-- Mouse look control
+- Mouse-controlled camera rotation
 
 ## 🎯 Key Challenges & Solutions
-Common challenges you might face:
-- Texture alignment issues? Check your wall hit calculations!
-- Movement feeling off? Double-check your delta time!
-- Walls looking weird? Make sure you're using perpendicular distance!
+Common issues to watch for:
+- Texture alignment: Verify wall hit calculations
+- Wall distortion: Ensure proper perpendicular distance calculation
+- Map parsing: Handle all edge cases and spaces correctly
 
-Remember: The goal is to create a smooth, immersive 3D experience from a 2D map. Take it step by step, and don't forget to handle those edge cases! 🎮✨
-
-Happy coding! 🚀
+Remember: Focus on creating a stable 3D visualization with clean, norm-compliant code! 🎮✨

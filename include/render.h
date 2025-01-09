@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   render.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mcantell <mcantell@student.42roma.it>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/09 10:37:05 by mcantell          #+#    #+#             */
+/*   Updated: 2025/01/09 10:37:33 by mcantell         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef RENDER_H
 # define RENDER_H
@@ -19,7 +30,7 @@ typedef struct s_textures
 	int		ceiling_color;
 	void	*floor;
 	void	*ceiling;
-    int		size;
+	int		size;
 }	t_textures;
 
 typedef struct s_wall_slice
@@ -42,6 +53,7 @@ typedef struct s_render_state
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
+	int		color;
 }	t_render_state;
 
 #endif

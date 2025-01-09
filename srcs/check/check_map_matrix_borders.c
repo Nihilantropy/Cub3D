@@ -1,13 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_map_matrix_borders.c                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mcantell <mcantell@student.42roma.it>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/09 10:45:59 by mcantell          #+#    #+#             */
+/*   Updated: 2025/01/09 10:47:25 by mcantell         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/cub3D.h"
 
 static void	check_borders(t_game *game, const char **matrix, int y, int x);
 static bool	is_valid_tile(char c);
 
 /**
- * @brief Check map matrix borders:
- * 1) Verify that all floor cells ('0') and space cells are surrounded
- *    by either walls ('1') or other valid cells
- * 2) Ensure the map is completely enclosed by walls
+ * @brief Checks if map borders are closed by examining adjacent cells
+ * around floor tiles and player position
+ *
+ * @param game Game structure for map validation
+ * @param matrix Map content as 2D array
  */
 void	check_map_matrix_borders(t_game *game, const char **matrix)
 {
@@ -33,8 +46,8 @@ void	check_map_matrix_borders(t_game *game, const char **matrix)
 
 static void	check_borders(t_game *game, const char **matrix, int y, int x)
 {
-	if (y == 0 || y == game->map.height - 1 || 
-		x == 0 || x == game->map.width - 1)
+	if (y == 0 || y == game->map.height - 1
+		|| x == 0 || x == game->map.width - 1)
 	{
 		game->map.check.map_open = true;
 		return ;
@@ -51,11 +64,10 @@ static void	check_borders(t_game *game, const char **matrix, int y, int x)
 
 static bool	is_valid_tile(char c)
 {
-	return (c == WALL ||
-			c == FLOOR ||
-			c == NORTH ||
-			c == SOUTH || 
-			c == EAST || 
-			c == WEST ||
-			c == MAP_FILLER);
+	return (c == WALL
+		|| c == FLOOR
+		|| c == NORTH
+		|| c == SOUTH
+		|| c == EAST
+		|| c == WEST);
 }

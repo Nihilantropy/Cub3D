@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_game.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mcantell <mcantell@student.42roma.it>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/09 10:53:32 by mcantell          #+#    #+#             */
+/*   Updated: 2025/01/09 10:54:49 by mcantell         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/cub3D.h"
 
 static void	init_map(t_game *game);
@@ -5,18 +17,20 @@ static void	init_display(t_game *game);
 static void	init_map_checks(t_game *game);
 static void	init_player(t_game *game);
 
-/** 
- *  @brief init game:
- *	initializing all variable in
- *	game structure
+/**
+ * @brief Initializes all game components to their default values:
+ * map, display settings, player state and textures. changed secure
+ * first frame render without key event
+ *
+ * @param game Pointer to the game structure to be initialized
  */
 void	init_game(t_game *game)
 {
 	game->mlx_ptr = NULL;
 	game->win_ptr = NULL;
 	game->running = false;
-    init_map(game);
-	init_minimap(game);
+	game->changed = true;
+	init_map(game);
 	init_display(game);
 	init_player(game);
 	init_textures(game);
@@ -37,7 +51,7 @@ static void	init_display(t_game *game)
 	game->display.open = false;
 }
 
-static void init_player(t_game *game)
+static void	init_player(t_game *game)
 {
 	game->player.face = 0;
 	game->player.pos.x = 0.0;
@@ -46,8 +60,8 @@ static void init_player(t_game *game)
 	game->player.pos.y_screen = 0;
 	game->player.speed = 0.0;
 	game->player.rot_speed = 0.0;
-	game->player.moving.forward = false;
-	game->player.moving.backward = false;
+	game->player.moving = m_still;
+	game->player.rotating = r_still;
 	game->player.camera.dir_x = 0.0;
 	game->player.camera.dir_y = 0.0;
 	game->player.camera.plane_x = 0.0;
@@ -85,4 +99,3 @@ static void	init_map_checks(t_game *game)
 	game->map.check.info = NULL;
 	init_info_list(game);
 }
-

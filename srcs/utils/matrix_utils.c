@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   matrix_utils.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mcantell <mcantell@student.42roma.it>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/09 11:13:38 by mcantell          #+#    #+#             */
+/*   Updated: 2025/01/09 11:14:02 by mcantell         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/cub3D.h"
 
 void	print_matrix(const char **matrix)
@@ -24,8 +36,8 @@ void	free_matrix(char **matrix)
 
 void	free_bool_matrix(bool **matrix)
 {
-	int y;
-	
+	int	y;
+
 	if (!matrix)
 		return ;
 	y = 0;
@@ -37,22 +49,22 @@ void	free_bool_matrix(bool **matrix)
 
 char	**dup_matrix(const char **matrix)
 {
-	char	**copy_matrix;
+	char	**dup_matrix;
 	int		y;
 
-	copy_matrix = NULL;
+	dup_matrix = NULL;
 	y = 0;
 	while (matrix[y])
 		y++;
-	copy_matrix = malloc(sizeof(char *) * (y + 1));
-	if (!copy_matrix)
-		ft_exit_error(ERR_ALLOC_MATRIX_COPY);
+	dup_matrix = malloc(sizeof(char *) * (y + 1));
+	if (!dup_matrix)
+		ft_exit_error(ERR_ALLOC_MATRIX_DUP);
 	y = 0;
 	while (matrix[y])
 	{
-		copy_matrix[y] = ft_strdup(matrix[y]);
+		dup_matrix[y] = ft_strdup(matrix[y]);
 		y++;
 	}
-	copy_matrix[y] = NULL;
-	return (copy_matrix);
+	dup_matrix[y] = NULL;
+	return (dup_matrix);
 }

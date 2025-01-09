@@ -1,11 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_arg.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mcantell <mcantell@student.42roma.it>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/09 10:45:54 by mcantell          #+#    #+#             */
+/*   Updated: 2025/01/09 10:45:55 by mcantell         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/cub3D.h"
 
 static bool	check_extention(char *str);
 
-/*	valid check:
-**	return 1 if argument passed or
-**	map extention are not valid
-*/
+/**
+ * @brief Validates command line arguments and map file extension
+ *
+ * @param argc Arguments count
+ * @param argv Arguments array
+ * @return bool true if valid, false otherwise
+ */
 bool	check_valid_arg(int argc, char **argv)
 {
 	if (argc != 2)
@@ -15,6 +30,12 @@ bool	check_valid_arg(int argc, char **argv)
 	return (true);
 }
 
+/**
+ * @brief Checks if file has .cub extension
+ *
+ * @param str File path to check
+ * @return bool true if extension is valid, false otherwise
+ */
 static bool	check_extention(char *str)
 {
 	int	i;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: crea <crea@student.42roma.it>              +#+  +:+       +#+        */
+/*   By: mcantell <mcantell@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 02:35:27 by crea              #+#    #+#             */
-/*   Updated: 2024/02/29 12:03:22 by crea             ###   ########.fr       */
+/*   Updated: 2025/01/09 14:09:38 by mcantell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ void	clean_list(t_list **list, t_list *new_head, char *buffer)
 		free(buffer);
 		free(new_head);
 	}
-
 }
 
 void	cpy_nodes(char *line, t_list *list)
@@ -85,11 +84,11 @@ int	len_to_newline(t_list *list)
 	return (len);
 }
 
-int find_newline(t_list *list)
+int	find_newline(t_list *list)
 {
 	int	i;
 
-	if(!list)
+	if (!list)
 		return (0);
 	while (list)
 	{
@@ -105,11 +104,11 @@ int find_newline(t_list *list)
 	return (0);
 }
 
-t_list  *find_last_node(t_list *list)
+t_list	*find_last_node(t_list *list)
 {
 	if (!list)
-		return (NULL); 
+		return (NULL);
 	while (list->next)
 		list = list->next;
-	return(list);
+	return (list);
 }
