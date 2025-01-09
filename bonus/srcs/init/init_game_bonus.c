@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_game_bonus.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mcantell <mcantell@student.42roma.it>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/09 11:55:12 by mcantell          #+#    #+#             */
+/*   Updated: 2025/01/09 11:55:51 by mcantell         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/cub3D_bonus.h"
 
 static void	init_device(t_game *game);
@@ -24,7 +36,7 @@ t_game	*init_game(void)
 	game->running = false;
 	game->changed = true;
 	init_device(game);
-    init_map(game);
+	init_map(game);
 	init_display(game);
 	init_player(game);
 	init_textures(game);

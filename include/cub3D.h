@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3D.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mcantell <mcantell@student.42roma.it>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/09 10:37:59 by mcantell          #+#    #+#             */
+/*   Updated: 2025/01/09 10:42:54 by mcantell         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB3D_H
 # define CUB3D_H
 
@@ -27,7 +39,7 @@
 
 # define TILE_SIZE 64
 
-# define FRAME_TIME_MS 1000 / 60
+# define FRAME_TIME_MS 1000
 
 typedef struct s_display
 {
@@ -136,8 +148,8 @@ bool	is_valid_pos(const char **matrix, double new_y, double new_x);
 /*** raycast ***/
 /* raycast */
 void	cast_ray(t_game *game, t_player *player, int x);
-void	init_ray(t_camera *camera, double ray_dir_x, 
-		double ray_dir_y, t_pos *pos);
+void	init_ray(t_camera *camera, double ray_dir_x,
+			double ray_dir_y, t_pos *pos);
 /* ray step */
 void	calculate_step_dist(t_camera *camera, t_pos *pos);
 int		step_in_x_direction(t_camera *camera);
@@ -152,14 +164,15 @@ int		calculate_wall_height(t_game *game, double perp_wall_dist);
 /* render frame */
 int		render_frame(t_game *game);
 /* render walls */
-void 	render_walls(t_game *game, t_render_state *state, int x);
+void	render_walls(t_game *game, t_render_state *state, int x);
 /* render walls utils */
-void 	calculate_wall_slice(t_wall_slice *slice, t_game *game, 
-	double perp_wall_dist);
-void 	select_wall_texture(t_wall_slice *slice, t_game *game, t_camera *cam);
-void 	calculate_texture_coords(t_wall_slice *slice, t_game *game, t_camera *cam);
+void	calculate_wall_slice(t_wall_slice *slice, t_game *game,
+			double perp_wall_dist);
+void	select_wall_texture(t_wall_slice *slice, t_game *game, t_camera *cam);
+void	calculate_texture_coords(t_wall_slice *slice, t_game *game,
+			t_camera *cam);
 void	apply_texture_color(t_render_state *state, t_render_state *tex_data,
-							t_wall_slice *slice, int position);
+			t_wall_slice *slice, int position);
 /* render floor and ceiling */
 void	render_floor_ceiling(t_game *game, t_render_state *state);
 
@@ -177,6 +190,5 @@ void	print_info_list(t_info *info);
 void	free_info_list(t_info **info);
 /* textures utils */
 void	free_textures(t_game *game);
-
 
 #endif

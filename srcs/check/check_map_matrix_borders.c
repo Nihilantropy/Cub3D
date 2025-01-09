@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_map_matrix_borders.c                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mcantell <mcantell@student.42roma.it>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/09 10:45:59 by mcantell          #+#    #+#             */
+/*   Updated: 2025/01/09 10:47:25 by mcantell         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/cub3D.h"
 
 static void	check_borders(t_game *game, const char **matrix, int y, int x);
@@ -34,8 +46,8 @@ void	check_map_matrix_borders(t_game *game, const char **matrix)
 
 static void	check_borders(t_game *game, const char **matrix, int y, int x)
 {
-	if (y == 0 || y == game->map.height - 1 || 
-		x == 0 || x == game->map.width - 1)
+	if (y == 0 || y == game->map.height - 1
+		|| x == 0 || x == game->map.width - 1)
 	{
 		game->map.check.map_open = true;
 		return ;
@@ -52,10 +64,10 @@ static void	check_borders(t_game *game, const char **matrix, int y, int x)
 
 static bool	is_valid_tile(char c)
 {
-	return (c == WALL ||
-			c == FLOOR ||
-			c == NORTH ||
-			c == SOUTH || 
-			c == EAST || 
-			c == WEST);
+	return (c == WALL
+		|| c == FLOOR
+		|| c == NORTH
+		|| c == SOUTH
+		|| c == EAST
+		|| c == WEST);
 }

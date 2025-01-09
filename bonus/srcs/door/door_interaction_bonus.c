@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   door_interaction_bonus.c                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mcantell <mcantell@student.42roma.it>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/09 11:50:18 by mcantell          #+#    #+#             */
+/*   Updated: 2025/01/09 13:38:34 by mcantell         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/cub3D_bonus.h"
 
 static t_door	*find_closest_door(t_game *game);
@@ -20,7 +32,8 @@ void	handle_door_interaction(t_game *game)
 		return ;
 	toggle_door_state(closest_door);
 	if (closest_door->anim_state == door_closing)
-		update_map_matrix(game, (int)closest_door->pos.y, (int)closest_door->pos.x, false);
+		update_map_matrix(game, (int)closest_door->pos.y,
+			(int)closest_door->pos.x, false);
 	closest_door->active = true;
 	game->changed = true;
 }
@@ -47,19 +60,25 @@ static void	toggle_door_state(t_door *door)
 */
 static t_door	*find_closest_door(t_game *game)
 {
-	t_door	*closest_door = NULL;
-	double	min_distance = DOOR_INTERACT_DIST;
-	int		i;
-	
+	t_door			*closest_door;
+	double			min_distance;
+	int				i;
+	t_door_inter	inter;
+
+	closest_door = NULL;
+	min_distance = DOOR_INTERACT_DIST;
 	i = 0;
 	while (i < game->door_system.door_counter)
 	{
-		double dx = game->player.pos.x - game->door_system.door[i].pos.x;
-		double dy = game->player.pos.y - game->door_system.door[i].pos.y;
-		double distance = sqrt(dx * dx + dy * dy);
-		if (distance < min_distance)
+		inter.coord_dist.x = game->player.pos.x
+			- game->door_system.door[i].pos.x;
+		inter.coord_dist.y = game->player.pos.y
+			- game->door_system.door[i].pos.y;
+		inter.distance = sqrt((inter.coord_dist.x * inter.coord_dist.x)
+				+ (inter.coord_dist.y * inter.coord_dist.y));
+		if (inter.distance < min_distance)
 		{
-			min_distance = distance;
+			min_distance = inter.distance;
 			closest_door = &game->door_system.door[i];
 		}
 		i++;
@@ -76,10 +95,13 @@ static t_door	*find_closest_door(t_game *game)
 */
 static bool	is_within_door_range(t_game *game, t_door *door)
 {
-	double dx = game->player.pos.x - door->pos.x;
-	double dy = game->player.pos.y - door->pos.y;
-	double distance = sqrt(dx * dx + dy * dy);
-	return (distance <= DOOR_INTERACT_DIST);
+	t_door_inter	inter;
+
+	inter.coord_dist.x = game->player.pos.x - door->pos.x;
+	inter.coord_dist.y = game->player.pos.y - door->pos.y;
+	inter.distance = sqrt((inter.coord_dist.x * inter.coord_dist.x)
+			+ (inter.coord_dist.y * inter.coord_dist.y));
+	return (inter.distance <= DOOR_INTERACT_DIST);
 }
 
 void	update_map_matrix(t_game *game, int y, int x, bool open)

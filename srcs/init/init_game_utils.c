@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_game_utils.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mcantell <mcantell@student.42roma.it>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/09 10:53:29 by mcantell          #+#    #+#             */
+/*   Updated: 2025/01/09 10:54:21 by mcantell         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/cub3D.h"
 
 static void		append_info_node(t_info **info, t_info *new_node);
 static t_info	*find_last_info_node(t_info *info);
-static char		set_info_identifier(int	i);
+static char		set_info_identifier(int i);
 
 /**
  * @brief Initializes the map's info list with default nodes.
@@ -37,7 +49,7 @@ void	init_info_list(t_game *game)
  * @param i The index corresponding to an identifier.
  * @return The character identifier ('N', 'S', 'E', 'W', 'F', or 'C').
  */
-static char	set_info_identifier(int	i)
+static char	set_info_identifier(int i)
 {
 	if (i == 0)
 		return ('N');
@@ -51,7 +63,7 @@ static char	set_info_identifier(int	i)
 		return ('F');
 	else if (i == 5)
 		return ('C');
-	return (0);	
+	return (0);
 }
 
 /**
@@ -60,7 +72,7 @@ static char	set_info_identifier(int	i)
  * @param info Pointer to the head of the info list.
  * @param new_node The node to append to the list.
  */
-static void append_info_node(t_info **info, t_info *new_node)
+static void	append_info_node(t_info **info, t_info *new_node)
 {
 	t_info	*last_node;
 
@@ -82,7 +94,7 @@ static void append_info_node(t_info **info, t_info *new_node)
  * @param info The head of the info list.
  * @return The last node in the list.
  */
-static t_info   *find_last_info_node(t_info *info)
+static t_info	*find_last_info_node(t_info *info)
 {
 	while (info->next)
 		info = info->next;

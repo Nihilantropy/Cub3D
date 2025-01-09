@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   messages.h                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mcantell <mcantell@student.42roma.it>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/09 10:38:04 by mcantell          #+#    #+#             */
+/*   Updated: 2025/01/09 10:38:50 by mcantell         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MESSAGES_H
 # define MESSAGES_H
 
-#define EXIT_MSG "Goodbye!\n"
+# define EXIT_MSG "Goodbye!\n"
 
 #endif

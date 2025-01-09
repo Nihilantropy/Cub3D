@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   raycast.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mcantell <mcantell@student.42roma.it>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/09 11:01:18 by mcantell          #+#    #+#             */
+/*   Updated: 2025/01/09 11:01:19 by mcantell         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/cub3D.h"
 
 /**
@@ -41,7 +53,7 @@ void	cast_ray(t_game *game, t_player *player, int x)
  * @param ray_dir_y Y component of ray direction
  * @param pos Current position in world space
  */
-void	init_ray(t_camera *camera, double ray_dir_x, 
+void	init_ray(t_camera *camera, double ray_dir_x,
 		double ray_dir_y, t_pos *pos)
 {
 	camera->ray_dir_x = ray_dir_x;

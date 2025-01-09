@@ -1,13 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser_get_player_bonus.c                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mcantell <mcantell@student.42roma.it>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/09 12:00:14 by mcantell          #+#    #+#             */
+/*   Updated: 2025/01/09 12:01:03 by mcantell         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/cub3D_bonus.h"
 
 static void	set_player_var(t_game *game, int y, int x);
 static void	set_player_pos(t_game *game, int y, int x);
-static void set_player_rot(t_game *game, char face);
+static void	set_player_rot(t_game *game, char face);
 
 /**
  * @brief Finds and sets the player's position in the map.
- * 
- * Scans the map matrix for the player character, updates the player's position, 
+ *
+ * Scans the map matrix for the player character, updates the player's position,
  * and marks the position as FLOOR.
  * @param game The game object containing the map.
  * @return None.
@@ -44,8 +56,9 @@ bool	is_player_char(char player)
 
 /**
  * @brief Initializes player variables based on the player's position.
- * 
- * Sets the player's facing direction, speed, rotation speed, position, and rotation 
+ *
+ * Sets the player's facing direction, speed,
+ * rotation speed, position, and rotation
  * according to the given coordinates on the map.
  * @param game The game object containing the player and map data.
  * @param y The row index of the player's position in the map.
@@ -58,12 +71,12 @@ static void	set_player_var(t_game *game, int y, int x)
 	game->player.speed = P_SPEED;
 	game->player.rot_speed = R_SPEED;
 	set_player_pos(game, y, x);
-	set_player_rot(game, game->player.face);	
+	set_player_rot(game, game->player.face);
 }
 
 /**
  * @brief Sets the player's position with an offset.
- * 
+ *
  * @param game The game object.
  * @param y The row index.
  * @param x The column index.
@@ -76,13 +89,14 @@ static void	set_player_pos(t_game *game, int y, int x)
 }
 
 /**
- * @brief Sets the player's camera direction and plane based on the facing direction.
- * 
+ * @brief Sets the player's camera direction and
+ * plane based on the facing direction.
+ *
  * @param game The game object.
  * @param face The player's facing direction (NORTH, EAST, SOUTH, WEST).
  * @return None.
  */
-static void set_player_rot(t_game *game, char face)
+static void	set_player_rot(t_game *game, char face)
 {
 	if (face == NORTH)
 		set_north_rot(game);

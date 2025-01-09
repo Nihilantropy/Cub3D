@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mcantell <mcantell@student.42roma.it>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/09 10:54:57 by mcantell          #+#    #+#             */
+/*   Updated: 2025/01/09 10:56:23 by mcantell         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/cub3D.h"
 
 /**
@@ -5,13 +17,14 @@
  * validates input, sets up display, and starts the game loop.
  *
  * @param argc Number of command-line arguments
- * @param argv Array of command-line arguments, where argv[1] is the map file path
- * @return int Returns 0 on successful execution, exits with failure status on errors
+ * @param argv Array of command-line arguments,
+ * where argv[1] is the map file path
+ * @return int Returns 0 on successful execution,
+ * exits with failure status on errors
  */
 int	main(int argc, char **argv)
 {
 	t_game	game;
-
 
 	if (check_valid_arg(argc, argv) == false)
 	{

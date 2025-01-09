@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_map_info_bonus.c                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mcantell <mcantell@student.42roma.it>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/09 11:38:12 by mcantell          #+#    #+#             */
+/*   Updated: 2025/01/09 11:42:09 by mcantell         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/cub3D_bonus.h"
 
 static bool	info_identifier_found(t_game *game, const char *line);
@@ -47,8 +59,8 @@ void	check_map_infos(t_game *game, const char **matrix)
  */
 static bool	info_identifier_found(t_game *game, const char *line)
 {
-	t_info  *info;
-	char    identifier;
+	t_info	*info;
+	char	identifier;
 
 	if (!game || !game->map.check.info || !line)
 		return (false);
@@ -68,7 +80,6 @@ static bool	info_identifier_found(t_game *game, const char *line)
 	}
 	return (false);
 }
-
 
 static char	get_identifier(const char *line)
 {

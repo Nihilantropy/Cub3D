@@ -1,7 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_map_matrix.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mcantell <mcantell@student.42roma.it>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/09 10:46:03 by mcantell          #+#    #+#             */
+/*   Updated: 2025/01/09 10:50:41 by mcantell         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/cub3D.h"
 
 static void	check_map_matrix_wrong_char(t_game *game,
-										const char **matrix);
+				const char **matrix);
 static bool	is_tile(char c);
 
 /**
@@ -55,6 +67,6 @@ static void	check_map_matrix_wrong_char(t_game *game,
 
 static bool	is_tile(char c)
 {
-	return (c == FLOOR || c == WALL || c == NORTH || c == SOUTH ||
-			c == EAST || c == WEST || c == MAP_FILLER);
+	return (c == FLOOR || c == WALL || c == NORTH || c == SOUTH
+		|| c == EAST || c == WEST || c == MAP_FILLER);
 }

@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ray_dda.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mcantell <mcantell@student.42roma.it>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/09 11:01:11 by mcantell          #+#    #+#             */
+/*   Updated: 2025/01/09 11:02:15 by mcantell         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/cub3D.h"
 
-static void    perform_dda_step(t_camera *camera, int *side);
+static void	perform_dda_step(t_camera *camera, int *side);
 
 /**
  * @brief Executes Digital Differential Analysis for ray casting.
@@ -24,8 +36,8 @@ int	perform_dda(t_game *game, t_camera *camera)
 	while (hit == 0 && iter < game->map.width * game->map.height)
 	{
 		perform_dda_step(camera, &side);
-		if (camera->map_y < 0 || camera->map_y >= game->map.height ||
-			camera->map_x < 0 || camera->map_x >= game->map.width)
+		if (camera->map_y < 0 || camera->map_y >= game->map.height
+			|| camera->map_x < 0 || camera->map_x >= game->map.width)
 			return (-1);
 		if (game->map.matrix[camera->map_y][camera->map_x] == WALL)
 			hit = 1;

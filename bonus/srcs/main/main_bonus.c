@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mcantell <mcantell@student.42roma.it>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/09 11:57:04 by mcantell          #+#    #+#             */
+/*   Updated: 2025/01/09 11:57:41 by mcantell         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/cub3D_bonus.h"
 
 /**
@@ -5,8 +17,10 @@
  * validates input, sets up display, and starts the game loop.
  *
  * @param argc Number of command-line arguments
- * @param argv Array of command-line arguments, where argv[1] is the map file path
- * @return int Returns 0 on successful execution, exits with failure status on errors
+ * @param argv Array of command-line arguments,
+ * where argv[1] is the map file path
+ * @return int Returns 0 on successful execution,
+ * exits with failure status on errors
  */
 int	main(int argc, char **argv)
 {
@@ -47,9 +61,9 @@ int	game_loop(t_game *game)
 	long					elapsed_time;
 
 	gettimeofday(&tv, NULL);
-	elapsed_time = (tv.tv_sec - last_frame_time.tv_sec) * 1000 +
-			(tv.tv_usec - last_frame_time.tv_usec) / 2000;
-	if (elapsed_time < FRAME_TIME_MS)
+	elapsed_time = (tv.tv_sec - last_frame_time.tv_sec) * 1000
+		+ (tv.tv_usec - last_frame_time.tv_usec) / 2000;
+	if (elapsed_time < FRAME_TIME_MS / 60)
 		return (0);
 	handle_key_update(game);
 	handle_mouse_update(game);

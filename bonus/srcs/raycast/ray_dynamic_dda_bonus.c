@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ray_dynamic_dda_bonus.c                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mcantell <mcantell@student.42roma.it>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/09 12:06:23 by mcantell          #+#    #+#             */
+/*   Updated: 2025/01/09 12:06:57 by mcantell         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/cub3D_bonus.h"
 
 static int	check_dynamic_collision(t_game *game, t_camera *camera);
@@ -40,7 +52,7 @@ int	perform_dynamic_dda(t_game *game, t_camera *camera)
 * @param side Current wall side hit
 * @return int 1 if collision detected, 0 otherwise
 */
-static int check_dynamic_collision(t_game *game, t_camera *camera)
+static int	check_dynamic_collision(t_game *game, t_camera *camera)
 {
 	t_door	*door;
 
@@ -59,5 +71,5 @@ static int check_dynamic_collision(t_game *game, t_camera *camera)
 			return (1);
 		}
 	}
-    return (0);
+	return (0);
 }

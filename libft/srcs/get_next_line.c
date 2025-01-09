@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: crea <crea@student.42roma.it>              +#+  +:+       +#+        */
+/*   By: mcantell <mcantell@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 02:35:30 by crea              #+#    #+#             */
-/*   Updated: 2024/02/29 12:06:17 by crea             ###   ########.fr       */
+/*   Updated: 2025/01/09 14:08:42 by mcantell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	clean_list(t_list **list, t_list *new_head, char *buffer);
 void	cpy_nodes(char *line, t_list *list);
 int		len_to_newline(t_list *list);
 int		find_newline(t_list *list);
-t_list  *find_last_node(t_list *list);
+t_list	*find_last_node(t_list *list);
 
 static void	polish_list(t_list **list)
 {
@@ -106,5 +106,5 @@ char	*get_next_line(int fd)
 		return (NULL);
 	line = extract_line(list);
 	polish_list(&list);
-	return (line);  
+	return (line);
 }

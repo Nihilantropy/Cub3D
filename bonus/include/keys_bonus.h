@@ -1,5 +1,17 @@
-#ifndef KEYS_H
-# define KEYS_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   keys_bonus.h                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mcantell <mcantell@student.42roma.it>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/09 11:28:05 by mcantell          #+#    #+#             */
+/*   Updated: 2025/01/09 11:36:16 by mcantell         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef KEYS_BONUS_H
+# define KEYS_BONUS_H
 
 # define X_EVENT_KEY_PRESS 2
 # define X_EVENT_KEY_RELEASE 3

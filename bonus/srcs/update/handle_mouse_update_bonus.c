@@ -1,13 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   handle_mouse_update_bonus.c                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mcantell <mcantell@student.42roma.it>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/09 13:54:04 by mcantell          #+#    #+#             */
+/*   Updated: 2025/01/09 13:56:45 by mcantell         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/cub3D_bonus.h"
 
 static bool	handle_mouse_x_edges(t_game *game);
 
 /**
-* @brief Updates mouse position and handles rotation based on movement
-*
-* @param game Game structure containing mouse and display data
-*/
-void    handle_mouse_update(t_game *game)
+ * @brief Updates mouse position and handles rotation based on movement
+ *
+ * @param game Game structure containing mouse and display data
+ */
+void	handle_mouse_update(t_game *game)
 {
 	int	old_x;
 
@@ -32,11 +44,11 @@ void    handle_mouse_update(t_game *game)
 }
 
 /**
-* @brief Handles mouse behavior at screen edges
-*
-* @param game Game structure containing display dimensions
-* @return true if mouse is at edge, false otherwise
-*/
+ * @brief Handles mouse behavior at screen edges
+ *
+ * @param game Game structure containing display dimensions
+ * @return true if mouse is at edge, false otherwise
+ */
 static bool	handle_mouse_x_edges(t_game *game)
 {
 	if (game->mouse.x == 0)
@@ -50,15 +62,15 @@ static bool	handle_mouse_x_edges(t_game *game)
 		return (true);
 	}
 	return (false);
-
 }
+
 /**
-// * @brief Controls mouse cursor if in game window
-// *
-// * @param game Game structure containing mouse and display data
-// * @param x Current mouse X position
-// * @param y Current mouse Y position
-// */
+ * @brief Controls mouse cursor if in game window
+ *
+ * @param game Game structure containing mouse and display data
+ * @param x Current mouse X position
+ * @param y Current mouse Y position
+ */
 void	handle_mouse_appear(t_game *game, int x, int y)
 {
 	if ((x < 0 || x > game->display.width)

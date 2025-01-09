@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   player.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mcantell <mcantell@student.42roma.it>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/09 10:38:06 by mcantell          #+#    #+#             */
+/*   Updated: 2025/01/09 10:43:24 by mcantell         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PLAYER_H
 # define PLAYER_H
 
@@ -10,9 +22,7 @@
 /* player hitbox radius for wall collision */
 # define PLAYER_RADIUS 0.2
 
-#ifndef M_PI
 # define M_PI 3.14159265358979323846
-#endif
 
 /**
  * @brief Camera structure containing all raycasting-related data.

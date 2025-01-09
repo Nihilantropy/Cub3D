@@ -1,23 +1,35 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   load_floor_and_ceiling.c                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mcantell <mcantell@student.42roma.it>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/09 10:50:59 by mcantell          #+#    #+#             */
+/*   Updated: 2025/01/09 10:53:04 by mcantell         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/cub3D.h"
 
-static bool process_rgb_values(int *color, char **values);
-static bool create_solid_color_texture(t_game *game, void **texture, int color);
-static bool	load_color_texture(t_game *game, char identifier, 
-							int *color_ptr, void **texture);
+static bool	process_rgb_values(int *color, char **values);
+static bool	create_solid_color_texture(t_game *game, void **texture, int color);
+static bool	load_color_texture(t_game *game, char identifier,
+				int *color_ptr, void **texture);
 
 /**
  * @brief Creates floor and ceiling textures from RGB color values
- * 
+ *
  * @param game Game structure containing texture data
  * @return bool true if both textures created successfully, false otherwise
  */
-bool load_floor_and_ceiling(t_game *game)
+bool	load_floor_and_ceiling(t_game *game)
 {
 	if (!load_color_texture(game, 'F', &game->textures.floor_color,
-						&game->textures.floor))
+			&game->textures.floor))
 		return (ft_bool_putstr_fd(ERR_LOAD_FLOOR_RGB, 2));
 	if (!load_color_texture(game, 'C', &game->textures.ceiling_color,
-						&game->textures.ceiling))
+			&game->textures.ceiling))
 		return (ft_bool_putstr_fd(ERR_LOAD_CEILING_RGB, 2));
 	return (true);
 }
@@ -31,7 +43,7 @@ bool load_floor_and_ceiling(t_game *game)
  * @param texture Pointer to store created texture
  * @return bool true if texture created successfully, false otherwise
  */
-static bool load_color_texture(t_game *game, char identifier, 
+static bool	load_color_texture(t_game *game, char identifier,
 							int *color_ptr, void **texture)
 {
 	char	*rgb_str;
@@ -69,7 +81,7 @@ static bool	create_solid_color_texture(t_game *game, void **texture, int color)
 	if (!(*texture))
 		return (false);
 	state.img_data = (int *)mlx_get_data_addr(*texture, &state.bits_per_pixel,
-								&state.line_length, &state.endian);
+			&state.line_length, &state.endian);
 	y = 0;
 	while (y < TEXTURE_SIZE)
 	{
@@ -91,7 +103,7 @@ static bool	create_solid_color_texture(t_game *game, void **texture, int color)
  * @param values Array of RGB strings to process
  * @return bool true if valid and converted, false otherwise
  */
-static bool process_rgb_values(int *color, char **values)
+static bool	process_rgb_values(int *color, char **values)
 {
 	if (!check_rgb_values((const char **)values))
 	{

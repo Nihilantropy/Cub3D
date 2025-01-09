@@ -1,5 +1,17 @@
-#ifndef COLORS_H
-# define COLORS_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   colors_bonus.h                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mcantell <mcantell@student.42roma.it>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/09 11:27:57 by mcantell          #+#    #+#             */
+/*   Updated: 2025/01/09 11:36:04 by mcantell         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef COLORS_BONUS_H
+# define COLORS_BONUS_H
 
 # define RED 0xFF0000
 # define YELLOW 0xFFFF00

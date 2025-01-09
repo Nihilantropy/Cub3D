@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   player_movement.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mcantell <mcantell@student.42roma.it>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/09 10:59:09 by mcantell          #+#    #+#             */
+/*   Updated: 2025/01/09 11:00:48 by mcantell         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/cub3D.h"
 
 static void	calculate_move_step(t_player *p, double *step_x, double *step_y);
@@ -6,8 +18,9 @@ static void	update_direction(t_camera *cam, double rot_speed);
 
 /**
  * @brief Updates player movement state based on input.
- * 
- * Sets movement flags and updates player position according to movement direction.
+ *
+ * Sets movement flags and updates player position
+ * according to movement direction.
  * @param game Main game state containing player data.
  * @param moving Movement input flag (STILL, FORWARD, or BACKWARD).
  */
@@ -63,8 +76,8 @@ static void	update_player_pos(t_game *game)
 	calculate_move_step(&game->player, &step_x, &step_y);
 	if (step_x == 0 && step_y == 0)
 		return ;
-	if (is_valid_pos((const char **)game->map.matrix, 
-		game->player.pos.y + step_y, game->player.pos.x + step_x))
+	if (is_valid_pos((const char **)game->map.matrix,
+			game->player.pos.y + step_y, game->player.pos.x + step_x))
 	{
 		new_pos.x = game->player.pos.x + step_x;
 		new_pos.y = game->player.pos.y + step_y;
@@ -80,13 +93,14 @@ static void	update_player_pos(t_game *game)
 
 /**
 * @brief Calculates movement step based on player direction.
-* 
+*
 * Computes x and y movement steps using player's direction and speed.
 * @param p Player data containing movement state and camera info.
 * @param step_x Pointer to store calculated x step.
 * @param step_y Pointer to store calculated y step.
 */
-static void	calculate_move_step(t_player *player, double *step_x, double *step_y)
+static void	calculate_move_step(t_player *player, double *step_x,
+			double *step_y)
 {
 	if (player->moving == m_forward)
 		move_step_forward(player, step_x, step_y);
@@ -118,6 +132,7 @@ static void	update_direction(t_camera *cam, double rot_speed)
 	old_plane_x = cam->plane_x;
 	cam->dir_x = cam->dir_x * cos(rot_speed) - cam->dir_y * sin(rot_speed);
 	cam->dir_y = old_dir_x * sin(rot_speed) + cam->dir_y * cos(rot_speed);
-	cam->plane_x = cam->plane_x * cos(rot_speed) - cam->plane_y * sin(rot_speed);
+	cam->plane_x = cam->plane_x * cos(rot_speed)
+		- cam->plane_y * sin(rot_speed);
 	cam->plane_y = old_plane_x * sin(rot_speed) + cam->plane_y * cos(rot_speed);
 }

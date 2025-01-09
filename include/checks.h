@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   checks.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mcantell <mcantell@student.42roma.it>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/09 10:37:54 by mcantell          #+#    #+#             */
+/*   Updated: 2025/01/09 10:38:31 by mcantell         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CHECKS_H
 # define CHECKS_H
 
@@ -13,7 +25,7 @@ typedef enum e_tiles
 	MAP_FILLER = 'H',
 	SPACE = ' ',
 	TAB = '\t',
-}	e_tiles;
+}	t_tiles;
 
 /* keep track of the necessary map infos */
 typedef struct s_info

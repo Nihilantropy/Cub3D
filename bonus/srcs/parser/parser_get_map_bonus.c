@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser_get_map_bonus.c                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mcantell <mcantell@student.42roma.it>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/09 12:00:13 by mcantell          #+#    #+#             */
+/*   Updated: 2025/01/09 12:03:37 by mcantell         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/cub3D_bonus.h"
 
 static int	get_matrix_len(const char *map);
@@ -5,8 +17,9 @@ static bool	build_matrixes(t_game *game, char **matrix, const char *map);
 
 /**
  * @brief Loads and validates the map from the given file.
- * 
- * Builds a matrix from the map, checks if the map is valid, and returns a result.
+ *
+ * Builds a matrix from the map,
+ * checks if the map is valid, and returns a result.
  * @param game The game context.
  * @param map The map file content.
  * @return true if the map is valid, false otherwise.
@@ -39,7 +52,7 @@ bool	get_map(t_game *game, const char *map)
 
 /**
  * @brief Builds the matrix from the map file.
- * 
+ *
  * Reads each line from the map file, trims it, and stores it in the matrix.
  * Parses the matrix to ensure the map is valid.
  * @param game The game context.
@@ -77,7 +90,7 @@ static bool	build_matrixes(t_game *game, char **matrix, const char *map)
 
 /**
  * @brief Returns the number of lines in the map file.
- * 
+ *
  * Reads the map file line by line and counts the total number of lines.
  * @param map The map file path.
  * @return The number of lines in the map file.

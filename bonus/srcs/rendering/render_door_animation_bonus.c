@@ -1,7 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   render_door_animation_bonus.c                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mcantell <mcantell@student.42roma.it>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/09 12:08:34 by mcantell          #+#    #+#             */
+/*   Updated: 2025/01/09 14:07:13 by mcantell         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/cub3D_bonus.h"
 
 static int	get_texture_pixel(t_render_state *tex_data, t_slice *slice,
-							double tex_pos, int x);
+				double tex_pos);
 static bool	is_transparent_pixel(unsigned int color);
 
 /**
@@ -23,16 +35,16 @@ void	render_transparent_slice(t_render_state *state, t_slice *slice,
 
 	if (!init_texture_rendering(slice, &tex_data, &step))
 		return ;
-	tex_pos = (slice->start_y - game->display.height / 2 + 
-			slice->height / 2) * step;
+	tex_pos = (slice->start_y - game->display.height / 2
+			+ slice->height / 2) * step;
 	y = slice->start_y;
 	while (y < slice->end_y)
 	{
-		color = get_texture_pixel(&tex_data, slice, tex_pos, x);
+		color = get_texture_pixel(&tex_data, slice, tex_pos);
 		if (!is_transparent_pixel(color))
 		{
 			if (y >= 0 && y < game->display.height)
-				state->img_data[y * game->display.width + x] = color; // + - 1
+				state->img_data[y * game->display.width + x] = color;
 		}
 		tex_pos += step;
 		y++;
@@ -49,11 +61,10 @@ void	render_transparent_slice(t_render_state *state, t_slice *slice,
 * @return int Color value at the specified position
 */
 static int	get_texture_pixel(t_render_state *tex_data, t_slice *slice,
-							double tex_pos, int x)
+							double tex_pos)
 {
 	int	tex_y;
 	int	position;
-	(void)x;
 
 	tex_y = (int)tex_pos & (TEXTURE_SIZE - 1);
 	position = TEXTURE_SIZE * tex_y + slice->tex_x;

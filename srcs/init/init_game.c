@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_game.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mcantell <mcantell@student.42roma.it>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/09 10:53:32 by mcantell          #+#    #+#             */
+/*   Updated: 2025/01/09 10:54:49 by mcantell         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/cub3D.h"
 
 static void	init_map(t_game *game);
@@ -18,7 +30,7 @@ void	init_game(t_game *game)
 	game->win_ptr = NULL;
 	game->running = false;
 	game->changed = true;
-    init_map(game);
+	init_map(game);
 	init_display(game);
 	init_player(game);
 	init_textures(game);
@@ -39,7 +51,7 @@ static void	init_display(t_game *game)
 	game->display.open = false;
 }
 
-static void init_player(t_game *game)
+static void	init_player(t_game *game)
 {
 	game->player.face = 0;
 	game->player.pos.x = 0.0;
@@ -87,4 +99,3 @@ static void	init_map_checks(t_game *game)
 	game->map.check.info = NULL;
 	init_info_list(game);
 }
-

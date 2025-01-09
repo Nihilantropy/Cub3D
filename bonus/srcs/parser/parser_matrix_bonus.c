@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser_matrix_bonus.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mcantell <mcantell@student.42roma.it>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/09 12:00:18 by mcantell          #+#    #+#             */
+/*   Updated: 2025/01/09 12:01:44 by mcantell         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/cub3D_bonus.h"
 
 static bool	set_map_start(t_game *game, const char **matrix);
@@ -6,8 +18,9 @@ static int	get_map_height(const char **matrix);
 static void	copy_matrix(char **matrix_dest, const char **matrix_src);
 
 /**
- * @brief Parses the map matrix and initializes the game map structure.
- * 
+ * @brief Parses the map matrix and
+ *  initializes the game map structure.
+ *
  * Build a new matrix with FILLER_CHAR ('H') where no char is found,
  * creating a rectancle to keep controls simpler
  * @param game The game object.
@@ -33,7 +46,7 @@ bool	parse_matrix(t_game *game, const char **matrix)
 
 /**
  * @brief Sets the starting row of the map in the matrix.
- * 
+ *
  * @param game The game object.
  * @param matrix The map matrix.
  * @return True if a valid map row is found, otherwise false.
@@ -66,7 +79,7 @@ static bool	set_map_start(t_game *game, const char **matrix)
 
 /**
  * @brief Gets the max width of the map by finding the longest row in the matrix.
- * 
+ *
  * @param matrix The map matrix.
  * @return The width of the map (longest row length).
  */
@@ -91,8 +104,9 @@ static int	get_map_max_width(const char **matrix)
 }
 
 /**
- * @brief Gets the height of the map by counting the number of rows in the matrix.
- * 
+ * @brief Gets the height of the map by
+ * counting the number of rows in the matrix.
+ *
  * @param matrix The map matrix.
  * @return The height of the map (number of rows).
  */

@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   load_textures.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mcantell <mcantell@student.42roma.it>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/09 10:51:01 by mcantell          #+#    #+#             */
+/*   Updated: 2025/01/09 10:51:54 by mcantell         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/cub3D.h"
 
-static bool load_single_texture(t_game *game, void **texture, char identifier);
+static bool	load_single_texture(t_game *game, void **texture, char identifier);
 
 /**
  * @brief Loads all game textures from XPM files
@@ -11,16 +23,14 @@ static bool load_single_texture(t_game *game, void **texture, char identifier);
 bool	load_textures(t_game *game)
 {
 	game->textures.size = TEXTURE_SIZE;
-
-	if (!load_single_texture(game, &game->textures.north, 'N') ||
-		!load_single_texture(game, &game->textures.south, 'S') ||
-		!load_single_texture(game, &game->textures.east, 'E') ||
-		!load_single_texture(game, &game->textures.west, 'W') ||
-		!load_floor_and_ceiling(game))
+	if (!load_single_texture(game, &game->textures.north, 'N')
+		|| !load_single_texture(game, &game->textures.south, 'S')
+		|| !load_single_texture(game, &game->textures.east, 'E')
+		|| !load_single_texture(game, &game->textures.west, 'W')
+		|| !load_floor_and_ceiling(game))
 	{
 		return (ft_bool_putstr_fd(ERR_TEXTURE_LOAD, 2));
 	}
-
 	return (true);
 }
 
@@ -32,7 +42,7 @@ bool	load_textures(t_game *game)
  * @param identifier Wall direction identifier (N,S,E,W)
  * @return bool true if texture loaded correctly, false on any error
  */
-static bool load_single_texture(t_game *game, void **texture, char identifier)
+static bool	load_single_texture(t_game *game, void **texture, char identifier)
 {
 	int		width;
 	int		height;

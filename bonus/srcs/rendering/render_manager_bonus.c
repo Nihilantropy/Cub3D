@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   render_manager_bonus.c                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mcantell <mcantell@student.42roma.it>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/09 12:08:40 by mcantell          #+#    #+#             */
+/*   Updated: 2025/01/09 14:04:22 by mcantell         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/cub3D_bonus.h"
 
 /**
@@ -19,12 +31,12 @@ void	*get_texture(t_game *game, t_camera *cam, int side)
 		return (select_door_texture(game, door));
 	}
 	if (cam->ray_dir_y > 0 && side == 1)
-		return game->textures.south;
+		return (game->textures.south);
 	else if (cam->ray_dir_y <= 0 && side == 1)
-		return game->textures.north;
+		return (game->textures.north);
 	else if (cam->ray_dir_x > 0 && side == 0)
-		return game->textures.east;
-	return game->textures.west;
+		return (game->textures.east);
+	return (game->textures.west);
 }
 
 /**

@@ -1,5 +1,17 @@
-#ifndef CUB3D_H
-# define CUB3D_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3D_bonus.h                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mcantell <mcantell@student.42roma.it>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/09 11:27:59 by mcantell          #+#    #+#             */
+/*   Updated: 2025/01/09 11:33:24 by mcantell         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef CUB3D_BONUS_H
+# define CUB3D_BONUS_H
 
 # define DISPLAY_NAME "Cub3D"
 
@@ -8,7 +20,7 @@
 
 # define TILE_SIZE 64
 
-# define FRAME_TIME_MS 1000 / 60
+# define FRAME_TIME_MS 1000
 # define DOOR_FRAME 120
 
 # include <unistd.h>
@@ -34,7 +46,6 @@
 # include "door_bonus.h"
 # include "mouse_bonus.h"
 
-
 typedef struct s_display
 {
 	int		width;
@@ -58,7 +69,7 @@ typedef struct s_game
 	t_player		player;
 	t_textures		textures;
 	t_minimap		minimap;
-	t_door_system   door_system;
+	t_door_system	door_system;
 	t_keys			keys;
 	t_mouse			mouse;
 	bool			running;
@@ -79,7 +90,7 @@ t_game	*init_game(void);
 /* init game utils */
 void	init_info_list(t_game *game);
 /* init player */
-void 	init_player(t_game *game);
+void	init_player(t_game *game);
 /* init textures */
 void	init_textures(t_game *game);
 /* init minimap */
@@ -173,16 +184,17 @@ void	move_step_left(t_player *player, double *step_x, double *step_y);
 void	move_step_right(t_player *player, double *step_x, double *step_y);
 void	move_step_still(double *step_x, double *step_y);
 /* player collision */
-bool 	try_slide_movement(t_game *game, t_pos *new_pos, 
-							double step_x, double step_y);
+bool	try_slide_movement(t_game *game, t_pos *new_pos,
+			double step_x, double step_y);
 /* player collision utils */
 bool	is_valid_pos(const char **matrix, double new_y, double new_x);
 
 /*** raycast ***/
 /* raycast */
-int		cast_ray(t_game *game, t_player *player, int x, t_render_type render_type);
-void	init_ray(t_camera *camera, double ray_dir_x, 
-		double ray_dir_y, t_pos *pos);
+int		cast_ray(t_game *game, t_player *player, int x,
+			t_render_type render_type);
+void	init_ray(t_camera *camera, double ray_dir_x,
+			double ray_dir_y, t_pos *pos);
 /* ray step */
 void	calculate_step_dist(t_camera *camera, t_pos *pos);
 double	calculate_perp_dist(t_camera *camera, t_pos *pos, int side);
@@ -201,22 +213,22 @@ int		render_frame(t_game *game);
 /* render manager */
 void	*get_texture(t_game *game, t_camera *cam, int side);
 void	get_texture_color(t_render_state *state, t_render_state *tex_data,
-						t_slice *slice, int position);
+			t_slice *slice, int position);
 /* render 3d map */
 void	render_3d_map(t_game *game, t_render_state *state);
 /* render walls */
 void	render_textured_slice(t_render_state *state, t_slice *slice,
-									t_game *game, int x);
-bool	init_texture_rendering(t_slice *slice, t_render_state *tex_data, 
-								double *step);
+			t_game *game, int x);
+bool	init_texture_rendering(t_slice *slice, t_render_state *tex_data,
+			double *step);
 bool	get_texture_data(t_slice *slice, t_render_state *tex_data);
 /* render walls utils */
-void 	calculate_slice(t_slice *slice, t_game *game, 
-	double perp_wall_dist);
-void 	calculate_texture_coords(t_slice *slice, t_game *game, t_camera *cam);
+void	calculate_slice(t_slice *slice, t_game *game,
+			double perp_wall_dist);
+void	calculate_texture_coords(t_slice *slice, t_game *game, t_camera *cam);
 /* render door animation */
 void	render_transparent_slice(t_render_state *state, t_slice *slice,
-								t_game *game, int x);
+			t_game *game, int x);
 /* render floor and ceiling */
 void	render_floor_ceiling(t_game *game, t_render_state *state);
 /* render minimap */
@@ -233,8 +245,8 @@ t_door	*find_door_at_position(t_game *game, int x, int y);
 /* handle key update */
 void	handle_key_update(t_game *game);
 /* handle mouse update */
-void    handle_mouse_update(t_game *game);
-void 	handle_mouse_appear(t_game *game, int x, int y);
+void	handle_mouse_update(t_game *game);
+void	handle_mouse_appear(t_game *game, int x, int y);
 /* update animation */
 void	update_animations(t_game *game);
 
@@ -256,6 +268,5 @@ void	free_textures(t_game *game);
 void	free_door_system(t_game *game);
 /* minimap utils */
 void	destroy_minimap_texture(t_game *game);
-
 
 #endif

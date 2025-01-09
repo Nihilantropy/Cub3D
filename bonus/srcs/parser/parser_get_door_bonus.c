@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser_get_door_bonus.c                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mcantell <mcantell@student.42roma.it>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/09 12:00:09 by mcantell          #+#    #+#             */
+/*   Updated: 2025/01/09 12:03:23 by mcantell         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/cub3D_bonus.h"
 
 static void	get_door_nbr(t_game *game);
@@ -26,7 +38,7 @@ static void	get_door_nbr(t_game *game)
 	while (game->map.matrix[y])
 	{
 		x = 0;
-		while(game->map.matrix[y][x])
+		while (game->map.matrix[y][x])
 		{
 			if (is_door_char(game->map.matrix[y][x]))
 				game->door_system.door_counter++;
@@ -47,7 +59,7 @@ static void	get_door_info(t_game *game)
 	while (game->map.matrix[y] && door_nbr < game->door_system.door_counter)
 	{
 		x = 0;
-		while(game->map.matrix[y][x])
+		while (game->map.matrix[y][x])
 		{
 			if (is_door_char(game->map.matrix[y][x]))
 			{

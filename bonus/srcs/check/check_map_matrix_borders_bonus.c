@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_map_matrix_borders_bonus.c                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mcantell <mcantell@student.42roma.it>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/09 11:38:16 by mcantell          #+#    #+#             */
+/*   Updated: 2025/01/09 11:41:49 by mcantell         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/cub3D_bonus.h"
 
 static void	check_borders(t_game *game, const char **matrix, int y, int x);
@@ -34,16 +46,16 @@ void	check_map_matrix_borders(t_game *game, const char **matrix)
 
 static void	check_borders(t_game *game, const char **matrix, int y, int x)
 {
-	if (y == 0 || y == game->map.height - 1 || 
-		x == 0 || x == game->map.width - 1)
+	if (y == 0 || y == game->map.height - 1
+		|| x == 0 || x == game->map.width - 1)
 	{
 		game->map.check.map_open = true;
 		return ;
 	}
-	if (!is_valid_tile(matrix[y - 1][x]) ||
-		!is_valid_tile(matrix[y + 1][x]) ||
-		!is_valid_tile(matrix[y][x - 1]) ||
-		!is_valid_tile(matrix[y][x + 1]))
+	if (!is_valid_tile(matrix[y - 1][x])
+		|| !is_valid_tile(matrix[y + 1][x])
+		|| !is_valid_tile(matrix[y][x - 1])
+		|| !is_valid_tile(matrix[y][x + 1]))
 	{
 		game->map.check.map_open = true;
 		return ;
@@ -52,11 +64,11 @@ static void	check_borders(t_game *game, const char **matrix, int y, int x)
 
 static bool	is_valid_tile(char c)
 {
-	return (c == WALL ||
-			c == FLOOR ||
-			c == NORTH ||
-			c == SOUTH || 
-			c == EAST || 
-			c == WEST ||
-			c == DOOR);
+	return (c == WALL
+		|| c == FLOOR
+		|| c == NORTH
+		|| c == SOUTH
+		|| c == EAST
+		|| c == WEST
+		|| c == DOOR);
 }

@@ -1,8 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser_get_infos_bonus.c                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mcantell <mcantell@student.42roma.it>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/09 12:00:11 by mcantell          #+#    #+#             */
+/*   Updated: 2025/01/09 12:02:53 by mcantell         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/cub3D_bonus.h"
 
 static char	*parse_info_content(const char *line);
 static char	*parse_line(const char *line);
-static char	*process_line_content(const char *line, char *new_line, int *i, int *j);
+static char	*process_line_content(const char *line,
+				char *new_line, int *i, int *j);
 
 /**
  * @brief Parses and stores content for a specific info node.
@@ -10,7 +23,8 @@ static char	*process_line_content(const char *line, char *new_line, int *i, int 
  * @param game The game structure containing map and error information.
  * @param info The info node to store the parsed content.
  * @param line The line to parse for content.
- * @return true if the content is successfully parsed and stored, false otherwise.
+ * @return true if the content is successfully parsed and
+ *  stored, false otherwise.
  */
 bool	parse_info(t_game *game, t_info *info, const char *line)
 {
@@ -99,7 +113,8 @@ static char	*parse_line(const char *line)
  * @param j The current index in the new line.
  * @return The processed line with standardized spaces.
  */
-static char	*process_line_content(const char *line, char *new_line, int *i, int *j)
+static char	*process_line_content(const char *line,
+			char *new_line, int *i, int *j)
 {
 	bool	word_started;
 

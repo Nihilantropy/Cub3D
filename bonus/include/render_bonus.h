@@ -1,6 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   render_bonus.h                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mcantell <mcantell@student.42roma.it>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/09 11:36:38 by mcantell          #+#    #+#             */
+/*   Updated: 2025/01/09 11:37:03 by mcantell         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#ifndef RENDER_H
-# define RENDER_H
+#ifndef RENDER_BONUS_H
+# define RENDER_BONUS_H
 
 # include "cub3D_bonus.h"
 
@@ -24,7 +35,7 @@ typedef struct s_textures
 	int		ceiling_color;
 	void	*floor;
 	void	*ceiling;
-    int		size;
+	int		size;
 }	t_textures;
 
 typedef struct s_slice

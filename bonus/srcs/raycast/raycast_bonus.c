@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   raycast_bonus.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mcantell <mcantell@student.42roma.it>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/09 12:06:29 by mcantell          #+#    #+#             */
+/*   Updated: 2025/01/09 12:06:30 by mcantell         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/cub3D_bonus.h"
 
 /**
@@ -16,7 +28,7 @@ int	cast_ray(t_game *game, t_player *player, int x, t_render_type render_type)
 	double	ray_dir_x;
 	double	ray_dir_y;
 	int		side;
-	
+
 	side = -1;
 	camera_x = 2 * x / (double)game->display.width - 1;
 	ray_dir_x = player->camera.dir_x + player->camera.plane_x * camera_x;
@@ -43,7 +55,7 @@ int	cast_ray(t_game *game, t_player *player, int x, t_render_type render_type)
  * @param ray_dir_y Y component of ray direction
  * @param pos Current position in world space
  */
-void	init_ray(t_camera *camera, double ray_dir_x, 
+void	init_ray(t_camera *camera, double ray_dir_x,
 		double ray_dir_y, t_pos *pos)
 {
 	camera->ray_dir_x = ray_dir_x;

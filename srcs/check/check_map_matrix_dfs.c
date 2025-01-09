@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_map_matrix_dfs.c                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mcantell <mcantell@student.42roma.it>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/09 10:46:01 by mcantell          #+#    #+#             */
+/*   Updated: 2025/01/09 10:49:17 by mcantell         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/cub3D.h"
 
 static bool	is_valid_cell(const char **matrix, int y, int x);
@@ -22,8 +34,8 @@ void	check_map_matrix_island(t_game *game, const char **matrix)
 		x = 0;
 		while (matrix[y][x])
 		{
-			if (is_valid_cell(matrix, y, x) &&
-				!game->map.check.visited[y][x])
+			if (is_valid_cell(matrix, y, x)
+				&& !game->map.check.visited[y][x])
 			{
 				if (game->map.check.found_region)
 				{
@@ -43,7 +55,7 @@ static bool	**create_bool_matrix(t_game *game, const char **matrix)
 {
 	bool	**visited;
 	int		y;
-	
+
 	visited = malloc(sizeof(bool *) * (game->map.height + 1));
 	if (!visited)
 		ft_exit_error(ERR_ALLOC_BOOL_MATRIX);
@@ -62,14 +74,14 @@ static bool	**create_bool_matrix(t_game *game, const char **matrix)
 
 static bool	is_valid_cell(const char **matrix, int y, int x)
 {
-	return (y >= 0 &&
-			x >= 0 &&
-			matrix[y] != NULL &&
-			matrix[y][x] != '\0' &&
-			matrix[y][x] != MAP_FILLER &&
-			(matrix[y][x] == WALL || 
-			matrix[y][x] == FLOOR ||
-			is_player_char(matrix[y][x])));
+	return (y >= 0
+		&& x >= 0
+		&& matrix[y] != NULL
+		&& matrix[y][x] != '\0'
+			&& matrix[y][x] != MAP_FILLER
+			&& (matrix[y][x] == WALL
+			|| matrix[y][x] == FLOOR
+			|| is_player_char(matrix[y][x])));
 }
 
 /**

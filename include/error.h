@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   error.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mcantell <mcantell@student.42roma.it>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/09 10:38:01 by mcantell          #+#    #+#             */
+/*   Updated: 2025/01/09 10:45:03 by mcantell         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef ERROR_H
 # define ERROR_H
 
@@ -18,7 +30,7 @@
 # define ERR_MATRIX_LEN "Error\nMap matrix length is too small\n"
 # define ERR_MAP_MATRIX "Error\nMap matrix format is incorrect\n"
 # define ERR_MAP_ISLAND "Error\nMap matrix contain an island\n"
-# define ERR_MAP_BORDERS "Error\nMap matrix borders are open or there's a hole in the map\n"
+# define ERR_MAP_BORDERS "Error\nMap matrix map or borders are open\n"
 # define ERR_NBR_PLAYER "Error\nWrong number of player\n"
 
 /* generic err msg*/
@@ -34,9 +46,9 @@
 # define ERR_ALLOC_RENDER_STATE "Error\nRender state alloc failed\n"
 
 /* raycast error msg */
-# define ERR_INVALID_RAY_CAST_ACCESS "Error\nInvalid acces on raycast\nClosing game...\n"
+# define ERR_INVALID_RAY_CAST_ACCESS "Error\nInvalid acces on raycast\n"
 
 /* player out of bound error msg */
-# define ERR_OUT_OF_BOUND "Error\nYou exceeded map limts. No wall collision implemented\n"
+# define ERR_OUT_OF_BOUND "Error\nYou exceeded map limts\n"
 
 #endif

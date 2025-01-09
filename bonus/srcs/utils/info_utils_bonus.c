@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   info_utils_bonus.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mcantell <mcantell@student.42roma.it>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/09 13:57:31 by mcantell          #+#    #+#             */
+/*   Updated: 2025/01/09 13:57:37 by mcantell         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/cub3D_bonus.h"
 
 void	print_info_list(t_info *info)
@@ -24,7 +36,7 @@ void	free_info_list(t_info **info)
 	t_info	*next;
 
 	if (!*info)
-		return;
+		return ;
 	current = *info;
 	while (current)
 	{

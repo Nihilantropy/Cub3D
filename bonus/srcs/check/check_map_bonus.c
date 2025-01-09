@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_map_bonus.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mcantell <mcantell@student.42roma.it>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/09 11:38:10 by mcantell          #+#    #+#             */
+/*   Updated: 2025/01/09 11:39:58 by mcantell         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/cub3D_bonus.h"
 
 static void	check_map_order(t_game *game, const char **matrix, int x, int y);
@@ -35,11 +47,12 @@ bool	check_valid_map(t_game *game, const char **matrix)
 }
 
 /**
- * @brief Validates proper order of map elements and identifies invalid characters
- * 
+ * @brief Validates proper order of map elements
+ * and identifies invalid characters
+ *
  * @param game Game structure with map validation state
  * @param matrix Map file content as 2D array
- * @param x 
+ * @param x
  * @param y
  */
 static void	check_map_order(t_game *game, const char **matrix, int x, int y)

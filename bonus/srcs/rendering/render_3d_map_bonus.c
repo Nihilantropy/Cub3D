@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   render_3d_map_bonus.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mcantell <mcantell@student.42roma.it>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/09 12:08:33 by mcantell          #+#    #+#             */
+/*   Updated: 2025/01/09 12:08:34 by mcantell         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/cub3D_bonus.h"
 
 static void	render_static_textures(t_game *game, t_render_state *state);
@@ -57,5 +69,5 @@ static void	render_dynamic_textures(t_game *game, t_render_state *state)
 		slice.texture = get_texture(game, &game->player.camera, slice.side);
 		render_transparent_slice(state, &slice, game, x);
 		x++;
-	}	
+	}
 }

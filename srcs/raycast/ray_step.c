@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ray_step.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mcantell <mcantell@student.42roma.it>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/09 11:01:16 by mcantell          #+#    #+#             */
+/*   Updated: 2025/01/09 11:01:58 by mcantell         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/cub3D.h"
 
 /**
@@ -62,10 +74,10 @@ void	calculate_wall_dist(t_camera *camera, t_pos *pos, int side)
 	double	original_dist;
 
 	if (side == 0)
-		original_dist = (camera->map_x - pos->x + 
-			(1 - camera->step_x) / 2) / camera->ray_dir_x;
+		original_dist = (camera->map_x - pos->x
+				+ (1 - camera->step_x) / 2) / camera->ray_dir_x;
 	else
-		original_dist = (camera->map_y - pos->y + 
-			(1 - camera->step_y) / 2) / camera->ray_dir_y;
+		original_dist = (camera->map_y - pos->y
+				+ (1 - camera->step_y) / 2) / camera->ray_dir_y;
 	camera->perp_wall_dist = fabs(original_dist);
 }

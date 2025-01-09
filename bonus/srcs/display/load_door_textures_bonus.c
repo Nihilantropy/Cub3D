@@ -1,18 +1,31 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   load_door_textures_bonus.c                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mcantell <mcantell@student.42roma.it>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/09 11:45:34 by mcantell          #+#    #+#             */
+/*   Updated: 2025/01/09 11:47:39 by mcantell         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/cub3D_bonus.h"
 
-static bool	generate_frames(t_game *game, t_render_state *orig_data, int width);
+static bool	generate_frames(t_game *game, t_render_state *orig_data,
+				int width);
 static bool	create_frame(t_game *game, t_render_state *orig_data,
 				int frame, int width);
-static void	fill_frame_pixels(t_render_state *tex_data, t_render_state *orig_data,
-				int width, int offset);
+static void	fill_frame_pixels(t_render_state *tex_data,
+				t_render_state *orig_data, int width, int offset);
 
 /**
  * @brief Loads door texture and generates all animation frames
  * Creates a sequence of textures showing the door sliding open
- * 
+ *
  * @param game Game structure containing door system data
  * @return bool true if door textures loaded successfully, false otherwise
- */	
+ */
 bool	load_door_texture(t_game *game)
 {
 	t_render_state	orig_data;
@@ -24,7 +37,8 @@ bool	load_door_texture(t_game *game)
 	if (!orig_data.img_ptr)
 		return (false);
 	orig_data.img_data = (int *)mlx_get_data_addr(orig_data.img_ptr,
-			&orig_data.bits_per_pixel, &orig_data.line_length, &orig_data.endian);
+			&orig_data.bits_per_pixel, &orig_data.line_length,
+			&orig_data.endian);
 	if (!generate_frames(game, &orig_data, width))
 	{
 		mlx_destroy_image(game->mlx_ptr, orig_data.img_ptr);
@@ -36,7 +50,7 @@ bool	load_door_texture(t_game *game)
 
 /**
  * @brief Generates all frames for the door animation sequence
- * 
+ *
  * @param game Game structure containing door system data
  * @param orig_data Original door texture data
  * @param width Width of the texture
@@ -58,7 +72,7 @@ static bool	generate_frames(t_game *game, t_render_state *orig_data, int width)
 
 /**
  * @brief Creates a single frame of the door animation sequence
- * 
+ *
  * @param game Game structure containing MLX data
  * @param orig_data Original door texture data
  * @param frame Current frame number being generated
@@ -84,14 +98,14 @@ static bool	create_frame(t_game *game, t_render_state *orig_data,
 
 /**
  * @brief Fills new frame pixels with offset door texture or transparency
- * 
+ *
  * @param tex_data New frame texture data
  * @param orig_data Original door texture data
  * @param width Width of the texture
  * @param offset X-offset for sliding door effect
  */
-static void	fill_frame_pixels(t_render_state *tex_data, t_render_state *orig_data,
-				int width, int offset)
+static void	fill_frame_pixels(t_render_state *tex_data,
+				t_render_state *orig_data, int width, int offset)
 {
 	int	x;
 	int	y;
@@ -107,11 +121,10 @@ static void	fill_frame_pixels(t_render_state *tex_data, t_render_state *orig_dat
 			if (src_x >= width)
 				tex_data->img_data[y * width + x] = TRANSPARENT;
 			else
-				tex_data->img_data[y * width + x] = orig_data->img_data[y * width
-					+ src_x];
+				tex_data->img_data[y * width + x]
+					= orig_data->img_data[y * width + src_x];
 			x++;
 		}
 		y++;
 	}
 }
-

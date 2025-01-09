@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   door_bonus.h                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mcantell <mcantell@student.42roma.it>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/09 11:28:01 by mcantell          #+#    #+#             */
+/*   Updated: 2025/01/09 13:34:02 by mcantell         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef DOOR_BONUS_H
 # define DOOR_BONUS_H
 
@@ -21,10 +33,17 @@ typedef enum e_door_state
 	door_closing
 }	t_door_state;
 
+typedef struct s_door_inter
+{
+	t_pos	coord_dist;
+	double	distance;
+}	t_door_inter;
+
 typedef struct s_door
 {
 	t_pos			pos;
 	t_door_state	anim_state;
+	t_door_inter	interaction;
 	int				frame;
 	int				anim_counter;
 	bool			active;

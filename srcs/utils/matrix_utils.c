@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   matrix_utils.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mcantell <mcantell@student.42roma.it>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/09 11:13:38 by mcantell          #+#    #+#             */
+/*   Updated: 2025/01/09 11:14:02 by mcantell         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/cub3D.h"
 
 void	print_matrix(const char **matrix)
@@ -24,8 +36,8 @@ void	free_matrix(char **matrix)
 
 void	free_bool_matrix(bool **matrix)
 {
-	int y;
-	
+	int	y;
+
 	if (!matrix)
 		return ;
 	y = 0;

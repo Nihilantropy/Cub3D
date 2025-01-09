@@ -1,8 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   player_collision_utils_bonus.c                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mcantell <mcantell@student.42roma.it>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/09 12:03:45 by mcantell          #+#    #+#             */
+/*   Updated: 2025/01/09 12:05:34 by mcantell         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/cub3D_bonus.h"
 
-static bool	check_corner_points(const char **matrix, double new_x, double new_y);
-static bool	check_circle_points(const char **matrix, 
-								double new_x, double new_y);
+static bool	check_corner_points(const char **matrix,
+				double new_x, double new_y);
+static bool	check_circle_points(const char **matrix,
+				double new_x, double new_y);
 static bool	is_valid_grid_point(const char **matrix, double x, double y);
 
 /**
@@ -18,8 +31,8 @@ static bool	is_valid_grid_point(const char **matrix, double x, double y);
  */
 bool	is_valid_pos(const char **matrix, double new_y, double new_x)
 {
-	return (check_corner_points(matrix, new_x, new_y) && 
-			check_circle_points(matrix, new_x, new_y));
+	return (check_corner_points(matrix, new_x, new_y)
+		&& check_circle_points(matrix, new_x, new_y));
 }
 
 /**
@@ -64,7 +77,7 @@ static bool	check_corner_points(const char **matrix, double new_x, double new_y)
  * @param new_y Center Y coordinate to check
  * @return true if all circle points are valid, false if any point collides
  */
-static bool	check_circle_points(const char **matrix, 
+static bool	check_circle_points(const char **matrix,
 								double new_x, double new_y)
 {
 	double	check_radius;
@@ -104,8 +117,8 @@ static bool	is_valid_grid_point(const char **matrix, double x, double y)
 
 	grid_x = (int)x;
 	grid_y = (int)y;
-	if (grid_y < 0 || matrix[grid_y] == NULL || 
-		grid_x < 0 || matrix[grid_y][grid_x] == '\0')
+	if (grid_y < 0 || matrix[grid_y] == NULL
+		|| grid_x < 0 || matrix[grid_y][grid_x] == '\0')
 		return (false);
 	if (matrix[grid_y][grid_x] != FLOOR)
 		return (false);

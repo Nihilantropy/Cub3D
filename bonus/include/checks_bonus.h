@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   checks_bonus.h                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mcantell <mcantell@student.42roma.it>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/09 11:27:55 by mcantell          #+#    #+#             */
+/*   Updated: 2025/01/09 11:30:52 by mcantell         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CHECKS_BONUS_H
 # define CHECKS_BONUS_H
 
@@ -14,7 +26,7 @@ typedef enum e_tiles
 	DOOR = 'D',
 	SPACE = ' ',
 	TAB = '\t',
-}	e_tiles;
+}	t_tiles;
 
 /* keep track of the necessary map infos */
 typedef struct s_info

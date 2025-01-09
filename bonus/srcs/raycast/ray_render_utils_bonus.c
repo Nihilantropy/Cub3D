@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ray_render_utils_bonus.c                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mcantell <mcantell@student.42roma.it>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/09 12:06:24 by mcantell          #+#    #+#             */
+/*   Updated: 2025/01/09 12:08:07 by mcantell         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/cub3D_bonus.h"
 
 /**
@@ -31,8 +43,8 @@ int	calculate_wall_height(t_game *game, double perp_wall_dist)
 */
 int	check_map_bounds(t_camera *camera, t_game *game)
 {
-	if (camera->map_y < 0 || camera->map_y >= game->map.height ||
-		camera->map_x < 0 || camera->map_x >= game->map.width)
+	if (camera->map_y < 0 || camera->map_y >= game->map.height
+		|| camera->map_x < 0 || camera->map_x >= game->map.width)
 		return (-1);
 	return (0);
 }

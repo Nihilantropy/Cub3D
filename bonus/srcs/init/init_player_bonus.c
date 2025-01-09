@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_player_bonus.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mcantell <mcantell@student.42roma.it>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/09 11:55:17 by mcantell          #+#    #+#             */
+/*   Updated: 2025/01/09 11:55:37 by mcantell         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/cub3D_bonus.h"
 
 static void	init_camera(t_game *game);
 
-void init_player(t_game *game)
+void	init_player(t_game *game)
 {
 	game->player.face = 0;
 	game->player.pos.x = 0.0;

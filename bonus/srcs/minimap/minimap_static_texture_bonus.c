@@ -1,11 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minimap_static_texture_bonus.c                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mcantell <mcantell@student.42roma.it>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/09 11:57:55 by mcantell          #+#    #+#             */
+/*   Updated: 2025/01/09 12:00:04 by mcantell         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/cub3D_bonus.h"
 
-static void	create_static_background(t_render_state *state, 
-								t_minimap *minimap);
-static void create_static_walls(t_game *game, t_render_state *state, 
-							t_minimap *minimap);
+static void	create_static_background(t_render_state *state,
+				t_minimap *minimap);
+static void	create_static_walls(t_game *game, t_render_state *state,
+				t_minimap *minimap);
 static void	draw_wall_tile(t_render_state *state, t_minimap *minimap,
-						t_pos *tile_pos, int line_length);
+				t_pos *tile_pos, int line_length);
 static void	draw_minimap_borders(t_render_state *state, t_minimap *minimap);
 
 /**
@@ -20,11 +32,12 @@ bool	init_static_minimap_texture(t_game *game)
 	t_minimap		*minimap;
 
 	minimap = &game->minimap;
-	state.img_ptr = mlx_new_image(game->mlx_ptr, minimap->width, minimap->height);
+	state.img_ptr = mlx_new_image(game->mlx_ptr,
+			minimap->width, minimap->height);
 	if (!state.img_ptr)
 		return (false);
-	state.img_data = (int *)mlx_get_data_addr(state.img_ptr, &state.bits_per_pixel,
-											&state.line_length, &state.endian);
+	state.img_data = (int *)mlx_get_data_addr(state.img_ptr,
+			&state.bits_per_pixel, &state.line_length, &state.endian);
 	if (!state.img_data)
 	{
 		mlx_destroy_image(game->mlx_ptr, state.img_ptr);
@@ -45,12 +58,12 @@ bool	init_static_minimap_texture(t_game *game)
 * @param state Render state for pixel manipulation
 * @param minimap Minimap structure with dimensions
 */
-static void	create_static_background(t_render_state *state, 
+static void	create_static_background(t_render_state *state,
 								t_minimap *minimap)
 {
-	int x;
-	int y;
-	int *img;
+	int	x;
+	int	y;
+	int	*img;
 
 	img = state->img_data;
 	y = 0;
@@ -117,11 +130,12 @@ static void	draw_wall_tile(t_render_state *state, t_minimap *minimap,
 	img = state->img_data;
 	start_y = tile_pos->y * minimap->tile_size + MINIMAP_BORDER_SIZE;
 	pixel_y = start_y;
-	while (pixel_y < (tile_pos->y + 1) * minimap->tile_size + MINIMAP_BORDER_SIZE)
+	while (pixel_y < (tile_pos->y + 1) * minimap->tile_size
+		+ MINIMAP_BORDER_SIZE)
 	{
 		pixel_x = tile_pos->x * minimap->tile_size + MINIMAP_BORDER_SIZE;
-		while (pixel_x < (tile_pos->x + 1) * minimap->tile_size + 
-				MINIMAP_BORDER_SIZE)
+		while (pixel_x < (tile_pos->x + 1) * minimap->tile_size
+			+ MINIMAP_BORDER_SIZE)
 		{
 			img[pixel_y * (line_length / 4) + pixel_x] = MINIMAP_WALL_COLOR;
 			pixel_x++;

@@ -1,5 +1,17 @@
-#ifndef PLAYER_H
-# define PLAYER_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   player_bonus.h                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mcantell <mcantell@student.42roma.it>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/09 11:28:14 by mcantell          #+#    #+#             */
+/*   Updated: 2025/01/09 11:35:47 by mcantell         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef PLAYER_BONUS_H
+# define PLAYER_BONUS_H
 
 # include "cub3D_bonus.h"
 
@@ -13,9 +25,7 @@
 /* Door interaction constants */
 # define DOOR_INTERACT_DIST 2
 
-#ifndef M_PI
 # define M_PI 3.14159265358979323846
-#endif
 
 /**
  * @brief Camera structure containing all raycasting-related data.
